@@ -1,0 +1,25 @@
+
+$small-spacing: 15px;
+$mid-spacing: 30px;
+$medium-spacing: $mid-spacing; //Just a failsafe, as I keep confusing the names
+$big-spacing: 50px;
+
+// To shift things around
+$tag-padding: 5px;
+
+$bgcolor: rgb(255,255,255);
+$altcolor: rgba(230,227,222, 0.2);
+$primarycolor: rgb(245,185,0);
+//Special color: midway for readability when blending text over complex images
+$blendcolor: #888888;
+
+$fontsize : 1.125em;
+$line-height: 1.45;
+$color: #333333;
+$lightcolor: lighten($color, 20%);
+
+//Fonts
+$bodyfontstack: 'PxGrotesk-Regular';
+$headerfontstacK: 'PxGrotesk-Bold';
+
+$header_margin: 1.414em 0 0.5em;
