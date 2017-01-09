@@ -8,8 +8,11 @@ $big-spacing: 50px;
 $tag-padding: 5px;
 
 $bgcolor: rgb(255,255,255);
-$altcolor: rgba(230,227,222, 0.2);
-$primarycolor: rgb(245,185,0);
+
+$altcolor: rgba(250,249,248, 1);
+$legacy-altcolor: rgba(205,227,222, 0.2);
+
+$primarycolor: rgb(136,176,75);
 //Special color: midway for readability when blending text over complex images
 $blendcolor: #888888;
 
@@ -19,7 +22,7 @@ $color: #333333;
 $lightcolor: lighten($color, 20%);
 
 //Fonts
-$bodyfontstack: 'PxGrotesk-Regular';
-$headerfontstacK: 'PxGrotesk-Bold';
+$bodyfontstack: Atlas, Arial, sans-serif;
+$headerfontstack: Atlas, Arial, sans-serif;
 
 $header_margin: 1.414em 0 0.5em;

@@ -1,5 +1,10 @@
 <?php
-function buildHomeArchive($post){ 
+function buildHomeArchive($post){ 	
+	//When we call via WP_Query, post object is empty. Fake it here.
+	if($post == null) {
+		$post->ID = get_the_ID();
+		$post->post_title = get_the_title();
+	}
 	$image = wp_get_attachment_image_srcset( get_post_thumbnail_id( $post->ID ), array(400,400)); 
 	?>
 	<article class="archive block">

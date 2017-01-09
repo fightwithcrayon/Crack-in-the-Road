@@ -10,7 +10,7 @@ function buildHomeFeaturedHighlights() {
 	$i = 0;
 	$args = array( 
 		'post__in' => get_option('sticky_posts'),
-        'posts_per_page' => 5
+        'posts_per_page' => 3
 		);
     $sticky = get_posts( $args ); 
     foreach($sticky as $post) {
@@ -30,7 +30,7 @@ function buildHomeFeaturedHighlights() {
                 <p>'. customExcerpt($post) .'</p>
                 <span class="more">
                     <a href="'. get_the_permalink($post->ID) .'" name="'. $post->post_title .'">Read more</a>
-                </span>
+                </span> 
             </div>
         </article>';
     	$i++;
@@ -47,22 +47,24 @@ function buildHomeFeaturedHighlights() {
 function buildHomeFeaturedPopular($displayedIds) {
     $displayedIds = $output[1];
     $i = 0;
-    $featuredargs = array( 
-        'posts_per_page' => 5,
-        'ignore_post_sticky' => true,
-        );
-    $featuredpopular = get_posts( $featuredargs ); 
-    $string .= '<aside class="featured_popular"><h3 class="entry">Popular stories</h3>';
-    foreach($featuredpopular as $post) {
-        $displayedIds[] = $post->ID;
-        $string .= '<article class="entry">
-                            <a href="' . get_the_permalink($post->ID) . '" name="' . $post->post_title . '" class="simple">
-                                '. $post->post_title .'
-                            </a>
-                    </article>';
-    };
+    $top_posts = stats_get_csv('postviews', 'days=1&limit=10'); 
+    $string .= '<aside class="featured_popular"><h3 class="entry">Popular today</h3>';
+    foreach($top_posts as $popular) {
+        if($i > 4) { break; }
+        if($popular['post_title'] != 'Home page' && $popular['post_title'] != 'Front Page' && $popular['post_id'] != 8901) { 
+            $displayedIds[] = $popular['post_id'];
+            $title = get_the_title($popular['post_id']);
+            $string .= '<article class="entry">
+                                <a href="' . get_the_permalink($popular['post_id']) . '" name="' . $title . '" class="simple">
+                                    '. $title .'
+                                </a>
+                        </article>';
+        $i++;
+        };
+    }
     $string .= '</aside>';
     $output = array($string, $displayedIds);
     return $output;
 }
+
 ?>

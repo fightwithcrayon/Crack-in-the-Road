@@ -1,3 +1,5 @@
+var ajaxurl = 'http://www.crackintheroad.com/wp-admin/admin-ajax.php';
+
 //Everything to do with the cover
 var pageDiv = document.getElementById("thepage"),
 	runScroll = function() { document.body.classList.toggle("cover-closed", window.scrollY <= window.innerHeight) },
@@ -11,23 +13,109 @@ var pageDiv = document.getElementById("thepage"),
 function setupCover(){
     document.body.style.paddingBottom = (pageDiv.clientHeight + document.getElementById("cover").clientHeight) + "px"
 	document.body.classList.toggle("cover-closed");
-}
-
-enquire.register("(max-width: 767px)", function() {
-    window.removeEventListener("scroll", runScroll, { passive: true });
-    window.removeEventListener("resize", runResize, { passive: true });
-}).register("(min-width: 768px)", function() {
     window.addEventListener("scroll", runScroll, { passive: true });
     window.addEventListener("resize", runResize, { passive: true });
+}
+
+//Other stuff
+$('.playlists > .more, .playlists > .less').click(function(){
+	$('.playlists').toggleClass('open');
+});
+
+$('a[data-action="openMenu"], li.close').click(function(e){
+	$('body').toggleClass('menuopen');
+	return false;
 });
 
 //That's all set up, on to the kick off
 $(document).ready(function(){ 
-	enquire.register("(min-width: 768px)", function() {
-		setupCover();
-	});
+	setupCover();
+	setTimeout(scribbleTitle, 1000);
+	if(document.querySelector(".infinitescroll .load-more")){
+		infinitescroll();
+	}
+
 });
 
+function scribbleTitle(){
+	var ctx = document.getElementById("sitetitle").getContext("2d"),
+    dashLen = 50, dashOffset = dashLen, speed = 10,
+    txt = "CITR", x = 30, i = 0;
+
+	ctx.font = "120px scrawl, sans-serif"; 
+	ctx.lineWidth = 3; ctx.lineJoin = "round"; ctx.globalAlpha = 2/3;
+	ctx.strokeStyle = ctx.fillStyle = "white";
+
+	(function loop() {
+	  ctx.clearRect(x, 0, 60, 150);
+	  ctx.setLineDash([dashLen - dashOffset, dashOffset - speed]); // create a long dash mask
+	  dashOffset -= speed;                                         // reduce dash length
+	  ctx.strokeText(txt[i], x, 90);                               // stroke letter
+
+	  if (dashOffset > 0) requestAnimationFrame(loop);             // animate
+	  else {
+	    ctx.fillText(txt[i], x, 90);                               // fill final letter
+	    dashOffset = dashLen;                                      // prep next char
+	    x += ctx.measureText(txt[i++]).width + ctx.lineWidth * Math.random();
+	    ctx.setTransform(1, 0, 0, 1, 0, 3 * Math.random());        // random y-delta
+	    ctx.rotate(Math.random() * 0.005);                         // random rotation
+	    if (i < txt.length) requestAnimationFrame(loop);
+	  }
+	})();
+}
+
+function infinitescroll(){
+	var button = $('.infinitescroll .load-more');
+	// Now the infinite scroll
+	var page = 2;
+	var loading = false;
+	var scrollHandling = {
+	    allow: true,
+	    reallow: function() {
+	        scrollHandling.allow = true;
+	    },
+	    delay: 400 //(milliseconds) adjust to the highest acceptable value
+	};
+
+	$(window).scroll(function(){
+		if( ! loading && scrollHandling.allow ) {
+			scrollHandling.allow = false;
+			setTimeout(scrollHandling.reallow, scrollHandling.delay);
+			var offset = $(button).offset().top - $(window).scrollTop();
+			if( 1200 > offset ) {
+				loading = true;
+				var data = {
+					action: 'be_ajax_load_more',
+					page: page
+				};
+				$.post(ajaxurl, data, function(res) {
+					if( res.success) {
+						console.log(res);
+						$('.infinitescroll').append( res.data );
+						$('.infinitescroll').append( button );
+						page = page + 1;
+						loading = false;
+					} else {
+						console.log(res);
+					}
+				}).fail(function(xhr, textStatus, e) {
+					console.log(xhr.responseText);
+				});
+
+			} else {
+				//console.log('Weak offset');
+			}
+		}
+	});
+}
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-17970339-3', 'auto');
+ga('send', 'pageview');
 
 /*
 soundManager.defaultOptions = {

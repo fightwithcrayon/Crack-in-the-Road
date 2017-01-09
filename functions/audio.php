@@ -1,7 +1,7 @@
 <?php
 
 function loadAudioPlayer() {
-    wp_enqueue_script( 'soundmanager', get_stylesheet_directory_uri() . '/class/soundmanager/soundmanager2-jsmin.js', null, '2.97a', true);
+   // wp_enqueue_script( 'soundmanager', get_stylesheet_directory_uri() . '/class/soundmanager/soundmanager2-jsmin.js', null, '2.97a', true);
     //wp_enqueue_script( 'waveform', get_stylesheet_directory_uri() . '/js/waveform.js', null, '1', true);
 }
 add_action( 'wp_enqueue_scripts', 'loadAudioPlayer' );
@@ -51,7 +51,7 @@ function stripAudioObjects($content) {
 		return $content;
 	}
 }
-add_filter( 'the_content', 'stripAudioObjects' );
+//add_filter( 'the_content', 'stripAudioObjects' );
 
 function insertPlayer($tracks) {
  	foreach($tracks['soundcloud'] as $track) { 

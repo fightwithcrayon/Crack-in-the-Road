@@ -1,5 +1,6 @@
 <?php
 
+add_theme_support( 'post-thumbnails' ); 
 
 
 function dummyBox($width, $height, $text, $style = '', $custom = null) {
@@ -73,6 +74,7 @@ add_action('init', 'artist_taxonomy');
 require('functions/init.php');
 require('functions/audio.php');
 require('functions/layout.php');
+require('functions/intelligence.php');
 
 require('home/featured.php');
 require('home/archive.php');

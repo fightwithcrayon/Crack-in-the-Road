@@ -3,7 +3,11 @@ function customExcerpt($post) {
 	if($post->post_excerpt != null && $post->post_excerpt != '') {
 		return $post->post_excerpt;
 	} else {
-		$array = explode('. ',strip_tags($post->post_content));
+		if(isset($post->post_content)) {
+			$array = explode('. ',strip_tags($post->post_content));
+		} else {
+			$array = explode('. ',strip_tags(get_the_content()));
+		}
 		if(strlen($array[0]) < 90) {
 			return $array[0] . '.';
 		}
@@ -27,7 +31,10 @@ function customTitle($post, $customtag = null) {
 	}
 
 	//Extract track/artist name
+	$remainingTitle = str_replace('&#8211;', '-', $remainingTitle);
+
 	$track = explode(' - ',$remainingTitle);
+
 	if(is_array($track)) {
 		$structure['artist'] = $track[0];
 		$structure['track'] = $track[1];
@@ -59,7 +66,6 @@ function customTitle($post, $customtag = null) {
 	}elseif($flags['fulltitle'] == true) {
 		$output .= '<h4 class="full">' . $post->post_title. '</h4>';
 	}
-
 	return $output;
 }
 
