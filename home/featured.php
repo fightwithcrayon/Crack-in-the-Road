@@ -34,7 +34,7 @@ function buildHomeFeaturedHighlights() {
             </div>
         </article>';
     	$i++;
-    	if($i == 99) {    
+    	if($i == 6) {    
             $popular = buildHomeFeaturedPopular($highlights[1]);
             $string .= $popular[0];
     	}
