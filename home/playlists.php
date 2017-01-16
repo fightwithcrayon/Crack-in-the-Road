@@ -8,18 +8,18 @@ function buildHomeSpotify(){
           </span>';
 }
 function loadSpotify() {
-	require('wp-content/themes/clean/class/spotify/SpotifyWebAPI.php');
-	require('wp-content/themes/clean/class/spotify/Session.php');
-	require('wp-content/themes/clean/class/spotify/Request.php');
-	require('wp-content/themes/clean/class/spotify/SpotifyWebAPIException.php');
+	require(get_stylesheet_directory() . '/class/spotify/SpotifyWebAPI.php');
+	require(get_stylesheet_directory() . '/class/spotify/Session.php');
+	require(get_stylesheet_directory() . '/class/spotify/Request.php');
+	require(get_stylesheet_directory() . '/class/spotify/SpotifyWebAPIException.php');
 }
 
-function updateSpotify() {
+function updateSpotify($force = false) {
 	$ignore = array(
 		'Release radar' => '37i9dQZEVXbs3J2wfh1mGg'
 	);
 	$set = get_option('spotify_playlist', true);
-	if($set != null) {
+	if($set == null || $force === true) {
 		loadSpotify();
 		$session = new SpotifyWebAPI\Session(
 		    '4a98167631d64a4ca9e77f267cf3fb51',
@@ -53,6 +53,21 @@ function updateSpotify() {
 	} else {
 		return $set;
 	}
+}
+
+register_activation_hook(__FILE__, 'on_activation_cron');
+
+function on_activation_cron() {
+    if ( ! wp_next_scheduled( 'citr_updateSpotify_cron' ) ) {
+  		wp_schedule_event( time(), 'hourly', 'citr_updateSpotify_cron' );
+	}
+}
+add_action( 'citr_updateSpotify_cron', 'updateSpotify' );
+
+register_deactivation_hook(__FILE__, 'on_deactivation_cron');
+
+function on_deactivation_cron() {
+	wp_clear_scheduled_hook('citr_updateSpotify_cron');
 }
 
 function getPlaylists() {

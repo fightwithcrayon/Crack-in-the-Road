@@ -5,7 +5,7 @@
 	<meta name="viewport"  content="width=device-width, initial-scale=1" />
 	<title><?php wp_title( ' | ', true, 'right' ); ?></title>
 	<?php wp_head(); ?>
-	<link href="/wp-content/themes/2017/stylesheets/screen.css?v=1.2.3" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="<?php echo get_stylesheet_directory_uri() ?>/stylesheets/screen.css?v=1.2.5" media="screen, projection" rel="stylesheet" type="text/css" />
 	<?php
 		if(is_home()) {
 			$args = array(
@@ -49,6 +49,9 @@
 	<meta name="msapplication-TileColor" content="#88b04b">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#88b04b">
+	<?
+		font_setup();
+	?>
 </head>
 <body <?php body_class(); ?>>
 <section id="cover">
