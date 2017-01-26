@@ -1,0 +1,3 @@
+# Ignore everything in root except...
+*.scssc
+*/.DS_Store
