@@ -490,6 +490,9 @@ a {
 			margin-right:auto;
 		}
 	}
+	.wp-caption-text {
+		display:none;
+	}
 	.media {
 		width: 100%;
 		margin-right:auto;
@@ -726,6 +729,11 @@ a {
 		}
 		.title {
 			text-align: center;
+		}
+		.wp-caption-text {
+		    line-height: 2;
+		    margin-left: $small-spacing;
+		    margin-bottom: $mid-spacing
 		}
 	}
 	//Switch on fixed nav bar, then set necessary padding adjustments
