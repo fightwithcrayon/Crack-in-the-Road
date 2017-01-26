@@ -485,9 +485,10 @@ a {
 		width: 100%;
 		margin:0 auto;
 		order:3;
-		* {
+		*:not(p) {
 			margin-left:auto;
 			margin-right:auto;
+			margin-bottom: $mid-spacing;
 		}
 	}
 	.wp-caption-text {
