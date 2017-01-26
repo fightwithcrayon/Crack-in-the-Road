@@ -5,7 +5,7 @@
 	<meta name="viewport"  content="width=device-width, initial-scale=1" />
 	<title><?php wp_title( ' | ', true, 'right' ); ?></title>
 	<?php wp_head(); ?>
-	<link href="<?php echo get_stylesheet_directory_uri() ?>/stylesheets/screen.css?v=1.2.8" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="<?php echo get_stylesheet_directory_uri() ?>/stylesheets/screen.css?v=1.2.9" media="screen, projection" rel="stylesheet" type="text/css" />
 	<?php
 		if(is_home()) {
 			$args = array(

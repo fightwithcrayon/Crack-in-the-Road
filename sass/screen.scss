@@ -486,9 +486,7 @@ a {
 		margin:0 auto;
 		order:3;
 		*:not(p) {
-			margin-left:auto;
-			margin-right:auto;
-			margin-bottom: $mid-spacing;
+			margin:1em auto auto;
 		}
 	}
 	.wp-caption-text {
@@ -734,7 +732,8 @@ a {
 		.wp-caption-text {
 		    line-height: 2;
 		    margin-left: $small-spacing;
-		    margin-bottom: $mid-spacing
+		    margin-bottom: $mid-spacing;
+		    display:block;
 		}
 	}
 	//Switch on fixed nav bar, then set necessary padding adjustments
