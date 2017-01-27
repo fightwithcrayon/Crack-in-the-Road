@@ -1,9 +1,8 @@
 <?php
 
 add_theme_support( 'post-thumbnails' ); 
-define( 'WP_HTTP_BLOCK_EXTERNAL', TRUE );
-define('WP_ACCESSIBLE_HOSTS', 'crackintheroad.com,www.crackintheroad.com,googleapis.com,spotify.com,newrelic.com');
-
+add_filter( 'auto_update_plugin', '__return_false' );
+add_filter( 'auto_update_theme', '__return_false' );
 
 function dummyBox($width, $height, $text, $style = '', $custom = null) {
 	if($custom == null) {
