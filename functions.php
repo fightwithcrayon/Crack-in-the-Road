@@ -2,7 +2,7 @@
 
 add_theme_support( 'post-thumbnails' ); 
 define( 'WP_HTTP_BLOCK_EXTERNAL', TRUE );
-define('WP_ACCESSIBLE_HOSTS', 'crackintheroad.com,www.crackintheroad.com,googleapis.com,spotify.com');
+define('WP_ACCESSIBLE_HOSTS', 'crackintheroad.com,www.crackintheroad.com,googleapis.com,spotify.com,newrelic.com');
 
 
 function dummyBox($width, $height, $text, $style = '', $custom = null) {
