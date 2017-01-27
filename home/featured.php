@@ -47,24 +47,25 @@ function buildHomeFeaturedHighlights() {
 function buildHomeFeaturedPopular($displayedIds) {
     $displayedIds = $output[1];
     $i = 0;
-    $top_posts = stats_get_csv('postviews', 'days=1&limit=10'); 
+    $top_posts = get_option('popular_stats', false);
     $string .= '<aside class="featured_popular"><h3 class="entry">Popular today</h3>';
     foreach($top_posts as $popular) {
         if($i > 4) { break; }
-        if($popular['post_title'] != 'Home page' && $popular['post_title'] != 'Front Page' && $popular['post_id'] != 8901) { 
-            $displayedIds[] = $popular['post_id'];
-            $title = get_the_title($popular['post_id']);
+        if($popular[0] != 'Home') { 
+            $displayedIds[] = $popular[0];
+            $title = get_the_title($popular[0]);
             $string .= '<article class="entry">
-                                <a href="' . get_the_permalink($popular['post_id']) . '" name="' . $title . '" class="simple">
+                                <a href="' . get_the_permalink($popular[0]) . '" name="' . $title . '" class="simple">
                                     '. $title .'
                                 </a>
                         </article>';
-        $i++;
-        };
+            $i++;
+        }
     }
     $string .= '</aside>';
     $output = array($string, $displayedIds);
     return $output;
 }
+
 
 ?>

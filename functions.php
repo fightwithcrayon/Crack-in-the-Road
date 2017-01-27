@@ -72,6 +72,7 @@ function artist_taxonomy() {
 add_action('init', 'artist_taxonomy');
 
 require('functions/init.php');
+require('functions/services.php');
 require('functions/audio.php');
 require('functions/layout.php');
 require('functions/intelligence.php');
