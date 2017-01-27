@@ -1,5 +1,5 @@
 <?php
-function updateSpotify() {
+function updateSpotify($force = false) {
 	$ignore = array(
 		'Release radar' => '37i9dQZEVXbs3J2wfh1mGg'
 	);
