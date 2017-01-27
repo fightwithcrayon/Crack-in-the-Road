@@ -3,10 +3,14 @@ function updateSpotify($force = false) {
 	$ignore = array(
 		'Release radar' => '37i9dQZEVXbs3J2wfh1mGg'
 	);
+  openlog('php', LOG_NDELAY, LOG_USER);
   syslog(strtotime('now') . " Checking Spotify....");
+  closelog();
 	$set = get_option('spotify_playlist', true);
 	if($set == null || $force === true) {  
+    openlog('php', LOG_NDELAY, LOG_USER);
     syslog(strtotime('now') . " Spotify data not up to date, refreshing");
+    closelog();
 		loadSpotify();
 		$session = new SpotifyWebAPI\Session(
 		    '4a98167631d64a4ca9e77f267cf3fb51',
@@ -44,7 +48,9 @@ function updateSpotify($force = false) {
 
 function updatePopularAnalytics(){
   $current_time = strtotime('now');
+  openlog('php', LOG_NDELAY, LOG_USER);
   syslog($current_time . " contacting Google services for popular posts....");
+  closelog();
 	require_once __DIR__ . '/../class/Google/vendor/autoload.php';
   $KEY_FILE_LOCATION = __DIR__ . '/../class/service-account-credentials.json';
 
@@ -132,7 +138,9 @@ function updatePopularAnalytics(){
     }
   }
   update_option('popular_stats', $results);
+  openlog('php', LOG_NDELAY, LOG_USER);
   syslog(strtotime('now') . " Finished pulling popular posts");
+  closelog();
 }
 
 add_action( 'citr_updateSpotify_cron', 'updateSpotify' );
