@@ -1,6 +1,7 @@
 <?php
 
 add_theme_support( 'post-thumbnails' ); 
+define('WP_HTTP_BLOCK_EXTERNAL', false);
 add_filter( 'auto_update_plugin', '__return_false' );
 add_filter( 'auto_update_theme', '__return_false' );
 
