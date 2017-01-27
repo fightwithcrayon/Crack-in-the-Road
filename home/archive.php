@@ -2,6 +2,7 @@
 function buildHomeArchive($post){ 	
 	//When we call via WP_Query, post object is empty. Fake it here.
 	if($post == null) {
+		$post = new stdClass();
 		$post->ID = get_the_ID();
 		$post->post_title = get_the_title();
 	}
