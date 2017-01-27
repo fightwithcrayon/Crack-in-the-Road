@@ -1,45 +1,39 @@
 <?php
-function updateSpotify($force = false) {
+function updateSpotify() {
 	$ignore = array(
 		'Release radar' => '37i9dQZEVXbs3J2wfh1mGg'
 	);
   syslog(LOG_NOTICE, strtotime('now') . " Checking Spotify....");
-	$set = get_option('spotify_playlist', true);
-	if($set == null || $force === true) {  
-    syslog(LOG_NOTICE, strtotime('now') . " Spotify data not up to date, refreshing");
-		loadSpotify();
-		$session = new SpotifyWebAPI\Session(
-		    '4a98167631d64a4ca9e77f267cf3fb51',
-		    'ac20fadd1b7e4574857fdefc52fa9aa3',
-		    'http://citrdev:8888'
-		);
-		$api = new SpotifyWebAPI\SpotifyWebAPI();
+	loadSpotify();
+	$session = new SpotifyWebAPI\Session(
+	    '4a98167631d64a4ca9e77f267cf3fb51',
+	    'ac20fadd1b7e4574857fdefc52fa9aa3',
+	    'http://citrdev:8888'
+	);
+	$api = new SpotifyWebAPI\SpotifyWebAPI();
 
-		// Request a access token with optional scopes
-		$scopes = array(
-		    'playlist-read-private',
-		    'user-read-private'
-		);
+	// Request a access token with optional scopes
+	$scopes = array(
+	    'playlist-read-private',
+	    'user-read-private'
+	);
 
-		$session->requestCredentialsToken($scopes);
-		$accessToken = $session->getAccessToken(); // We're good to go!
+	$session->requestCredentialsToken($scopes);
+	$accessToken = $session->getAccessToken(); // We're good to go!
 
-		// Set the code on the API wrapper
-		$api->setAccessToken($accessToken);
+	// Set the code on the API wrapper
+	$api->setAccessToken($accessToken);
 
-		$set = array();
-		$list = $api->getUserPlaylists('crackintheroad')->items;
-		foreach($list as $entry) {
-			if(!in_array($entry->id, $ignore)) {
-				$set[] = $api->getUserPlaylist('crackintheroad', $entry->id);
-			}
+	$set = array();
+	$list = $api->getUserPlaylists('crackintheroad')->items;
+	foreach($list as $entry) {
+		if(!in_array($entry->id, $ignore)) {
+			$set[] = $api->getUserPlaylist('crackintheroad', $entry->id);
 		}
-		$set = json_encode($set);
-		update_option('spotify_playlist', $set);
-		return $set;
-	} else {
-		return $set;
 	}
+	$set = json_encode($set);
+	update_option('spotify_playlist', $set);
+  syslog(LOG_NOTICE, strtotime('now') . " Spotify updated.");
 }
 
 function updatePopularAnalytics(){

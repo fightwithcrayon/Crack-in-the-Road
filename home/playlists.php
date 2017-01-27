@@ -15,7 +15,7 @@ function loadSpotify() {
 }
 
 function getPlaylists() {
-	$set = json_decode(updateSpotify());
+    $set = json_decode(get_option('popular_stats', false));
 	foreach($set as $playlist) { 
 		?>
 			<article class="playlist block">
