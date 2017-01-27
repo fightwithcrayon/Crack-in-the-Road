@@ -1,45 +1,45 @@
 <?php
 function updateSpotify($force = false) {
-	$ignore = array(
-		'Release radar' => '37i9dQZEVXbs3J2wfh1mGg'
-	);
+  $ignore = array(
+    'Release radar' => '37i9dQZEVXbs3J2wfh1mGg'
+  );
   syslog(LOG_NOTICE, strtotime('now') . " Checking Spotify....");
-	loadSpotify();
-	$session = new SpotifyWebAPI\Session(
-	    '4a98167631d64a4ca9e77f267cf3fb51',
-	    'ac20fadd1b7e4574857fdefc52fa9aa3',
-	    'http://citrdev:8888'
-	);
-	$api = new SpotifyWebAPI\SpotifyWebAPI();
+    loadSpotify();
+    $session = new SpotifyWebAPI\Session(
+        '4a98167631d64a4ca9e77f267cf3fb51',
+        'ac20fadd1b7e4574857fdefc52fa9aa3',
+        'http://citrdev:8888'
+    );
+    $api = new SpotifyWebAPI\SpotifyWebAPI();
 
-	// Request a access token with optional scopes
-	$scopes = array(
-	    'playlist-read-private',
-	    'user-read-private'
-	);
+    // Request a access token with optional scopes
+    $scopes = array(
+        'playlist-read-private',
+        'user-read-private'
+    );
 
-	$session->requestCredentialsToken($scopes);
-	$accessToken = $session->getAccessToken(); // We're good to go!
+    $session->requestCredentialsToken($scopes);
+    $accessToken = $session->getAccessToken(); // We're good to go!
 
-	// Set the code on the API wrapper
-	$api->setAccessToken($accessToken);
+    // Set the code on the API wrapper
+    $api->setAccessToken($accessToken);
 
-	$set = array();
-	$list = $api->getUserPlaylists('crackintheroad')->items;
-	foreach($list as $entry) {
-		if(!in_array($entry->id, $ignore)) {
-			$set[] = $api->getUserPlaylist('crackintheroad', $entry->id);
-		}
-	}
-	$set = json_encode($set);
-	update_option('spotify_playlist', $set);
-  syslog(LOG_NOTICE, strtotime('now') . " Spotify updated.");
+    $set = array();
+    $list = $api->getUserPlaylists('crackintheroad')->items;
+    foreach($list as $entry) {
+      if(!in_array($entry->id, $ignore)) {
+        $set[] = $api->getUserPlaylist('crackintheroad', $entry->id);
+      }
+    }
+    $set = json_encode($set);
+    update_option('spotify_playlist', $set);
+    syslog(LOG_NOTICE, strtotime('now') . " Spotify updated.");
 }
 
 function updatePopularAnalytics(){
   $current_time = strtotime('now');
   syslog(LOG_NOTICE, $current_time . " contacting Google services for popular posts....");
-	require_once __DIR__ . '/../class/Google/vendor/autoload.php';
+  require_once __DIR__ . '/../class/Google/vendor/autoload.php';
   $KEY_FILE_LOCATION = __DIR__ . '/../class/service-account-credentials.json';
 
   // Create and configure a new client object.
@@ -55,9 +55,9 @@ function updatePopularAnalytics(){
   // Create the DateRange object.
   $dateRange = new Google_Service_AnalyticsReporting_DateRange();
   if ($current_time > strtotime('12:00am') && $current_time < strtotime('03:00am')) { 
-  	$dateRange->setStartDate("yesterday");
+    $dateRange->setStartDate("yesterday");
   } else {
-  	$dateRange->setStartDate("today");
+    $dateRange->setStartDate("today");
   }
   $dateRange->setEndDate("today");
 
@@ -135,16 +135,16 @@ add_action( 'citr_popularanalytics_cron', 'updatePopularAnalytics' );
 
 function on_activation_cron() {
     if ( ! wp_next_scheduled( 'citr_updateSpotify_cron' ) ) {
-  		wp_schedule_event( time(), 'hourly', 'citr_updateSpotify_cron' );
-	}
+      wp_schedule_event( time(), 'hourly', 'citr_updateSpotify_cron' );
+  }
     if ( ! wp_next_scheduled( 'citr_popularanalytics_cron' ) ) {
-  		wp_schedule_event( time(), 'hourly', 'citr_popularanalytics_cron' );
-	}
+      wp_schedule_event( time(), 'hourly', 'citr_popularanalytics_cron' );
+  }
 }
 register_activation_hook(__FILE__, 'on_activation_cron');
 
 function on_deactivation_cron() {
-	wp_clear_scheduled_hook('citr_updateSpotify_cron');
-	wp_clear_scheduled_hook('citr_popularanalytics_cron');
+  wp_clear_scheduled_hook('citr_updateSpotify_cron');
+  wp_clear_scheduled_hook('citr_popularanalytics_cron');
 }
 register_deactivation_hook(__FILE__, 'on_deactivation_cron');
