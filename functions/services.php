@@ -132,19 +132,9 @@ function updatePopularAnalytics(){
 add_action( 'citr_updateSpotify_cron', 'updateSpotify' );
 add_action( 'citr_popularanalytics_cron', 'updatePopularAnalytics' );
 
-
-function on_activation_cron() {
-    if ( ! wp_next_scheduled( 'citr_updateSpotify_cron' ) ) {
-      wp_schedule_event( time(), 'hourly', 'citr_updateSpotify_cron' );
-  }
-    if ( ! wp_next_scheduled( 'citr_popularanalytics_cron' ) ) {
-      wp_schedule_event( time(), 'hourly', 'citr_popularanalytics_cron' );
-  }
+if ( ! wp_next_scheduled( 'citr_updateSpotify_cron' ) ) {
+  wp_schedule_event( time(), 'hourly', 'citr_updateSpotify_cron' );
 }
-register_activation_hook(__FILE__, 'on_activation_cron');
-
-function on_deactivation_cron() {
-  wp_clear_scheduled_hook('citr_updateSpotify_cron');
-  wp_clear_scheduled_hook('citr_popularanalytics_cron');
+if ( ! wp_next_scheduled( 'citr_popularanalytics_cron' ) ) {
+  wp_schedule_event( time(), 'hourly', 'citr_popularanalytics_cron' );
 }
-register_deactivation_hook(__FILE__, 'on_deactivation_cron');
