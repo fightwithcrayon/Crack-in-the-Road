@@ -14,13 +14,13 @@ var	runResize = function() {
 			var y = null;
 			pageDiv = document.getElementById("thepage");
 			coverDiv = document.getElementById("cover");
-			document.body.style.paddingBottom = (pageDiv.clientHeight + coverDiv.clientHeight) + "px";
+			document.body.style.paddingBottom = (pageDiv.clientHeight ) + "px";
 		}, 200);
 	}
 };
 
 function setupCover(){
-    document.body.style.paddingBottom = (pageDiv.clientHeight + cover.clientHeight) + "px";
+    document.body.style.paddingBottom = (pageDiv.clientHeight ) + "px";
 	document.body.classList.toggle("cover-closed");
     window.addEventListener("scroll", runScroll, { passive: true });
     window.addEventListener("resize", runResize, { passive: true });

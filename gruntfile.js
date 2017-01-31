@@ -14,7 +14,7 @@ module.exports = function(grunt) {
           'js/main.js',
           'Gruntfile.js'
         ],
-        tasks: ['jshint', 'concat','notify:successJs']
+        tasks: ['jshint', 'concat','uglify:scripts','notify:successJs']
       }
     },
     sass: {
@@ -66,7 +66,7 @@ module.exports = function(grunt) {
       },
     },
     uglify: {
-      my_target: {
+      scripts: {
         files: {
           'js/scripts-min.js': ['js/scripts-concat.js']
         },

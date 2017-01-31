@@ -358,6 +358,9 @@ a {
   z-index: 1;
   width: 100%; }
 
+body:not(.cover-closed) {
+  padding-bottom: 0 !important; }
+
 #sitetitle {
   width: 300px;
   position: absolute;
