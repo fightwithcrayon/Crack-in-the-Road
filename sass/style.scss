@@ -182,11 +182,17 @@ a {
 	overflow:hidden;
 	position:relative;
 	z-index:4;
-	figure img {   
-		display: block;
-	    width: 100vw;
+	figure {
+	    width: 100%;
 	    height: 100%;
-	    object-fit: cover;
+	    width: 100vw;
+	    height: 100vh;
+		img {   
+			display: block;
+		    width: 100vw;
+		    height: 100%;
+		    object-fit: cover;
+		}
 	}
 	figcaption {
 		position: absolute;
@@ -377,7 +383,14 @@ body:not(.cover-closed){
 }
 .playlists {
 	overflow:hidden;
-	max-height: calc(( ((50vw - (4 * #{$mid-spacing})) / 3) * 2) + ((1em + 2em + 1.5em + 1.414em) * 1.2) + (#{$small-spacing} + #{$small-spacing} + #{$mid-spacing} + 1em));
+	$heading-line-height: 1.2;
+	$body-line-height: 1.45;
+	$self: $mid-spacing;
+	$header: ((1.414em + 2.25em + 0.5em + 1.5em + 1em) * $heading-line-height);
+	$more: (#{$small-spacing} + #{$mid-spacing} + (1em * $body-line-height));
+	$box: "(((50vw - (4 * 30px)) / 3) + #{$small-spacing})";
+	$howmanyboxes: 2;
+	max-height: calc(#{$header} + #{$more} + #{$self} + (#{$box} * #{$howmanyboxes}));
 	transition: max-height 0.6s ease-in-out;    
 	padding-bottom: calc(#{$small-spacing} + #{$mid-spacing} + (1em * 1.45)) !important;
 	.more, .less{
@@ -615,10 +628,17 @@ body:not(.cover-closed){
 		}
 	}
 	.playlists {
-		$playlistHeader: ((2em + 1.414em + 2em) * 1.2);
-		$playlistDetails: ((#{$mid-spacing} + 2em + ((2 * 0.667em) * 1.2) ));
-		$playlistMore: (#{$small-spacing} + #{$mid-spacing} + (1em * 1.45));
-		max-height: calc((((50vw - 15px) - (15px / 2)) * 2) + #{$playlistHeader} + #{$playlistMore} + #{$playlistDetails} + #{$playlistDetails});
+		$heading-line-height: 1.2;
+		$body-line-height: 1.45;
+		$self: $mid-spacing;
+		$header: ((1.414em + 2.25em + 0.5em + 1.5em + 1em) * $heading-line-height);
+		$more: (#{$small-spacing} + #{$mid-spacing} + (1em * $body-line-height));
+    	
+    	$imageandpadding: calc(50vw + (2 * #{$small-spacing}) );
+		$boxtext: calc(0.667 * ((1.414em + 0.5em) + (1em * #{$body-line-height})));
+		$box: (#{$imageandpadding} + #{$boxtext});
+		$howmanyboxes: 2;
+		max-height: calc(#{$header} + #{$more} + #{$self} + ((#{$box}) * #{$howmanyboxes}));
 	}
 	.playlist.block {
 		a { 

@@ -46,7 +46,7 @@ module.exports = function(grunt) {
     cssmin: {
       combine: {
         files: {
-          'stylesheets/style.css': ['stylesheets/style-prefixed.css']
+          'stylesheets/style-min.css': ['stylesheets/style-prefixed.css']
         },
       },
     },
@@ -71,6 +71,19 @@ module.exports = function(grunt) {
           'js/scripts-min.js': ['js/scripts-concat.js']
         },
       },
+    },
+    browserSync: {
+      files: {
+        src : [
+          'stylesheets/*.css',
+          'js/*.js',
+          '**/*.php'
+        ],
+      },
+      options: {
+        watchTask: true,
+        proxy: 'localhost:8888'
+      }
     },
 //Notification toasts
     notify: {
@@ -109,8 +122,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-browser-sync');
   grunt.loadNpmTasks('grunt-notify');
   // Register the default tasks.
-  grunt.registerTask('default', ['watch', 'notify']);
+  grunt.registerTask('default', ['browserSync', 'watch', 'notify']);
   grunt.registerTask('prod', ['sass:dist', 'autoprefixer', 'cssmin', 'jshint', 'concat','uglify', 'notify:successProduction']);
 };
