@@ -77,7 +77,7 @@
 	</a>
 </nav>
 <ul id="menu">
-	<li><a href="http://www.crackintheroad.com/">Home</a></li>
+	<li><a href="https://www.crackintheroad.com/">Home</a></li>
 	<li>&nbsp;</li>
 	<li>(More to come throughout January)</li>
 	<li class="close"></li>

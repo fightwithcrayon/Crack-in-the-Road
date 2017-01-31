@@ -1,9 +1,8 @@
 //Main
-var ajaxurl = 'http://www.crackintheroad.com/wp-admin/admin-ajax.php';
+var ajaxurl = 'https://www.crackintheroad.com/wp-admin/admin-ajax.php';
 
 //Everything to do with the cover
 var pageDiv = document.getElementById("thepage");
-var coverDiv = document.getElementById("cover");
 var	y = null;
 var	runScroll = function() { 
 	document.body.classList.toggle("cover-closed", window.scrollY <= window.innerHeight); 
@@ -13,14 +12,13 @@ var	runResize = function() {
 		y = setTimeout(function() {
 			var y = null;
 			pageDiv = document.getElementById("thepage");
-			coverDiv = document.getElementById("cover");
-			document.body.style.paddingBottom = (pageDiv.clientHeight ) + "px";
+			document.body.style.paddingBottom = pageDiv.clientHeight + "px";
 		}, 200);
 	}
 };
 
 function setupCover(){
-    document.body.style.paddingBottom = (pageDiv.clientHeight ) + "px";
+    document.body.style.paddingBottom = pageDiv.clientHeight + "px";
 	document.body.classList.toggle("cover-closed");
     window.addEventListener("scroll", runScroll, { passive: true });
     window.addEventListener("resize", runResize, { passive: true });
