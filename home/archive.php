@@ -11,7 +11,7 @@ function buildHomeArchive($post){
 	<article class="archive block">
 		<div class="image">
 			<a href="<?php the_permalink(); ?>" name="<?php echo $post->post_title ?>">
-				<img srcset="<?php echo $image; ?>" alt="<?php echo $post->post_title; ?>" />
+				<img srcset="<?php echo $image; ?>" alt="<?php echo $post->post_title; ?>" title="<?php echo $post->post_title; ?>" />
 			</a>
 		</div>
 		<div class="info">

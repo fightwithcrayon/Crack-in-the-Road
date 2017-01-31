@@ -1,0 +1,22 @@
+{
+  "name": "coffee",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-autoprefixer": "~0.2.20130806",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-contrib-compass": "~0.6.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-cssmin": "~0.6.1",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-notify": "^0.4.5",
+    "grunt-sass": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fightwithcrayon/random_access_coffee.git"
+  },
+  "author": "Andrew Hill"
+}

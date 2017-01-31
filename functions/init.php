@@ -1,13 +1,13 @@
 <?php
 add_filter('show_admin_bar', '__return_false');
 
-function dequeue_core_default( $scripts ) {
-	if ( ! is_admin() && ! empty( $scripts->registered['jquery'] ) ) {
-		$jquery_dependencies = $scripts->registered['jquery']->deps;
-		$scripts->registered['jquery']->deps = array_diff( $jquery_dependencies, array( 'jquery-migrate' ));
+function dequeue_core_default() {
+	if (!is_admin()) {
+		wp_deregister_script('wp-embed');
+		wp_deregister_script('jquery-migrate');  // Bonus: remove jquery too if it's not required
 	}
 }
-add_action( 'wp_default_scripts', 'dequeue_core_default' );
+add_action('init', 'dequeue_core_default');
 
 function dequeue_core() {
     wp_deregister_style('dashicons');

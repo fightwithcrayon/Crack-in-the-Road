@@ -6,8 +6,8 @@
 	?>
 </section>
 <section class="playlists wide-content">
-    <h3>Playlists</h3>
-    <h4>Latest updates</h4>
+    <h2>Playlists</h2>
+    <h3>Latest updates</h3>
 	<?php
 	 buildHomeSpotify();
 	?>
@@ -19,8 +19,8 @@
 	?>
 </section>
 <section class="archives infinitescroll full-content">
-    <h3>Latest stories</h3>
-    <h4>Everything we've written about</h4>
+    <h2>Latest stories</h2>
+    <h3>Everything we've written about</h3>
 	<?php
 	$vw = 'calc(25vw - 60px)';
 	if(have_posts()): while(have_posts()): the_post(); 

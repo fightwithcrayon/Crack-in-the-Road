@@ -19,7 +19,7 @@ function buildHomeFeaturedHighlights() {
         $tracks = get_post_meta($post->ID, 'audioObjects', true);
         $string .= '<article class="featured block">
             <figure class="image">
-                <img srcset="'. $image .'" alt="'. $post->post_title .'" />
+                <img srcset="'. $image .'" alt="'. $post->post_title .'" title="'. $post->post_title .'" />
                 <figcaption>
                     <a href="#" name="'. $post->post_title .'" data-tracks=""></a>
                     <a href="'. get_the_permalink($post->ID) .'" name="'. $post->post_title .'" data-tracks></a>

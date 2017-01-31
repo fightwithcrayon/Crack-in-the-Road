@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
@@ -5,7 +6,7 @@
 	<meta name="viewport"  content="width=device-width, initial-scale=1" />
 	<title><?php wp_title( ' | ', true, 'right' ); ?></title>
 	<?php wp_head(); ?>
-	<link href="<?php echo get_stylesheet_directory_uri() ?>/stylesheets/screen.css?v=1.2.9" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="<?php echo get_stylesheet_directory_uri() ?>/stylesheets/style-min.css?v=1.0" media="screen, projection" rel="stylesheet" type="text/css" />
 	<?php
 		if(is_home()) {
 			$args = array(
@@ -58,7 +59,14 @@
 <canvas id="sitetitle"></canvas>
 	<figure>
 		<img alt="<?php echo $title; ?>" title="<?php echo $title; ?>" srcset="<?php echo $featured_srcset; ?>">
-		<figcaption><?php echo $caption; ?></figcaption>
+		<figcaption>	
+		<?php
+			if(is_home()) {
+				echo '<h2>' . $caption . '</h2>';
+			} else {
+				echo '<h1>' . $caption . '</h1>';
+			}
+		?></figcaption>
 	</figure>
 </section>
 <nav id="nav" <?php if(is_home()){ echo 'class="home"'; } ?> >

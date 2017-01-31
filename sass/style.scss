@@ -1,4 +1,4 @@
-@import "compass/reset";
+@import "reset";
 @import "variables";
 @import "font";
 @import "print";
@@ -23,7 +23,7 @@ body {
 }
 .full-content {
 	display:flex;
-	flex-wrap:wrap;
+	flex-wrap:wrap;	
 	width:100%;
 	padding: $small-spacing;
 	justify-content:space-between;
@@ -146,6 +146,7 @@ a {
 	  height: 2.25em;
 	  opacity: 0.3;
 	  content: '';
+	  cursor:pointer;
 	}
 	.close:hover {
 	  opacity: 1;
@@ -190,19 +191,17 @@ a {
 	figcaption {
 		position: absolute;
 	    bottom: 0;
-	    z-index: 4;
 	    right: 0;
+	    left: 0;
+	    z-index: 4;
 	    color: white;
 	    text-transform: uppercase;
 	    margin: 1em;
 	    font-size: 1em;
+	    text-align:right;
 	}
-	h1 {
-		position:absolute;
-		bottom:0;
-		right:0;
-		text-align: right;
-		color:$bgcolor;
+	h1, h2 {
+		font-size:inherit;
 	}
 }
 .cover-closed #thepage {
@@ -243,10 +242,10 @@ a {
 }
 .full-content, .wide-content {
 	margin-bottom: $mid-spacing;
-	> h3 {
+	> h2 {
 		text-align: center;
 	}
-	> h4 {
+	> h3 {
 		margin:0 0 1em;
 		width:100%;
 		text-transform:uppercase;
@@ -552,7 +551,7 @@ a {
 @media(max-width:768px) {
 	#cover {
 		figcaption {
-			display: none;
+	    	visibility:hidden;
 		}
 		&:after {
 		    border: 1px solid $bgcolor;
@@ -752,14 +751,6 @@ a {
 		}
 	}
 	// End nav
-	#cover h1 {
-		position:absolute;
-		left:50%;
-		right:0;
-		top:50%;
-		transform:translateY(-50%);
-		text-align: center;
-	}
 	#sitetitle {
 		left:3em;
 		transform: rotate(-25deg) skewX(5deg) skewY(5deg);
