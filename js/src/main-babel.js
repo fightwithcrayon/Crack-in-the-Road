@@ -12,7 +12,6 @@ $('a[data-action="openMenu"], li.close').on('click', function (e) {
 
 $(document).ready(function () {
 	setupCover();
-	setTimeout(scribbleTitle, 100);
 	if (document.querySelector(".infinitescroll .load-more")) {
 		infinitescroll();
 	}
