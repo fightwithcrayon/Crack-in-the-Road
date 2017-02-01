@@ -4,7 +4,7 @@ function rest_post_thumbnail() {
 	    'post',
 	    'featured_image_url',  //key-name in json response
 	    array(
-			'get_callback'    => 'get_thumbnail_url',
+			'get_callback'    => 'rest_get_small_thumbnail_url',
 			'update_callback' => null,
 			'schema'          => null,
 		)
@@ -51,4 +51,13 @@ function rest_get_featured_image_srcset( $object) {
 function rest_get_custom_title( $object, $field_name, $request ) {
 	$post = (object) ['post_title' => $object['title']['rendered']];
     return customTitle($post);
+}
+function rest_get_small_thumbnail_url($post){
+    if(has_post_thumbnail($post['id'])){
+        $imgArray = wp_get_attachment_image_src( get_post_thumbnail_id( $post['id'] ), array(50,50) );
+        $imgURL = $imgArray[0];
+        return $imgURL;
+    } else {
+        return '';
+    }
 }

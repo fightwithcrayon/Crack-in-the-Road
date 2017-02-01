@@ -1,7 +1,7 @@
 <?php
-function get_thumbnail_url($post){
-    if(has_post_thumbnail($post['id'])){
-        $imgArray = wp_get_attachment_image_src( get_post_thumbnail_id( $post['id'] ), array(200,200) );
+function get_small_thumbnail_url($id){
+    if(has_post_thumbnail($id)){
+        $imgArray = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), array(50,50) );
         $imgURL = $imgArray[0];
         return $imgURL;
     } else {

@@ -87,13 +87,11 @@ function infinitescroll(){
 				loading = true;
 				$.getJSON('/wp-json/wp/v2/posts?page=' + page, function(data){
 					var postString = '';
-					console.log('Loaded page ' + page);
 					data.forEach(function(post, i){
-						console.log(postString);
 							postString += `<article class="archive block">
 								<div class="image">
 									<a href="${post.link}" name="${post.title.rendered}">
-										<img srcset="${post.featured_image_srcset}" alt="${post.title.rendered}" title="${post.title.rendered}" />
+										<img src="${post.featured_image_url}" data-srcset="${post.featured_image_srcset}" alt="${post.title.rendered}" title="${post.title.rendered}" class="lazyload blur-up" />
 									</a>
 								</div>
 								<div class="info">
