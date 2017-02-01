@@ -12,7 +12,7 @@ $('a[data-action="openMenu"], li.close').on('click', function (e) {
 
 $(document).ready(function () {
 	setupCover();
-	setTimeout(scribbleTitle, 1000);
+	setTimeout(scribbleTitle, 100);
 	if (document.querySelector(".infinitescroll .load-more")) {
 		infinitescroll();
 	}
@@ -91,9 +91,10 @@ function infinitescroll() {
 			if (1200 > offset && loading === false) {
 				loading = true;
 				$.getJSON('/wp-json/wp/v2/posts?page=' + page, function (data) {
-					var postString;
+					var postString = '';
 					console.log('Loaded page ' + page);
 					data.forEach(function (post, i) {
+						console.log(postString);
 						postString += '<article class="archive block">\n\t\t\t\t\t\t\t\t<div class="image">\n\t\t\t\t\t\t\t\t\t<a href="' + post.link + '" name="' + post.title.rendered + '">\n\t\t\t\t\t\t\t\t\t\t<img srcset="' + post.featured_image_srcset + '" alt="' + post.title.rendered + '" title="' + post.title.rendered + '" />\n\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class="info">\n\t\t\t\t\t\t\t\t\t<a href="' + post.link + '" name="' + post.title.rendered + '" class="simple">\n\t\t\t\t\t\t\t\t\t\t' + post.custom_title + '\n\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t\t<p>' + post.custom_excerpt + '</p>\n\t\t\t\t\t\t\t\t\t<span class="more">\n\t\t\t\t\t\t\t\t\t\t<a href="' + post.link + '" name="' + post.title.rendered + '">Read more</a>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</article>';
 					});
 					infiniteScrollContainer.append(postString);
@@ -104,9 +105,6 @@ function infinitescroll() {
 		}
 	});
 }
-
-ga('create', 'UA-17970339-3', 'auto');
-ga('send', 'pageview');
 
 /*
 soundManager.defaultOptions = {

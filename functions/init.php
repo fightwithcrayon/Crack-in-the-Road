@@ -17,17 +17,24 @@ function dequeue_core() {
 add_action( 'wp_enqueue_scripts', 'dequeue_core' );
 
 function font_setup(){
-	 $host = $_SERVER['HTTP_HOST']; 
-	 $output = '';
-	 if($host == "www.crackintheroad.com" || $host == "crackintheroad.com") {
-		$output .= '<script src="https://use.typekit.net/nrb2ssy.js"></script>';
-		$output .= '<script>try{Typekit.load({ async: true });}catch(e){}</script>';
-	 } else {
-	 	$output .= '<!--Dev fonts -->';
-		$output .= '<script src="https://use.typekit.net/gtb5zrx.js"></script>';
-		$output .= '<script>try{Typekit.load({ async: true });}catch(e){}</script>';
-	 }
-	 echo $output;
+	$host = $_SERVER['HTTP_HOST']; 
+	$output = '';
+	if($host == "www.crackintheroad.com" || $host == "crackintheroad.com") { 
+        $kitId = 'nrb2ssy';
+    } else {
+        $kitId = 'gtb5zrx';
+        } ?>
+    <script>
+      (function(d) {
+        var config = {
+          kitId: "<?php echo $kitId; ?>",
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+    </script>
+<?php
 }
 
 function gt_exclude_sticky( $query ) {

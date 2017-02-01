@@ -10,7 +10,7 @@ $('a[data-action="openMenu"], li.close').on('click', function(e){
 
 $(document).ready(function(){ 
 	setupCover();
-	setTimeout(scribbleTitle, 1000);
+	setTimeout(scribbleTitle, 100);
 	if(document.querySelector(".infinitescroll .load-more")){
 		infinitescroll();
 	}
@@ -86,9 +86,10 @@ function infinitescroll(){
 			if( 1200 > offset && loading === false) {
 				loading = true;
 				$.getJSON('/wp-json/wp/v2/posts?page=' + page, function(data){
-					var postString;
+					var postString = '';
 					console.log('Loaded page ' + page);
 					data.forEach(function(post, i){
+						console.log(postString);
 							postString += `<article class="archive block">
 								<div class="image">
 									<a href="${post.link}" name="${post.title.rendered}">
@@ -114,9 +115,6 @@ function infinitescroll(){
 		}
 	});
 }
-
-ga('create', 'UA-17970339-3', 'auto');
-ga('send', 'pageview');
 
 /*
 soundManager.defaultOptions = {

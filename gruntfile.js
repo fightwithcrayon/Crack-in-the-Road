@@ -71,10 +71,10 @@ module.exports = function(grunt) {
         separator: ';',
         stripBanners: true
       },
-      dist: {
+      stageone: {
         src: ['js/src/sources.js','js/src/main-babel.js'],
         dest: 'js/scripts-concat.js',
-      },
+      }
     },
     uglify: {
       scripts: {
@@ -138,5 +138,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-babel');
   // Register the default tasks.
   grunt.registerTask('default', ['browserSync', 'watch', 'notify']);
-  grunt.registerTask('prod', ['sass:dist', 'autoprefixer', 'cssmin', 'jshint','babel','concat','uglify', 'notify:successProduction']);
+  grunt.registerTask('prod', ['sass:dist', 'autoprefixer', 'cssmin', 'jshint','babel','concat','uglify:scripts', 'notify:successProduction']);
 };
