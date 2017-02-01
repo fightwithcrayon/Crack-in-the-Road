@@ -10,7 +10,7 @@ $('a[data-action="openMenu"], li.close').on('click', function(e){
 
 $(document).ready(function(){ 
 	setupCover();
-	setTimeout(scribbleTitle, 1000);
+	setTimeout(scribbleTitle, 100);
 	if(document.querySelector(".infinitescroll .load-more")){
 		infinitescroll();
 	}
@@ -114,9 +114,6 @@ function infinitescroll(){
 		}
 	});
 }
-
-ga('create', 'UA-17970339-3', 'auto');
-ga('send', 'pageview');
 
 /*
 soundManager.defaultOptions = {

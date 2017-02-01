@@ -50,9 +50,13 @@
 	<meta name="msapplication-TileColor" content="#88b04b">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#88b04b">
-	<?php
-		font_setup();
-	?>
+	<script>
+		window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+		ga('create', 'UA-17970339-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<script async src='https://www.google-analytics.com/analytics.js'></script>
+	<?php font_setup(); ?>
 </head>
 <body <?php body_class(); ?>>
 <section id="cover">

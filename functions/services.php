@@ -4,7 +4,7 @@ function updateSpotify($force = false) {
     'Release radar' => '37i9dQZEVXbs3J2wfh1mGg'
   );
   syslog(LOG_NOTICE, strtotime('now') . " Checking Spotify....");
-    loadSpotify();
+   loadSpotify();
     $session = new SpotifyWebAPI\Session(
         '4a98167631d64a4ca9e77f267cf3fb51',
         'ac20fadd1b7e4574857fdefc52fa9aa3',
@@ -29,6 +29,19 @@ function updateSpotify($force = false) {
     foreach($list as $entry) {
       if(!in_array($entry->id, $ignore)) {
         $set[] = $api->getUserPlaylist('crackintheroad', $entry->id);
+      }
+    } 
+    foreach($set as $playlist) {
+      $image = $playlist->images[0]->url;
+      $filename = basename($image);
+      $file = 'wp-content/uploads/spotify/' . $filename . '.jpg';
+      $service = 'http://api.resmush.it/ws.php?img=';
+      $quality = '&qlty=66';
+      if(!file_exists($file)){
+        file_put_contents($file, file_get_contents($image));
+        $o = json_decode(file_get_contents($service . 'https://www.crackintheroad.com/' . $file . $quality));
+        file_put_contents("wp-content/uploads/spotify/optimised/" . $filename . '.jpg', file_get_contents($o->dest));
+        $playlist->images[0]->url = 'wp-content/uploads/spotify/optimised/' . $filename . '.jpg';
       }
     }
     $set = json_encode($set);
