@@ -1,18 +1,54 @@
 <?php
-
-/* AJAX load more */
-function be_ajax_load_more() {
-	$args['post_type'] = 'post';
-	$args['paged'] = esc_attr( $_POST['page'] );
-	$args['post_status'] = 'publish';
-	ob_start();
-	$loop = new WP_Query( $args );
-	if( $loop->have_posts() ): while( $loop->have_posts() ): $loop->the_post();	
-		buildHomeArchive($post);
-	endwhile; endif; wp_reset_postdata();
-	$data = ob_get_clean();
-	wp_send_json_success( $data );
-	wp_die();
+function rest_post_thumbnail() {
+    register_rest_field( 
+	    'post',
+	    'featured_image_url',  //key-name in json response
+	    array(
+			'get_callback'    => 'get_thumbnail_url',
+			'update_callback' => null,
+			'schema'          => null,
+		)
+	);
+    register_rest_field( 
+	    'post',
+	    'featured_image_srcset',  //key-name in json response
+	    array(
+			'get_callback'    => 'rest_get_featured_image_srcset',
+			'update_callback' => null,
+			'schema'          => null,
+		)
+	);
 }
-add_action( 'wp_ajax_be_ajax_load_more', 'be_ajax_load_more' );
-add_action( 'wp_ajax_nopriv_be_ajax_load_more', 'be_ajax_load_more' );
+function rest_post_custom_excerpt() {
+    register_rest_field( 
+	    'post',
+	    'custom_excerpt',  //key-name in json response
+	    array(
+			'get_callback'    => 'customExcerpt',
+			'update_callback' => null,
+			'schema'          => null,
+		)
+	);
+}
+function rest_post_custom_title() {
+    register_rest_field( 
+	    'post',
+	    'custom_title',  //key-name in json response
+	    array(
+			'get_callback'    => 'rest_get_custom_title',
+			'update_callback' => null,
+			'schema'          => null,
+		)
+	);
+}
+add_action( 'rest_api_init', 'rest_post_thumbnail' );
+add_action( 'rest_api_init', 'rest_post_custom_excerpt' );
+add_action( 'rest_api_init', 'rest_post_custom_title' );
+
+function rest_get_featured_image_srcset( $object) {
+    return wp_get_attachment_image_srcset( get_post_thumbnail_id( $object['id'] ), array(400,400));
+}
+function rest_get_custom_title( $object, $field_name, $request ) {
+	$post = (object) ['post_title' => $object['title']['rendered']];
+    return customTitle($post);
+}

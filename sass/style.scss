@@ -954,4 +954,9 @@ body:not(.cover-closed){
 	    	display: block;
 	    }
 	}
+	.archive.block {
+		.info {
+			height: calc(10 * #{$mid-spacing});
+		}
+	}
 }

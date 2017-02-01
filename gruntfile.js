@@ -10,11 +10,11 @@ module.exports = function(grunt) {
       },
       js: {
         files: [
-          'js/sources.js',
-          'js/main.js',
+          'js/src/sources.js',
+          'js/src/main.js',
           'Gruntfile.js'
         ],
-        tasks: ['jshint', 'concat','uglify:scripts','notify:successJs']
+        tasks: ['jshint','babel','concat','uglify:scripts','notify:successJs']
       }
     },
     sass: {
@@ -54,14 +54,25 @@ module.exports = function(grunt) {
       options: {
         jshintrc: '.jshintrc'
       },
-      all: ['Gruntfile.js', 'js/main.js']
+      all: ['Gruntfile.js', 'js/src/main.js']
+    },
+    babel: {
+        options: {
+            presets: ['es2015']
+        },
+        dist: {
+            files: {
+                'js/src/main-babel.js': 'js/src/main.js'
+            }
+        }
     },
     concat: {
       options: {
         separator: ';',
+        stripBanners: true
       },
       dist: {
-        src: ['js/sources.js','js/main.js'],
+        src: ['js/src/sources.js','js/src/main-babel.js'],
         dest: 'js/scripts-concat.js',
       },
     },
@@ -124,7 +135,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-browser-sync');
   grunt.loadNpmTasks('grunt-notify');
+  grunt.loadNpmTasks('grunt-babel');
   // Register the default tasks.
   grunt.registerTask('default', ['browserSync', 'watch', 'notify']);
-  grunt.registerTask('prod', ['sass:dist', 'autoprefixer', 'cssmin', 'jshint', 'concat','uglify', 'notify:successProduction']);
+  grunt.registerTask('prod', ['sass:dist', 'autoprefixer', 'cssmin', 'jshint','babel','concat','uglify', 'notify:successProduction']);
 };

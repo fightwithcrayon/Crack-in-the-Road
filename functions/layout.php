@@ -1,4 +1,13 @@
 <?php
+function get_thumbnail_url($post){
+    if(has_post_thumbnail($post['id'])){
+        $imgArray = wp_get_attachment_image_src( get_post_thumbnail_id( $post['id'] ), array(200,200) );
+        $imgURL = $imgArray[0];
+        return $imgURL;
+    } else {
+        return false;
+    }
+}
 function customExcerpt($post) {
 	if($post->post_excerpt != null && $post->post_excerpt != '') {
 		return $post->post_excerpt;

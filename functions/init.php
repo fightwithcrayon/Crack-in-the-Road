@@ -1,6 +1,4 @@
 <?php
-add_filter('show_admin_bar', '__return_false');
-
 function dequeue_core_default() {
 	if (!is_admin()) {
 		wp_deregister_script('wp-embed');
@@ -31,5 +29,44 @@ function font_setup(){
 	 }
 	 echo $output;
 }
+
+function gt_exclude_sticky( $query ) {
+    if ( $query->is_home() && $query->is_main_query() && !is_admin() ) {
+        //show the sticky post in its chronological place
+        $query->set( 'ignore_sticky_posts', 1 );
+    }
+}
+add_action( 'pre_get_posts', 'gt_exclude_sticky' );
+
+
+function artist_taxonomy() {
+    // Add Artist taxonomy, make it hierarchical (like categories)
+    $artisttax = array( 
+        'name' => __( 'Artist', 'taxonomy general name' ),
+        'singular_name' => __( 'Artist', 'taxonomy singular name' ),
+        'search_items' =>  __( 'Search Artists' ),
+        'popular_items' => __( 'Popular Artists' ),
+        'all_items' => __( 'All Artists' ),
+        'parent_item' => __( 'Parent Artist' ),
+        'parent_item_colon' => __( 'Parent Artist:' ),
+        'edit_item' => __( 'Edit Artist' ), 
+        'update_item' => __( 'Update Artist' ),
+        'add_new_item' => __( 'Add New Artist' ),
+        'new_item_name' => __( 'New Artist' ),
+    );  
+
+    register_taxonomy('ha_artist', array('post'), array(
+        'hierarchical' => true,
+        'labels' => $artisttax,
+        'show_ui' => true,
+        'query_var' => true,
+        'rewrite' => array( 'slug' => 'artist' ),
+        'capabilities' =>  array(
+            'edit_terms' => 'edit_posts',
+            'assign_terms' => 'edit_posts'
+            )
+      ));
+}
+add_action('init', 'artist_taxonomy');
 
 ?>

@@ -1,40 +1,13 @@
-//Main
-var ajaxurl = 'https://www.crackintheroad.com/wp-admin/admin-ajax.php';
-
-//Everything to do with the cover
-var pageDiv = document.getElementById("thepage");
-var	y = null;
-var	runScroll = function() { 
-	document.body.classList.toggle("cover-closed", window.scrollY <= window.innerHeight); 
-};
-var	runResize = function() {
-	if(y === null){
-		y = setTimeout(function() {
-			var y = null;
-			pageDiv = document.getElementById("thepage");
-			document.body.style.paddingBottom = pageDiv.clientHeight + "px";
-		}, 200);
-	}
-};
-
-function setupCover(){
-    document.body.style.paddingBottom = pageDiv.clientHeight + "px";
-	document.body.classList.toggle("cover-closed");
-    window.addEventListener("scroll", runScroll, { passive: true });
-    window.addEventListener("resize", runResize, { passive: true });
-}
-
 //Other stuff
-$('.playlists > .more, .playlists > .less').click(function(){
+$('.playlists > .more, .playlists > .less').on('click', function(){
 	$('.playlists').toggleClass('open');
 });
 
-$('a[data-action="openMenu"], li.close').click(function(e){
+$('a[data-action="openMenu"], li.close').on('click', function(e){
 	$('body').toggleClass('menuopen');
 	return false;
 });
 
-//That's all set up, on to the kick off
 $(document).ready(function(){ 
 	setupCover();
 	setTimeout(scribbleTitle, 1000);
@@ -43,6 +16,28 @@ $(document).ready(function(){
 	}
 
 });
+
+function setupCover(){
+    var pageDiv = document.getElementById("thepage");
+	document.body.style.paddingBottom = pageDiv.clientHeight + "px";
+	document.body.classList.toggle("cover-closed");
+	var	y = null;
+	var	runScroll = function() { 
+		document.body.classList.toggle("cover-closed", window.scrollY <= window.innerHeight); 
+	};
+    window.addEventListener("scroll", runScroll, { passive: true });
+    
+	var	runResize = function() {
+		if(y === null){
+			y = setTimeout(function() {
+				var y = null;
+				pageDiv = document.getElementById("thepage");
+				document.body.style.paddingBottom = pageDiv.clientHeight + "px";
+			}, 200);
+		}
+	};
+    window.addEventListener("resize", runResize, { passive: true });
+}
 
 function scribbleTitle(){
 	var ctx = document.getElementById("sitetitle").getContext("2d"),
@@ -71,7 +66,8 @@ function scribbleTitle(){
 }
 
 function infinitescroll(){
-	var button = $('.infinitescroll .load-more');
+	var infiniteScrollContainer = $('.infinitescroll');
+	var button = $(infiniteScrollContainer).children('.load-more');
 	// Now the infinite scroll
 	var page = 2;
 	var loading = false;
@@ -82,34 +78,38 @@ function infinitescroll(){
 	    },
 	    delay: 400 //(milliseconds) adjust to the highest acceptable value
 	};
-
 	$(window).scroll(function(){
-		if( ! loading && scrollHandling.allow ) {
+		if( loading === false && scrollHandling.allow ) {
 			scrollHandling.allow = false;
 			setTimeout(scrollHandling.reallow, scrollHandling.delay);
 			var offset = $(button).offset().top - $(window).scrollTop();
-			if( 1200 > offset ) {
+			if( 1200 > offset && loading === false) {
 				loading = true;
-				var data = {
-					action: 'be_ajax_load_more',
-					page: page
-				};
-				$.post(ajaxurl, data, function(res) {
-					if( res.success) {
-						console.log(res);
-						$('.infinitescroll').append( res.data );
-						$('.infinitescroll').append( button );
-						page = page + 1;
-						loading = false;
-					} else {
-						console.log(res);
-					}
-				}).fail(function(xhr, textStatus, e) {
-					console.log(xhr.responseText);
+				$.getJSON('/wp-json/wp/v2/posts?page=' + page, function(data){
+					var postString;
+					console.log('Loaded page ' + page);
+					data.forEach(function(post, i){
+							postString += `<article class="archive block">
+								<div class="image">
+									<a href="${post.link}" name="${post.title.rendered}">
+										<img srcset="${post.featured_image_srcset}" alt="${post.title.rendered}" title="${post.title.rendered}" />
+									</a>
+								</div>
+								<div class="info">
+									<a href="${post.link}" name="${post.title.rendered}" class="simple">
+										${post.custom_title}
+									</a>
+									<p>${post.custom_excerpt}</p>
+									<span class="more">
+										<a href="${post.link}" name="${post.title.rendered}">Read more</a>
+									</span>
+								</div>
+							</article>`;
+					});
+					infiniteScrollContainer.append(postString); 
+					page++;
+					loading = false;
 				});
-
-			} else {
-				//console.log('Weak offset');
 			}
 		}
 	});
