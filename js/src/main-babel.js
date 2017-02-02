@@ -71,7 +71,7 @@ function scribbleTitle() {
 
 function infinitescroll() {
 	var infiniteScrollContainer = $('.infinitescroll');
-	var button = $(infiniteScrollContainer).children('.load-more');
+	var button = $(infiniteScrollContainer).children('.load-more')[0];
 	// Now the infinite scroll
 	var page = 2;
 	var loading = false;
@@ -89,7 +89,7 @@ function infinitescroll() {
 			var offset = $(button).offset().top - $(window).scrollTop();
 			if (1200 > offset && loading === false) {
 				loading = true;
-				$.getJSON('/wp-json/wp/v2/posts?page=' + page, function (data) {
+				$.getJSON('/wp-json/wp/v2/posts?page=' + page + '&' + button.dataset.query, function (data) {
 					var postString = '';
 					data.forEach(function (post, i) {
 						postString += '<article class="archive block">\n\t\t\t\t\t\t\t\t<div class="image">\n\t\t\t\t\t\t\t\t\t<a href="' + post.link + '" name="' + post.title.rendered + '">\n\t\t\t\t\t\t\t\t\t\t<img src="' + post.featured_image_url + '" data-srcset="' + post.featured_image_srcset + '" alt="' + post.title.rendered + '" title="' + post.title.rendered + '" class="lazyload blur-up" />\n\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class="info">\n\t\t\t\t\t\t\t\t\t<a href="' + post.link + '" name="' + post.title.rendered + '" class="simple">\n\t\t\t\t\t\t\t\t\t\t' + post.custom_title + '\n\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t\t<p>' + post.custom_excerpt + '</p>\n\t\t\t\t\t\t\t\t\t<span class="more">\n\t\t\t\t\t\t\t\t\t\t<a href="' + post.link + '" name="' + post.title.rendered + '">Read more</a>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</article>';

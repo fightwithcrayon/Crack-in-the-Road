@@ -7,32 +7,6 @@
 	<title><?php wp_title( ' | ', true, 'right' ); ?></title>
 	<?php wp_head(); ?>
 	<link href="<?php echo get_stylesheet_directory_uri() ?>/stylesheets/style-min.css?v=1.1.3" media="screen, projection" rel="stylesheet" type="text/css" />
-	<?php
-		if(is_home()) {
-			$args = array(
-				'posts_per_page' => 1,
-				'post__in'  => get_option( 'sticky_posts' ),
-				'ignore_sticky_posts' => 1
-			);
-			$query = new WP_Query( $args );
-			while ( $query->have_posts() ) : $query->the_post();
-				$attachment = get_post_thumbnail_id();
-				$featured_srcset = wp_get_attachment_image_srcset($attachment, array(1920,1024));
-				$title = get_the_title();
-				$thumb = wp_get_attachment_image_src($attachment, 'large', true);
-				$customtitle = explode(': ',$title);
-				$caption = 'Cover story: ' . $customtitle[1];
-				echo '<meta property="og:image" content="' . $thumb[0] . '">';
-				echo '<meta property="og:image:width" content="' . $thumb[1] .'">';
-				echo '<meta property="og:image:height" content="' . $thumb[2] .'">';
-			endwhile;
-		} else {
-			$attachment = get_post_thumbnail_id();
-			$featured_srcset = wp_get_attachment_image_srcset($attachment, array(1920,1080));
-			$title = get_the_title();
-			$caption = $title;
-		}
-	?>
 	<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -50,6 +24,7 @@
 	<meta name="msapplication-TileColor" content="#88b04b">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#88b04b">
+	<?php get_cover_details(); ?>
 	<script>
 		window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 		ga('create', 'UA-17970339-3', 'auto');

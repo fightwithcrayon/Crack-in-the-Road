@@ -1,12 +1,4 @@
 <?php
-
-function loadAudioPlayer() {
-   // wp_enqueue_script( 'soundmanager', get_stylesheet_directory_uri() . '/class/soundmanager/soundmanager2-jsmin.js', null, '2.97a', true);
-    //wp_enqueue_script( 'waveform', get_stylesheet_directory_uri() . '/js/waveform.js', null, '1', true);
-}
-add_action( 'wp_enqueue_scripts', 'loadAudioPlayer' );
-
-
 function captureSoundcloudObjects($content) {
 	$soundcloudID = '543a39f54bd63a00779211590a0f96a8';
 

@@ -66,7 +66,7 @@ function scribbleTitle(){
 
 function infinitescroll(){
 	var infiniteScrollContainer = $('.infinitescroll');
-	var button = $(infiniteScrollContainer).children('.load-more');
+	var button = $(infiniteScrollContainer).children('.load-more')[0];
 	// Now the infinite scroll
 	var page = 2;
 	var loading = false;
@@ -84,7 +84,7 @@ function infinitescroll(){
 			var offset = $(button).offset().top - $(window).scrollTop();
 			if( 1200 > offset && loading === false) {
 				loading = true;
-				$.getJSON('/wp-json/wp/v2/posts?page=' + page, function(data){
+				$.getJSON('/wp-json/wp/v2/posts?page=' + page + '&' + button.dataset.query, function(data){
 					var postString = '';
 					data.forEach(function(post, i){
 							postString += `<article class="archive block">

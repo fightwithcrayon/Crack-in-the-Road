@@ -122,13 +122,9 @@ function updatePopularAnalytics(){
       for ($i = 0; $i < count($dimensionHeaders) && $i < count($dimensions); $i++) {
         //This is page path
         //Debug: print($dimensionHeaders[$i] . ": " . $dimensions[$i] . "\n");
-        if($dimensions[$i] !== '/') {
-          $pathFragments = explode('/', $dimensions[$i]);
-          $idFragments = explode('-', end($pathFragments));
-          $results[$rowIndex] = array($idFragments[0]);
-        } else {
-          $results[$rowIndex] = array('Home');
-        }
+        $pathFragments = explode('/', $dimensions[$i]);
+        $idFragments = explode('-', end($pathFragments));
+        if(is_numeric($idFragments[0])) $results[$rowIndex] = array($idFragments[0]);
       }
 
       for ($j = 0; $j < count( $metricHeaders ) && $j < count( $metrics ); $j++) {
