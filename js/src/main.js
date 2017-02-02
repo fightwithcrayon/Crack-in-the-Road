@@ -1,3 +1,5 @@
+window.lazySizesConfig = window.lazySizesConfig || {};
+window.lazySizesConfig.loadMode = 1;
 //Other stuff
 $('.playlists > .more, .playlists > .less').on('click', function(){
 	$('.playlists').toggleClass('open');
@@ -13,7 +15,6 @@ $(document).ready(function(){
 	if(document.querySelector(".infinitescroll .load-more")){
 		infinitescroll();
 	}
-
 });
 
 function setupCover(){
@@ -81,7 +82,7 @@ function infinitescroll(){
 		if( loading === false && scrollHandling.allow ) {
 			scrollHandling.allow = false;
 			setTimeout(scrollHandling.reallow, scrollHandling.delay);
-			var offset = $(button).offset().top - $(window).scrollTop();
+			var offset = $(button).offset().top - ($(window).scrollTop() / 2);
 			if( 1200 > offset && loading === false) {
 				loading = true;
 				$.getJSON('/wp-json/wp/v2/posts?page=' + page + '&' + button.dataset.query, function(data){
