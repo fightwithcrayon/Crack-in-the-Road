@@ -26,15 +26,28 @@ function font_setup(){
         } ?>
     <script>
       (function(d) {
-        var h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);
+        var config = {
+                  kitId: "<?php echo $kitId; ?>",
+                  scriptTimeout: 3000,
+                  async: true
+            },h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);
             try{
                 Typekit.load({
                   kitId: "<?php echo $kitId; ?>",
                   scriptTimeout: 3000,
                   async: true,
                   active: function() {
-                    setTimeout(scribbleTitle, 100);
-                  }
+                    var timer = setInterval(function() {
+                       if ($('html').hasClass('wf-scriptoramatradeshowjf-n4-active')) {
+                        console.log('sorted');
+                           scribbleTitle();
+                           clearInterval(timer);
+                       } else {
+                        console.log('No luck');
+                       }
+                    }, 200);
+                  },
+                  inactive: console.log('Font loading failed')
                 })
             }catch(e){
 

@@ -41,7 +41,11 @@ function updateSpotify($force = false) {
         file_put_contents($file, file_get_contents($image));
         $o = json_decode(file_get_contents($service . 'https://www.crackintheroad.com/' . $file . $quality));
         file_put_contents("wp-content/uploads/spotify/optimised/" . $filename . '.jpg', file_get_contents($o->dest));
-        $playlist->images[0]->url = 'wp-content/uploads/spotify/optimised/' . $filename . '.jpg';
+        $playlist->images[0]->url = 'wp-content/uploads/spotify/optimised/' . $filename;
+        $thumb = new Imagick($playlist->images[0]->url . '.jpg');
+        $thumb->resizeImage(150,150,Imagick::FILTER_LANCZOS,1, true);
+        $thumb->writeImage($playlist->images[0]->url .'_150.jpg');
+        $thumb->destroy();
       }
     }
     $set = json_encode($set);

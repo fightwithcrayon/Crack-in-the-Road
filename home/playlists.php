@@ -22,7 +22,7 @@ function getPlaylists() {
 				<article class="playlist block">
 					<?php echo '<a href="'. $playlist->external_urls->spotify .'" name="'. $playlist->name .'">'; ?>
 		            <figure class="image">
-		            	<?php echo '<img src="'. $playlist->images[0]->url .'" alt="'. $playlist->images[0]->name .'" title="'. $playlist->images[0]->name .'" />'; ?>
+		            	<?php echo '<img srcset="'. playlistSrcset($playlist) .'" alt="'. $playlist->images[0]->name .'" title="'. $playlist->images[0]->name .'" />'; ?>
 		            </figure>
 					<div class="info">
 						<h4><?php echo str_replace('Crack in the Road ','',$playlist->name); ?></h4>
@@ -39,7 +39,9 @@ function getPlaylists() {
 		}
     }
 }
-
+function playlistSrcset($playlist){
+	return $playlist->images[0]->url . '.jpg 300w, '. $playlist->images[0]->url . '_150.jpg 150w';
+}
 function playlistDate($playlist){
 	return date('l jS', strtotime($playlist->tracks->items[0]->added_at));
 }
