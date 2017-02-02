@@ -8,13 +8,13 @@ $title = get_the_title();
 		<h1><?php echo $title ?></h1>
 	</div>
 	<ul class="meta font_small">
-		<li>By <?php echo get_the_author(); ?></li>
+		<!--<li>By <?php echo get_the_author(); ?></li>
 		<li><?php echo get_the_date('jS M Y'); ?></li>
 		<?php
 			if(is_array($artists)) {
 				echo '<li>Who is ' . $artists[0]->name . '?</li>';
 			}
-		?>
+		?>-->
 	</ul>
  	<div class="copy">
 	 	<?php echo $copy;

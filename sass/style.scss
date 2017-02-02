@@ -761,8 +761,11 @@ body:not(.cover-closed){
 		p {
 			margin:0 auto;
 		}
-		.title {
+		.title, .meta {
 			text-align: center;
+			margin:0 auto;
+			width:100%;
+			max-width:680px
 		}
 		.wp-caption-text {
 		    line-height: 2;
@@ -920,11 +923,6 @@ body:not(.cover-closed){
 		}
 	}
 	.page-content {
-		.title {
-			text-align: left;
-			width:66%;
-			margin-right:auto;
-		}
 		.media {
 			width: 33%;
 		}
