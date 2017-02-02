@@ -46,6 +46,9 @@ function updateSpotify($force = false) {
         $thumb->resizeImage(150,150,Imagick::FILTER_LANCZOS,1, true);
         $thumb->writeImage($playlist->images[0]->url .'_150.jpg');
         $thumb->destroy();
+      } else {
+        $filename = basename($playlist->images[0]->url);
+        $playlist->images[0]->url = 'wp-content/uploads/spotify/optimised/' . $filename;
       }
     }
     $set = json_encode($set);
@@ -144,6 +147,7 @@ function updatePopularAnalytics(){
   }
   update_option('popular_stats', $results);
   syslog(LOG_NOTICE, strtotime('now') . " Finished pulling popular posts");
+  syslog(LOG_NOTICE, strtotime('now') . $results);
 }
 
 add_action( 'citr_updateSpotify_cron', 'updateSpotify' );

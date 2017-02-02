@@ -38,12 +38,9 @@ function font_setup(){
                   async: true,
                   active: function() {
                     var timer = setInterval(function() {
-                       if ($('html').hasClass('wf-scriptoramatradeshowjf-n4-active')) {
-                        console.log('sorted');
+                      if ($('html').hasClass('wf-scriptoramatradeshowjf-n4-active')) {
                            scribbleTitle();
                            clearInterval(timer);
-                       } else {
-                        console.log('No luck');
                        }
                     }, 200);
                   },
