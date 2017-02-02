@@ -24,7 +24,7 @@
 	<meta name="msapplication-TileColor" content="#88b04b">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#88b04b">
-	<?php get_cover_details(); ?>
+	<?php $cover = get_cover_details(); ?>
 	<script>
 		window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 		ga('create', 'UA-17970339-3', 'auto');
@@ -37,13 +37,13 @@
 <section id="cover">
 <canvas id="sitetitle"></canvas>
 	<figure>
-		<img alt="<?php echo $title; ?>" title="<?php echo $title; ?>" srcset="<?php echo $featured_srcset; ?>">
+		<img alt="<?php echo $cover['title']; ?>" title="<?php echo $cover['title']; ?>" srcset="<?php echo $cover['featured_srcset']; ?>">
 		<figcaption>	
 		<?php
 			if(is_home()) {
-				echo '<h2>' . $caption . '</h2>';
+				echo '<h2>' . $cover['caption'] . '</h2>';
 			} else {
-				echo '<h1>' . $caption . '</h1>';
+				echo '<h1>' . $cover['caption'] . '</h1>';
 			}
 		?></figcaption>
 	</figure>

@@ -1,5 +1,6 @@
 <?php
 function get_cover_details(){
+	$cover = array();
 	if(is_home()) {
 		$args = array(
 			'posts_per_page' => 1,
@@ -9,28 +10,29 @@ function get_cover_details(){
 		$query = new WP_Query( $args );
 		while ( $query->have_posts() ) : $query->the_post();
 			$attachment = get_post_thumbnail_id();
-			$featured_srcset = wp_get_attachment_image_srcset($attachment, array(1920,1024));
-			$title = get_the_title();
-			$thumb = wp_get_attachment_image_src($attachment, 'large', true);
-			$customtitle = explode(': ',$title);
-			$caption = 'Cover story: ' . $customtitle[1];
-			echo '<meta property="og:image" content="' . $thumb[0] . '">';
-			echo '<meta property="og:image:width" content="' . $thumb[1] .'">';
-			echo '<meta property="og:image:height" content="' . $thumb[2] .'">';
+			$cover['featured_srcset'] = wp_get_attachment_image_srcset($attachment, array(1920,1024));
+			$cover['title'] = get_the_title();
+			$cover['thumb'] = wp_get_attachment_image_src($attachment, 'large', true);
+			$customtitle = explode(': ',$cover['title']);
+			$cover['caption'] = 'Cover story: ' . $customtitle[1];
+			echo '<meta property="og:image" content="' . $$cover['thumb'][0] . '">';
+			echo '<meta property="og:image:width" content="' . $cover['thumb'][1] .'">';
+			echo '<meta property="og:image:height" content="' . $cover['thumb'][2] .'">';
 		endwhile;
 	} elseif(is_single()) {
 		$attachment = get_post_thumbnail_id();
-		$featured_srcset = wp_get_attachment_image_srcset($attachment, array(1920,1080));
-		$title = get_the_title();
-		$caption = $title;
+		$cover['featured_srcset'] = wp_get_attachment_image_srcset($attachment, array(1920,1080));
+		$cover['title'] = get_the_title();
+		$cover['caption'] = $cover['title'];
 	} elseif(is_404()) {
-		$featured_srcset = wp_get_attachment_image_srcset('29704', array(1920,1080));
-		$title = 'Alexandra Bondi De Antoni, 2014';
-		$caption = '404: Page not found';
-		echo '<meta property="og:image" content="' . $thumb[0] . '">';
-		echo '<meta property="og:image:width" content="' . $thumb[1] .'">';
-		echo '<meta property="og:image:height" content="' . $thumb[2] .'">';
+		$cover['featured_srcset'] = wp_get_attachment_image_srcset('29704', array(1920,1080));
+		$cover['title'] = 'Alexandra Bondi De Antoni, 2014';
+		$cover['caption'] = '404: Page not found';
+		echo '<meta property="og:image" content="' . $cover['thumb'][0] . '">';
+		echo '<meta property="og:image:width" content="' . $cover['thumb'][1] .'">';
+		echo '<meta property="og:image:height" content="' . $cover['thumb'][2] .'">';
 	}
+	return $cover;
 }
 
 function get_small_thumbnail_url($id){
