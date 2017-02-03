@@ -1,4 +1,6 @@
 <?php
+define( 'WP_USE_THEMES', false ); 
+require( '/var/www/crackintheroad.com/htdocs/wp-load.php' );
 function updateSpotify($force = false) {
   $ignore = array(
     'Release radar' => '37i9dQZEVXbs3J2wfh1mGg'
@@ -8,7 +10,7 @@ function updateSpotify($force = false) {
     $session = new SpotifyWebAPI\Session(
         '4a98167631d64a4ca9e77f267cf3fb51',
         'ac20fadd1b7e4574857fdefc52fa9aa3',
-        'http://citrdev:8888'
+        'https://www.crackintheroad.com'
     );
     $api = new SpotifyWebAPI\SpotifyWebAPI();
 
@@ -34,21 +36,22 @@ function updateSpotify($force = false) {
     foreach($set as $playlist) {
       $image = $playlist->images[0]->url;
       $filename = basename($image);
-      $file = 'wp-content/uploads/spotify/' . $filename . '.jpg';
+      $uploads = wp_upload_dir()['basedir'];
+      $file = $uploads . '/spotify/' . $filename . '.jpg';
       $service = 'http://api.resmush.it/ws.php?img=';
       $quality = '&qlty=66';
       if(!file_exists($file)){
         file_put_contents($file, file_get_contents($image));
         $o = json_decode(file_get_contents($service . 'https://www.crackintheroad.com/' . $file . $quality));
-        file_put_contents("wp-content/uploads/spotify/optimised/" . $filename . '.jpg', file_get_contents($o->dest));
-        $playlist->images[0]->url = 'wp-content/uploads/spotify/optimised/' . $filename;
+        file_put_contents($uploads . "/spotify/optimised/" . $filename . '.jpg', file_get_contents($o->dest));
+        $playlist->images[0]->url = $uploads . '/spotify/optimised/' . $filename;
         $thumb = new Imagick($playlist->images[0]->url . '.jpg');
         $thumb->resizeImage(150,150,Imagick::FILTER_LANCZOS,1, true);
         $thumb->writeImage($playlist->images[0]->url .'_150.jpg');
         $thumb->destroy();
       } else {
         $filename = basename($playlist->images[0]->url);
-        $playlist->images[0]->url = 'wp-content/uploads/spotify/optimised/' . $filename;
+        $playlist->images[0]->url = $uploads . '/spotify/optimised/' . $filename;
       }
     }
     $set = json_encode($set);
@@ -59,8 +62,8 @@ function updateSpotify($force = false) {
 function updatePopularAnalytics(){
   $current_time = strtotime('now');
   syslog(LOG_NOTICE, $current_time . " contacting Google services for popular posts....");
-  require_once __DIR__ . '/../class/Google/vendor/autoload.php';
-  $KEY_FILE_LOCATION = __DIR__ . '/../class/service-account-credentials.json';
+  require_once get_stylesheet_directory() . '/class/Google/vendor/autoload.php';
+  $KEY_FILE_LOCATION = get_stylesheet_directory() . '/class/service-account-credentials.json';
 
   // Create and configure a new client object.
   $client = new Google_Client();
@@ -146,12 +149,5 @@ function updatePopularAnalytics(){
   syslog(LOG_NOTICE, strtotime('now') . $results);
 }
 
-add_action( 'citr_updateSpotify_cron', 'updateSpotify' );
-add_action( 'citr_popularanalytics_cron', 'updatePopularAnalytics' );
-
-if ( ! wp_next_scheduled( 'citr_updateSpotify_cron' ) ) {
-  wp_schedule_event( time(), 'hourly', 'citr_updateSpotify_cron' );
-}
-if ( ! wp_next_scheduled( 'citr_popularanalytics_cron' ) ) {
-  wp_schedule_event( time(), 'hourly', 'citr_popularanalytics_cron' );
-}
+updateSpotify();
+updatePopularAnalytics();
