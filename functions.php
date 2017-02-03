@@ -7,7 +7,6 @@ add_filter( 'auto_update_plugin', '__return_false' );
 add_filter( 'auto_update_theme', '__return_false' );
 
 require('functions/init.php');
-require('functions/services.php');
 require('functions/audio.php');
 require('functions/layout.php');
 require('functions/intelligence.php');
