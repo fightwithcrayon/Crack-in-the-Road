@@ -1,6 +1,14 @@
 <?php
 define( 'WP_USE_THEMES', false ); 
+<<<<<<< HEAD:services/services.php
+<<<<<<< HEAD:services/services.php
 require( '/var/www/crackintheroad.com/htdocs/wp-load.php' );
+=======
+require( $_SERVER['DOCUMENT_ROOT'] .'/wp-load.php' );
+>>>>>>> 289707a65fc384dd4372c48928258c93aacbb7b1:services/services.php
+=======
+require( $_SERVER['DOCUMENT_ROOT'] .'/wp-load.php' );
+>>>>>>> 289707a65fc384dd4372c48928258c93aacbb7b1:services/services.php
 function updateSpotify($force = false) {
   $ignore = array(
     'Release radar' => '37i9dQZEVXbs3J2wfh1mGg'
@@ -62,8 +70,18 @@ function updateSpotify($force = false) {
 function updatePopularAnalytics(){
   $current_time = strtotime('now');
   syslog(LOG_NOTICE, $current_time . " contacting Google services for popular posts....");
+<<<<<<< HEAD:services/services.php
+<<<<<<< HEAD:services/services.php
   require_once get_stylesheet_directory() . '/class/Google/vendor/autoload.php';
   $KEY_FILE_LOCATION = get_stylesheet_directory() . '/class/service-account-credentials.json';
+=======
+  require_once get_stylesheet_directory_uri() . '/class/Google/vendor/autoload.php';
+  $KEY_FILE_LOCATION = get_stylesheet_directory_uri() . '/class/service-account-credentials.json';
+>>>>>>> 289707a65fc384dd4372c48928258c93aacbb7b1:services/services.php
+=======
+  require_once get_stylesheet_directory_uri() . '/class/Google/vendor/autoload.php';
+  $KEY_FILE_LOCATION = get_stylesheet_directory_uri() . '/class/service-account-credentials.json';
+>>>>>>> 289707a65fc384dd4372c48928258c93aacbb7b1:services/services.php
 
   // Create and configure a new client object.
   $client = new Google_Client();
