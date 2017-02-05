@@ -38,21 +38,22 @@ function updateSpotify($force = false) {
       $image = $playlist->images[0]->url;
       $filename = basename($image);
       $uploads = wp_upload_dir()['basedir'];
-      $file = $uploads . '/spotify/' . $filename . '.jpg';
+      $localpath = $uploads . '/spotify/';
+      $publicpath = 'https://www.crackintheroad.com/wp-content/uploads/spotify/';
       $service = 'http://api.resmush.it/ws.php?img=';
       $quality = '&qlty=66';
-      if(!file_exists($file)){
-        file_put_contents($file, file_get_contents($image));
-        $o = json_decode(file_get_contents($service . 'https://www.crackintheroad.com/' . $file . $quality));
-        file_put_contents($uploads . "/spotify/optimised/" . $filename . '.jpg', file_get_contents($o->dest));
-        $playlist->images[0]->url = $uploads . '/spotify/optimised/' . $filename;
-        $thumb = new Imagick($playlist->images[0]->url . '.jpg');
+      if(!file_exists($localpath . 'optimised/' . $filename . '.jpg')){
+        file_put_contents($localpath . $filename . '.jpg', file_get_contents($image));
+        $o = json_decode(file_get_contents($service . $publicpath . $filename . '.jpg' . $quality));
+        file_put_contents($localpath . 'optimised/' . $filename . '.jpg', file_get_contents($o->dest));
+        $playlist->images[0]->url = $publicpath . 'optimised/' . $filename;
+        $thumb = new Imagick($localpath . 'optimised/' . $filename . '.jpg');
         $thumb->resizeImage(150,150,Imagick::FILTER_LANCZOS,1, true);
-        $thumb->writeImage($playlist->images[0]->url .'_150.jpg');
+        $thumb->writeImage($localpath . 'optimised/' . $filename .'_150.jpg');
         $thumb->destroy();
       } else {
         $filename = basename($playlist->images[0]->url);
-        $playlist->images[0]->url = $uploads . '/spotify/optimised/' . $filename;
+        $playlist->images[0]->url = $localpath . 'optimised/' . $filename;
       }
     }
     $set = json_encode($set);
