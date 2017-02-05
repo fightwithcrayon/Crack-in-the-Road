@@ -1,7 +1,6 @@
 <?php
 define( 'WP_USE_THEMES', false ); 
 require( '/var/www/crackintheroad.com/htdocs/wp-load.php' );
-require( $_SERVER['DOCUMENT_ROOT'] .'/wp-load.php' );
 
 function updateSpotify($force = false) {
   $ignore = array(
@@ -64,7 +63,7 @@ function updateSpotify($force = false) {
 function updatePopularAnalytics(){
   $current_time = strtotime('now');
   syslog(LOG_NOTICE, $current_time . " contacting Google services for popular posts....");
-  
+
   require_once get_stylesheet_directory_uri() . '/class/Google/vendor/autoload.php';
   $KEY_FILE_LOCATION = get_stylesheet_directory_uri() . '/class/service-account-credentials.json';
 
