@@ -82,7 +82,7 @@ function infinitescroll(){
 		if( loading === false && scrollHandling.allow ) {
 			scrollHandling.allow = false;
 			setTimeout(scrollHandling.reallow, scrollHandling.delay);
-			var offset = $(button).offset().top - ($(window).scrollTop() / 2);
+			var offset = $(button).offset().top - $(window).scrollTop();
 			if( 1200 > offset && loading === false) {
 				loading = true;
 				$.getJSON('/wp-json/wp/v2/posts?page=' + page + '&' + button.dataset.query, function(data){
@@ -91,7 +91,7 @@ function infinitescroll(){
 							postString += `<article class="archive block">
 								<div class="image">
 									<a href="${post.link}" name="${post.title.rendered}">
-										<img src="${post.featured_image_url}" data-srcset="${post.featured_image_srcset}" alt="${post.title.rendered}" title="${post.title.rendered}" class="lazyload blur-up" />
+										<img data-srcset="${post.featured_image_srcset}" alt="${post.title.rendered}" title="${post.title.rendered}" class="lazyload blur-up" />
 									</a>
 								</div>
 								<div class="info">

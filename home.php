@@ -14,7 +14,6 @@
 </section>
 <section class="newsletter divider">
 	<?php
-	$vh = 'calc((25vw - 60px) * 1.5)';
 	//getNewsletter();
 	?>
 </section>

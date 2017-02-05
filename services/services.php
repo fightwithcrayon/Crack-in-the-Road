@@ -64,8 +64,8 @@ function updatePopularAnalytics(){
   $current_time = strtotime('now');
   syslog(LOG_NOTICE, $current_time . " contacting Google services for popular posts....");
 
-  require_once get_stylesheet_directory_uri() . '/class/Google/vendor/autoload.php';
-  $KEY_FILE_LOCATION = get_stylesheet_directory_uri() . '/class/service-account-credentials.json';
+  require_once get_stylesheet_directory() . '/class/Google/vendor/autoload.php';
+  $KEY_FILE_LOCATION = get_stylesheet_directory() . '/class/service-account-credentials.json';
 
   // Create and configure a new client object.
   $client = new Google_Client();

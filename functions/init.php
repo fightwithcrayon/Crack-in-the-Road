@@ -1,4 +1,6 @@
 <?php
+$host = $_SERVER['HTTP_HOST']; 
+
 function localize_js() {
   wp_enqueue_script( 'scripts', get_stylesheet_directory_uri() . '/js/scripts-min.js', null, '1.2.4', true);
  /* wp_localize_script( 'scripts', 'localized_var', array(
@@ -25,7 +27,6 @@ function dequeue_core() {
 add_action( 'wp_enqueue_scripts', 'dequeue_core' );
 
 function font_setup(){
-	$host = $_SERVER['HTTP_HOST']; 
 	$output = '';
 	if($host == "www.crackintheroad.com" || $host == "crackintheroad.com") { 
         $kitId = 'nrb2ssy';
@@ -101,5 +102,17 @@ function artist_taxonomy() {
       ));
 }
 add_action('init', 'artist_taxonomy');
+
+function dev_images_src($sources){
+  foreach ( $sources as $source ) {
+    $sources[ $source['value'] ][ 'url' ] = str_replace('http://portfolio:8888', 'https://www.crackintheroad.com', $sources[ $source['value'] ][ 'url' ]);
+    // you MAY use external domains as well
+    // $sources[ $source['value'] ][ 'url' ] = str_replace('http://www.example.com', 'https://static.examplecdnprovider.com', $sources[ $source['value'] ][ 'url' ]);
+  }
+  return $sources;
+}
+if($host == "portfolio:8888" || $host == "localhost:3000") { 
+  add_filter( 'wp_calculate_image_srcset', 'dev_images_src');
+}
 
 ?>
