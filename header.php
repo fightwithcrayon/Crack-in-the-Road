@@ -58,7 +58,7 @@
 <ul id="menu">
 	<li><a href="https://www.crackintheroad.com/">Home</a></li>
 	<li>&nbsp;</li>
-	<li>(More to come throughout January)</li>
+	<li><a href="https://en.wikipedia.org/wiki/Crack_in_the_Road" target="_blank">About</a></li>
 	<li class="close"></li>
 </ul>
 <div id="thepage">
