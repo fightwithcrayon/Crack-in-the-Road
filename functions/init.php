@@ -28,10 +28,10 @@ add_action( 'wp_enqueue_scripts', 'dequeue_core' );
 
 function font_setup(){
 	$output = '';
-	if($host == "www.crackintheroad.com" || $host == "crackintheroad.com") { 
-        $kitId = 'nrb2ssy';
-    } else {
+	if($host == "localhost:8888" || $host == "portfolio:8888") { 
         $kitId = 'gtb5zrx';
+    } else {
+        $kitId = 'nrb2ssy';
         } ?>
     <script>
       (function(d) {
