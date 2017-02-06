@@ -35,6 +35,7 @@ function font_setup(){
         } ?>
     <script>
       (function(d) {
+        var currentHost = "<?php echo $host; ?>";
         var config = {
                   kitId: "<?php echo $kitId; ?>",
                   scriptTimeout: 3000,
