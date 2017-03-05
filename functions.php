@@ -8,6 +8,7 @@ add_filter( 'auto_update_theme', '__return_false' );
 
 require('functions/init.php');
 require('functions/audio.php');
+require('functions/admin.php');
 require('functions/layout.php');
 require('functions/intelligence.php');
 

@@ -51,9 +51,11 @@ function updateSpotify($force = false) {
         $thumb->resizeImage(150,150,Imagick::FILTER_LANCZOS,1, true);
         $thumb->writeImage($localpath . 'optimised/' . $filename .'_150.jpg');
         $thumb->destroy();
+         syslog(LOG_NOTICE, strtotime('now') . " Playlist optimised: " . $playlist->images[0]->url);
       } else {
         $filename = basename($playlist->images[0]->url);
-        $playlist->images[0]->url = $localpath . 'optimised/' . $filename;
+        $playlist->images[0]->url = $publicpath . 'optimised/' . $filename;
+     syslog(LOG_NOTICE, strtotime('now') . " Playlist not optimised: " . $playlist->images[0]->url);
       }
     }
     $set = json_encode($set);
@@ -154,3 +156,4 @@ function updatePopularAnalytics(){
 
 updateSpotify();
 updatePopularAnalytics();
+?>
