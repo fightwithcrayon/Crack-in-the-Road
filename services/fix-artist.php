@@ -94,11 +94,11 @@ function firstStage(){
 	if($i == $quantity) {
 		$_SESSION['offset']++;
 		header( "refresh:3" );
-		echo '<h2>'. ($i * $_SESSION['offset']) .' posts of '. $untagged->post_count .' reviewed</h2>';
+		echo '<h2>'. ($i * $_SESSION['offset']) .' posts of '. $untagged->found_posts .' reviewed</h2>';
 		var_dump($output);
 	} else {
 		session_destroy();
-		echo '<h2>'. ($i * $_SESSION['offset']) .' posts of '. $untagged->post_count .' reviewed.</h2>
+		echo '<h2>'. ($i * $_SESSION['offset']) .' posts of '. $untagged->found_posts .' reviewed.</h2>
 				<p>We\'re finished for now, but '. (count($output['failed']) + count($output['attention'])) .'posts need further attention.</p>';
 		var_dump($output);
 	}
