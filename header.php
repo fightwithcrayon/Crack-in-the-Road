@@ -6,7 +6,6 @@
 	<meta name="viewport"  content="width=device-width, initial-scale=1" />
 	<title><?php wp_title( ' | ', true, 'right' ); ?></title>
 	<?php wp_head(); ?>
-	<link href="<?php echo get_stylesheet_directory_uri() ?>/stylesheets/style-min.css?v=1.1.3" media="screen, projection" rel="stylesheet" type="text/css" />
 	<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
