@@ -38,7 +38,7 @@
 <canvas id="sitetitle"></canvas>
 	<figure>
 		<img alt="<?php echo $cover['title']; ?>" title="<?php echo $cover['title']; ?>" srcset="<?php echo $cover['featured_srcset']; ?>">
-		<figcaption>	
+		<figcaption>
 		<?php
 			if(is_home()) {
 				echo '<h2>' . $cover['caption'] . '</h2>';

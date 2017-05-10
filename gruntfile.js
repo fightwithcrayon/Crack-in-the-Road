@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     watch: {
       sass: {
-        files: 'sass/style.scss',
+        files: 'sass/*.scss',
         tasks: ['sass:dev', 'notify:successCss'],
       },
       js: {
@@ -33,11 +33,14 @@ module.exports = function(grunt) {
             }
         }
     },
-    autoprefixer: {
+    postcss: {
+      options: {
+        map: false,
+        processors: [
+          require('autoprefixer')({browsers: ['last 1 version', '> 1%', 'ie 8']})
+        ]
+      },
       dist: {
-        options: {
-          browsers: ['last 1 version', '> 1%', 'ie 8']
-        },
         files: {
           'stylesheets/style-prefixed.css': ['stylesheets/src/style.css']
         }
@@ -93,7 +96,8 @@ module.exports = function(grunt) {
       },
       options: {
         watchTask: true,
-        proxy: 'portfolio:8888'
+        server: false,
+        proxy: 'citr:8888'
       }
     },
 //Notification toasts
@@ -128,7 +132,7 @@ module.exports = function(grunt) {
   // Load the Grunt plugins.
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-sass');
-  grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -138,5 +142,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-babel');
   // Register the default tasks.
   grunt.registerTask('default', ['browserSync', 'watch', 'notify']);
-  grunt.registerTask('prod', ['sass:dist', 'autoprefixer', 'cssmin', 'jshint','babel','concat','uglify:scripts', 'notify:successProduction']);
+  grunt.registerTask('prod', ['sass:dist', 'postcss', 'cssmin', 'jshint','babel','concat','uglify:scripts', 'notify:successProduction']);
 };

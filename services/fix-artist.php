@@ -26,7 +26,7 @@ function firstStage(){
 	  'post_type' => 'post',
 	  'posts_per_page' => $quantity,
 	  'cat' => 301,
-	  'offset' => ($quantity * $_SESSION['offset']),
+	  'paged' => $_SESSION['offset'],
 	  'tax_query' => array(
 	    array(
 	      'taxonomy' => 'ha_artist',

@@ -1,11 +1,11 @@
 
-$small-spacing: 15px;
-$mid-spacing: 30px;
+$small-spacing: 20px;
+$mid-spacing: 40px;
 $medium-spacing: $mid-spacing; //Just a failsafe, as I keep confusing the names
-$big-spacing: 50px;
+$big-spacing: 60px;
 
 // To shift things around
-$tag-padding: 5px;
+$tag-padding: 4px;
 
 $bgcolor: rgb(255,255,255);
 
@@ -17,7 +17,7 @@ $primarycolor: rgb(136,176,75);
 $blendcolor: #888888;
 
 $fontsize : 1.125em;
-$line-height: 1.45;
+$line-height: 1.5;
 $color: #333333;
 $lightcolor: lighten($color, 20%);
 
@@ -25,4 +25,4 @@ $lightcolor: lighten($color, 20%);
 $bodyfontstack: aktiv-grotesk, Helvetica Nueue, Helvetica, Arial, sans-serif;
 $headerfontstack: aktiv-grotesk, Helvetica Nueue, Helvetica, Arial, sans-serif;
 
-$header_margin: 1.414em 0 0.5em;
+$header_margin: (1em * $line-height) 0 (0.5em * $line-height);
