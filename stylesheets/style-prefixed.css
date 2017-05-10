@@ -630,8 +630,11 @@ body:not(.cover-closed) {
     -webkit-box-ordinal-group: 2;
             order: 1;
     padding: 0 20px; }
+  .page-content h2 {
+    margin-bottom: 0.25em;
+    font-weight: bold; }
   .page-content .copy {
-    padding: 40px 0;
+    padding: 0 0 40px;
     width: 100%;
     margin: 0 auto;
     -webkit-box-ordinal-group: 4;
@@ -846,11 +849,6 @@ body:not(.cover-closed) {
       width: 100%;
       max-width: 680px;
       padding: 0; }
-    .page-content h2 {
-      margin-bottom: 0.25em;
-      font-weight: bold; }
-    .page-content .copy {
-      padding-top: 0; }
     .page-content .wp-caption-text {
       line-height: 2;
       margin-left: 20px;

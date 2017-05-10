@@ -499,8 +499,12 @@ body:not(.cover-closed){
 		order:1;
 		padding:0 $small-spacing;
 	}
+	h2 {
+		margin-bottom: (0.5em * $line-height) / 3;
+		font-weight:bold;
+	}
 	.copy {
-		padding: $mid-spacing 0;
+		padding: 0 0 $mid-spacing;
 		width: 100%;
 		margin:0 auto;
 		order:3;
@@ -773,13 +777,6 @@ body:not(.cover-closed){
 			width:100%;
 			max-width:680px;
 			padding:0;
-		}
-		h2 {
-			margin-bottom: (0.5em * $line-height) / 3;
-			font-weight:bold;
-		}
-		.copy {
-			padding-top:0;
 		}
 		.wp-caption-text {
 		    line-height: 2;
