@@ -2,7 +2,7 @@
   <div>
     <Cover :image='posts[0].featured_image_srcset' :caption='posts[0].title.rendered' :title='posts[0].title.rendered' />
     <Nav />
-    <main id="thepage">
+    <main id="thepage" ref="thepage">
       <section class="featured divider">
         <FeaturedCard v-for="(post, i) in featured" :data="post" :key="i" />
       </section>
@@ -32,6 +32,9 @@ export default {
     let posts = await app.$axios.get(`posts`)
     let featured = await app.$axios.get(`posts?sticky=true&per_page=3`)
     return { posts: posts.data, featured: featured.data }
+  },
+  mounted () {
+    this.$root.$emit('setupPageHeight', this.$refs.thepage.clientHeight)
   },
   components: {
     Cover,
