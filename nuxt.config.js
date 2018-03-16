@@ -20,6 +20,26 @@ module.exports = {
   /*
   ** Build configuration
   */
+  css: [
+    '@/assets/shared.scss'
+  ],
+  transition: {
+    name: 'page',
+    mode: 'out-in',
+    beforeEnter (el) {
+      console.log('Before enter...')
+    }
+  },
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
+  ],
+  axios: {
+    baseURL: '/api'
+  },
+  proxy: {
+    '/api': 'https://www.crackintheroad.com/wp-json/wp/v2/',
+  },
   build: {
     /*
     ** Run ESLint on save
@@ -34,11 +54,5 @@ module.exports = {
         })
       }
     }
-  },
-  modules: [
-    '@nuxtjs/axios',
-  ],
-  axios: {
-    baseURL: 'https://www.crackintheroad.com/wp-json/wp/v2/'
   }
 }

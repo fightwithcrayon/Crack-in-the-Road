@@ -16,8 +16,13 @@ export default {
   },
   async asyncData ({ app, params }) {
     const postId = params.id.split('-')[0]
-    let { data } = await app.$axios.get(`posts/${postId}`)
-    return { post: data }
+    try {
+      let { data } = await app.$axios.get(`posts/${postId}`)
+      return { post: data }
+    } catch (error) {
+      console.log(Object.keys(error), error.message)
+      return { post: {} }
+    }
   },
   computed: {
     postContent () {
