@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.1.1",
-    "nuxt": "^1.0.0"
+    "intersection-observer": "^0.5.0",
+    "nuxt": "^1.0.0",
+    "vue-intersect": "^1.1.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

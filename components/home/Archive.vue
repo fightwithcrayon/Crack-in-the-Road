@@ -2,7 +2,7 @@
 	<article class="archive block">
 		<div class="image">
 			<a :href="permalink" :name="data.title.rendered">
-				<img :src="data.featured_image_url" :data-srcset="data.featured_image_srcset" :alt="data.title.rendered" :title="data.title.rendered" class="lazyload blur-up" />
+				<LazyImage :src="data.featured_image_url" :srcset="data.featured_image_srcset" :alt="data.title.rendered" :title="data.title.rendered" />
 			</a>
 		</div>
 		<div class="info">
@@ -15,12 +15,21 @@
 	</article>
 </template>
 <script>
+import LazyImage from '~/components/LazyImage.vue'
 export default {
-  props: ['data'],
+	props: ['data'],
   computed: {
     permalink () {
       return this.data.link.replace('https://www.crackintheroad.com/', '')
     }
-  }
+	},
+	components: {
+		LazyImage
+	}
 }
 </script>
+<style>
+.archive img.hidden {
+	opacity:0;
+}
+</style>

@@ -1,13 +1,9 @@
 <template>
-  <div>
-    <Cover :image='post.featured_image_srcset' :caption='post.title.rendered' :title='post.title.rendered' />
-    <Nav />
-    <main class="page-content">
-      <div class="title">
-        <h2 v-html="post.title.rendered"></h2>
-      </div>
-      <div class="copy" v-html="postContent"></div>
-    </main>
+  <div class="page-content">
+    <div class="title">
+      <h2 v-html="post.title.rendered"></h2>
+    </div>
+    <div class="copy" v-html="postContent"></div>
   </div>
 </template>
 
@@ -22,11 +18,18 @@ export default {
     const postId = params.id.split('-')[0]
     let { data } = await app.$axios.get(`posts/${postId}`)
     return { post: data }
-  },  
+  },
   computed: {
     postContent () {
       return this.post.content.rendered.replace('.', '.</p><p>')
     }
+  },
+  mounted () {
+    this.$root.$emit('updateCover', {
+      image: this.post.featured_image_srcset,
+      caption: this.post.title.rendered,
+      title: this.post.title.rendered
+    })
   }
 }
 </script>

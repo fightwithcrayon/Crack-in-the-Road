@@ -1,7 +1,7 @@
 <template>
   <article class="featured block">
     <figure class="image">
-      <img :src="data.featured_image_url" :data-srcset="data.featured_image_srcset" :alt="data.title.rendered" :title="data.title.rendered" class="lazyload blur-up" />
+      <LazyImage :src="data.featured_image_url" :srcset="data.featured_image_srcset" :alt="data.title.rendered" :title="data.title.rendered" />
       <figcaption>
         <a href="#" :name="data.title.rendered" data-tracks=""></a>
         <a :href="permalink" :name="data.title.rendered" data-tracks></a>
@@ -17,6 +17,7 @@
   </article>
 </template>
 <script>
+import LazyImage from '~/components/LazyImage.vue'
 export default {
   props: ['data'],
   computed: {
@@ -26,6 +27,9 @@ export default {
     permalink () {
       return this.data.link.replace('https://www.crackintheroad.com/', '')
     }
-  }
+  },
+	components: {
+		LazyImage
+	}
 }
 </script>
