@@ -25,8 +25,8 @@ import FeaturedCard from '~/components/home/Featured.vue'
 
 export default {
   async asyncData ({ app }) {
-    let posts = await app.$axios.get(`posts`)
-    let featured = await app.$axios.get(`posts?sticky=true&per_page=3`)
+    let posts = await app.$axios.get(`/api/posts`)
+    let featured = await app.$axios.get(`/api/posts?sticky=true&per_page=3`)
     return { posts: posts.data, featured: featured.data }
   },
   components: {
@@ -53,7 +53,7 @@ export default {
     _handleInfiniteScroll () {
       if (!this.loading && window.scrollY > (document.body.clientHeight - (window.screen.height * 2))) {
         this.loading = true
-        this.$axios.get(`posts?page=${this.page}`).then((response) => {
+        this.$axios.get(`/api/posts?page=${this.page}`).then((response) => {
           this.posts = this.posts.concat(response.data)
           this.page++
           this.loading = false

@@ -37,7 +37,7 @@ body {
 	width:calc(100% - 20px);
 	margin: 0 10px;
 	min-height:100vh;
-	justify-content:space-between;
+	justify-content:flex-start;
 	background-color:$bgcolor;
 }
 .divider {

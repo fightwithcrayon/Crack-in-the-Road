@@ -35,10 +35,15 @@ module.exports = {
     '@nuxtjs/proxy'
   ],
   axios: {
-    baseURL: '/api'
+    proxy: true
   },
   proxy: {
-    '/api': 'https://www.crackintheroad.com/wp-json/wp/v2/',
+    '/api/': {
+      target: 'https://www.crackintheroad.com/wp-json/wp/v2',
+      pathRewrite: {
+        '^/api/': '/'
+      }
+    }
   },
   build: {
     /*
