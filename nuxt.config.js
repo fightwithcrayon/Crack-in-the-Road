@@ -43,6 +43,12 @@ module.exports = {
       pathRewrite: {
         '^/api/': '/'
       }
+    },
+    '/custom/': {
+      target: 'https://www.crackintheroad.com/wp-json/custom',
+      pathRewrite: {
+        '^/custom/': '/'
+      }
     }
   },
   build: {

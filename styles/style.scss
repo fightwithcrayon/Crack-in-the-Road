@@ -378,96 +378,6 @@ body:not(.cover-closed){
 	    transform: translateY(-50%);
 	}
 }
-.playlists {
-	overflow:hidden;
-	$heading-line-height: ($line-height * 0.75em);
-	$body-line-height: $line-height;
-	$self: $mid-spacing;
-	$header: ((1.414em + 2.25em + 0.5em + 1.5em + 1em) * #{$heading-line-height});
-	$more: (#{$small-spacing} + #{$mid-spacing} + (1em * $body-line-height));
-	$box: "(((50vw - (4 * 30px)) / 3) + #{$small-spacing})";
-	$howmanyboxes: 2;
-	max-height: calc(#{$header} + #{$more} + #{$self} + (#{$box} * #{$howmanyboxes}));
-	transition: max-height 0.6s ease-in-out;
-	padding-bottom: calc(#{$small-spacing} + #{$mid-spacing} + (1em * #{$line-height})) !important;
-	.more, .less{
-		content: '';
-		cursor: pointer;
-		border-bottom: none;
-		text-transform: uppercase;
-		color:$lightcolor;
-		&:after, &:before {
-		    content: "";
-		    position: absolute;
-		    top: ($mid-spacing + $small-spacing);
-		    transform: translateX(-50%);
-		    left: 50%;
-		    border-style: solid;
-		    border-width:$small-spacing ($small-spacing + $mid-spacing) 0 ($small-spacing + $mid-spacing);
-		    width:0;
-		    height:0;
-		}
-	}
-	.less {
-		&:after, &:before {
-			top: $small-spacing;
-			border-width:0 ($small-spacing + $mid-spacing) $small-spacing ($small-spacing + $mid-spacing);
-		}
-	}
-	.more {
-		&:before {
-			border-color: $primarycolor transparent transparent;
-		}
-		&:after {
-			margin-top:-2px;
-			border-color: $bgcolor transparent transparent;
-		}
-	}
-	.less {
-		&:before {
-			border-color: transparent transparent $primarycolor transparent;
-		}
-		&:after {
-			margin-top:2px;
-			border-color: transparent transparent $bgcolor transparent;
-		}
-	}
-	.less {
-		display:none;
-	}
-	&.open {
-		max-height:1500px;
-		.more {
-			display:none;
-		}
-		.less {
-			display:block;
-		}
-	}
-}
-.playlist.block {
-	height: auto;
-    width: calc(50vw - #{$small-spacing} - (#{$small-spacing} / 2));
-    flex-direction: column;
-    overflow: hidden;
-    h4 {
-    	line-height: $line-height;
-    }
-	.image {
-		height: calc(50vw - #{$small-spacing});
-	    width: 100%;
-	}
-	.info {
-	    width: 100%;
-	    height:auto;
-	}
-	.more, .subscribe {
-		display: none;
-	}
-	a {
-		border-bottom:none;
-	}
-}
 .archives {
 	position: relative;
 	.archive.block {
@@ -641,24 +551,6 @@ body:not(.cover-closed){
 			margin-top:30px;
 			position: relative;
 			bottom: initial;
-		}
-	}
-	.playlists {
-		$heading-line-height: 1;
-		$body-line-height: $line-height;
-		$self: $mid-spacing;
-		$header: ((1.5em + 2.25em + 0.5em + 1.5em + 1em) * $heading-line-height);
-		$more: (#{$small-spacing} + #{$mid-spacing} + (1em * $body-line-height));
-
-    	$imageandpadding: calc(50vw + (2 * #{$small-spacing}) );
-		$boxtext: calc(0.667 * ((1.5em + 0.5em) + (1em * #{$body-line-height})));
-		$box: (#{$imageandpadding} + #{$boxtext});
-		$howmanyboxes: 2;
-		max-height: calc(#{$header} + #{$more} + #{$self} + ((#{$box}) * #{$howmanyboxes}));
-	}
-	.playlist.block {
-		a {
-			font-size: 0.667em;
 		}
 	}
 	.archive.block {
@@ -854,31 +746,6 @@ body:not(.cover-closed){
 			}
 		}
 	}
-	.playlist.block {
-	    height: calc((50vw - (4 * #{$mid-spacing})) / 3);
-	    width: calc((50vw - #{$mid-spacing}) - (#{$small-spacing / 2}));
-	    flex-direction: row;
-	    max-width: calc(900px - ((4 * #{$mid-spacing}) + (#{$small-spacing / 2})));
-	    overflow: hidden;
-	    display: flex;
-	    text-align: left;
-	    .image {
-	    	height: calc((50vw - 120px) / 3);
-		    width: calc((50vw - 120px) / 3);
-		    max-width: calc((900px - 120px) / 3);
-	    }
-	    .info {
-	    	width: calc(100% - ((50vw - 120px) / 3));
-    		height: auto;
-	    }
-	    p {
-	    	display:none;
-	    }
-	    &:nth-of-type(even) {
-	    	flex-direction: row-reverse;
-	    	text-align: right;
-	    }
-	}
 }
 
 @media(min-width:1024px) {
@@ -935,13 +802,6 @@ body:not(.cover-closed){
 	}
 }
 
-@media(min-width:1200px) {
-	.playlist.block {
-		p {
-			display:block;
-		}
-	}
-}
 @media(min-width:1440px) {
 	.wide-content {
 		padding:0 120px;
@@ -950,12 +810,6 @@ body:not(.cover-closed){
 	    width: 25%;
 	    margin: 0;
 	    padding: 0 calc(30px / 3) 30px;
-	}
-	.playlist.block {
-		width: calc(50vw - ((4 * #{$mid-spacing}) + (#{$small-spacing / 2})));
-		p {
-			display:block;
-		}
 	}
 	.featured_popular {
 		order:2;

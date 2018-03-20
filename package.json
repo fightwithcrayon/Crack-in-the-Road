@@ -15,6 +15,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.1.1",
     "@nuxtjs/proxy": "^1.1.4",
+    "date-fns": "^1.29.0",
     "intersection-observer": "^0.5.0",
     "nuxt": "^1.0.0",
     "vue-intersect": "^1.1.2"

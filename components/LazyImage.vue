@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='lazyLoadContainer'>
     <img v-if="!imageLoaded" ref="image" :src="$props.src" :alt="$props.alt" :title="$props.title" class="blur-up" />
     <img v-if="visible"
       :class="{'hidden': !imageLoaded}"
@@ -24,16 +24,19 @@ export default {
 	mounted () {
 		this.io = new IntersectionObserver(entries => this._imageVisible(entries), {})
     this.io.observe(this.$refs.image)
-    console.log('Observing')
 	},
 	methods: {
 		_imageVisible (e) {
       if (e[0].isIntersecting) {
         this.io.unobserve(this.$refs.image)
         this.visible = true
-        console.log('Unobserving')
       }
 		}
 	}
 }
 </script>
+<style>
+.lazyLoadContainer {
+  height: 100%;
+}
+</style>

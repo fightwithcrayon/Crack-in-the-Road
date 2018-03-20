@@ -1,15 +1,15 @@
 <template>
 	<article class="archive block">
 		<div class="image">
-			<router-link :to="permalink" :name="data.title.rendered">
+			<nuxt-link :to="permalink" :name="data.title.rendered">
 				<LazyImage :src="data.featured_image_url" :srcset="data.featured_image_srcset" :alt="data.title.rendered" :title="data.title.rendered" />
-			</router-link>
+			</nuxt-link>
 		</div>
 		<div class="info">
-      <router-link :to="permalink" :name="data.title.rendered" class="simple" v-html='data.custom_title'></router-link>
+      <nuxt-link :to="permalink" :name="data.title.rendered" class="simple" v-html='data.custom_title'></nuxt-link>
 			<p v-html='data.custom_excerpt'></p>
 			<span class="more">
-				<router-link :to="permalink" :name="data.title.rendered">Read more</router-link>
+				<nuxt-link :to="permalink" :name="data.title.rendered">Read more</nuxt-link>
 			</span>
 		</div>
 	</article>

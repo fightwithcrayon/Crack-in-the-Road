@@ -10,6 +10,7 @@
 <script>
 import Cover from '~/components/Cover.vue'
 import Nav from '~/components/Nav.vue'
+
 export default {
   data () {
     return {
@@ -54,3 +55,8 @@ export default {
   }
 }
 </script>
+<style>
+#thepage {
+  max-width: 100%;
+}
+</style>
