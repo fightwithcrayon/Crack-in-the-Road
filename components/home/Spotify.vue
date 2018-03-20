@@ -69,6 +69,7 @@
     }
     @media(min-width:1024px) {
       width: calc(50% - 10px);
+      text-align:left;
     }
     a {
       border-bottom: none;
@@ -86,8 +87,11 @@
         height: 20vw;
       }
       @media(min-width:1440px) {
-        min-width: 20vw;
-        height: 20;
+        min-width: 50%;
+        height:calc((50vw - 120px) / 3);
+      }
+      @media(min-width:1800px) {
+        height:calc(900px / 3);
       }
     }
     .info {
@@ -99,6 +103,9 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+      }
+      @media(min-width:1024px) {
+        justify-content:center;
       }
     }
     h4 {
