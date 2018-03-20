@@ -1,3 +1,4 @@
+const axios = require('axios')
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
     base: '/Crack-in-the-Road/'
@@ -84,6 +85,14 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+    }
+  },
+  generate: {
+    routes: function () {
+      return ['https://www.crackintheroad.com/music/34275-new-thunder-jackson-colours']
+      return axios.get('https://www.crackintheroad.com/wp-json/custom/routes').then((res) => {
+          return res.data
+        })
     }
   }
 }

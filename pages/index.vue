@@ -29,12 +29,12 @@ import ArchiveCard from '~/components/home/Archive.vue'
 
 export default {
   async asyncData ({ app }) {
-    let api = process.server ? 'https://www.crackintheroad.com/wp-json/wp/v2' : '/api'
-    let custom = process.server ? 'https://www.crackintheroad.com/wp-json/custom' : '/custom'
-    let posts = await app.$axios.get(`${api}/posts`)
-    let featured = await app.$axios.get(`${api}/posts?sticky=true&per_page=3`)
-    let spotify = await app.$axios.get(`${custom}/spotify`)
-    let popular = await app.$axios.get(`${custom}/stats`)
+    const api = process.server ? 'https://www.crackintheroad.com/wp-json/wp/v2' : '/api'
+    const custom = process.server ? 'https://www.crackintheroad.com/wp-json/custom' : '/custom'
+    const posts = await app.$axios.get(`${api}/posts`)
+    const featured = await app.$axios.get(`${api}/posts?sticky=true&per_page=3`)
+    const spotify = await app.$axios.get(`${custom}/spotify`)
+    const popular = await app.$axios.get(`${custom}/stats`)
     return { posts: posts.data, featured: featured.data, spotify: JSON.parse(spotify.data), popular: popular.data }
   },
   components: {
