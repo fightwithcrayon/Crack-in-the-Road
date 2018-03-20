@@ -3,15 +3,14 @@
     <figure class="image">
       <LazyImage :src="data.featured_image_url" :srcset="data.featured_image_srcset" :alt="data.title.rendered" :title="data.title.rendered" />
       <figcaption>
-        <a href="#" :name="data.title.rendered" data-tracks=""></a>
-        <a :href="permalink" :name="data.title.rendered" data-tracks></a>
+        <router-link :to="permalink" :name="data.title.rendered" data-tracks></router-link>
       </figcaption>
     </figure>
     <div class="info">
-      <a :href="permalink" :name="data.title.rendered" class="simple" v-html="featuredTitle"></a>
+      <router-link :to="permalink" :name="data.title.rendered" class="simple" v-html="featuredTitle"></router-link>
       <p v-html="data.custom_excerpt"></p>
       <span class="more">
-          <a :href="permalink" :name="data.title.rendered">Read more</a>
+          <router-link :to="permalink" :name="data.title.rendered">Read more</router-link>
       </span> 
     </div>
   </article>

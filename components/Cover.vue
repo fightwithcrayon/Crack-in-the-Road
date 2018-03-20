@@ -4,8 +4,8 @@
     <figure>
       <img :alt="ttl" :title="ttl" :srcset="srcset">
       <figcaption>
-        <h2 v-if="$route.path != '/'">{{ cap }}</h2>
-        <h1 v-else>{{ cap }}</h1>
+        <h2 v-if="$route.path != '/'" v-html="cap"></h2>
+        <h1 v-else v-html="cap"></h1>
       </figcaption>
     </figure>
   </section>
@@ -35,7 +35,7 @@ export default {
         dashLen = 50, dashOffset = dashLen, speed = 10,
         txt = "CITR", x = 30, i = 0;
 
-      ctx.font = "92px scriptorama-tradeshow-jf, sans-serif"; 
+      ctx.font = "92px Rock Salt, sans-serif"; 
       ctx.lineWidth = 1; ctx.lineJoin = "round"; ctx.globalAlpha = 1;
       ctx.strokeStyle = ctx.fillStyle = "white";
 

@@ -2,7 +2,7 @@
   <aside class="featured_popular">
     <h3 class="entry">Popular today</h3>
     <article class="entry" v-for="(post, i) in topFive" :key="i">
-      <a href="permalink" name="title" class="simple">Title</a>
+      <router-link :to="permalink(post.link)" name="title" class="simple">{{ post.post_title }}</router-link>
     </article>
   </aside>
 </template>
@@ -12,6 +12,11 @@ export default {
   computed: {
     topFive () {
       return this.data.slice(0, 5)
+    }
+  },
+  methods: {
+    permalink (link) {
+      return link.replace('https://www.crackintheroad.com/', '')
     }
   }
 }

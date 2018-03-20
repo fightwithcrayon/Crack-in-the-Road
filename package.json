@@ -18,7 +18,8 @@
     "date-fns": "^1.29.0",
     "intersection-observer": "^0.5.0",
     "nuxt": "^1.0.0",
-    "vue-intersect": "^1.1.2"
+    "vue-intersect": "^1.1.2",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

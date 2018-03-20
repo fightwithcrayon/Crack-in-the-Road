@@ -11,6 +11,14 @@
 import Cover from '~/components/Cover.vue'
 import Nav from '~/components/Nav.vue'
 export default {
+  head () {
+    return {
+      title: `${this.sanitisedTitle} - Crack in the Road`,
+      meta: [
+        { hid: 'description', name: 'description', content: this.post.custom_excerpt }
+      ]
+    }
+  },
   components: {
     Cover, Nav
   },
@@ -27,6 +35,11 @@ export default {
   computed: {
     postContent () {
       return this.post.content.rendered.replace('.', '.</p><p>')
+    },
+    sanitisedTitle () {
+			return this.post.title.rendered.replace(/&#(\d+);/g, function(match, dec) {
+				return String.fromCharCode(dec);
+			});
     }
   },
   mounted () {

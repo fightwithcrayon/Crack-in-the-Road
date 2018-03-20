@@ -51,9 +51,9 @@ export default {
   },
   mounted () {
     this.$root.$emit('updateCover', {
-      image: this.posts[0].featured_image_srcset,
-      caption: this.posts[0].title.rendered,
-      title: this.posts[0].title.rendered
+      image: this.featured[0].featured_image_srcset,
+      caption: this.featured[0].title.rendered,
+      title: this.featured[0].title.rendered
     })
     window.addEventListener('scroll', this._handleInfiniteScroll)
   },

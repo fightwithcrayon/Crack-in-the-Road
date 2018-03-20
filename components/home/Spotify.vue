@@ -10,9 +10,6 @@
         <h4>{{ name }}</h4>
       </a>
       <p v-html="description"></p>
-      <a :href="permalink" :alt="`Subscribe to ${name}`"  :name="`Subscribe to ${name}`" class="subscribe">
-        Subscribe
-      </a>
       <span class="more">Last updated: {{ date }}</span>
     </div>
   </article>
@@ -31,8 +28,9 @@
         return format(parse(this.data.tracks.items[0].added_at), 'Do MMM')
       },
       description () {
-        return this.data.description.replace(/<a href="([^"]*?)">Crack in the Road<\/a>/g, 'Crack in the Road')
+        return `<a href="${this.permalink}" name="${this.data.name}">` + this.data.description.replace(/<a href="([^"]*?)">Crack in the Road<\/a>/g, 'Crack in the Road')
                                     .replace(/<a href="([^"]*?)">www.crackintheroad.com<\/a>/g, 'Crack in the Road')
+                + '</a>'
       },
       image () {
         return this.data.images[0] || {}
@@ -87,11 +85,16 @@
         height: 20vw;
       }
       @media(min-width:1440px) {
-        min-width: 50%;
+        min-width: 0;
+        width:calc((50vw - 120px) / 3);
         height:calc((50vw - 120px) / 3);
       }
       @media(min-width:1800px) {
+        width:calc(900px / 3);
         height:calc(900px / 3);
+      }
+      img {
+        height: 100%;
       }
     }
     .info {
@@ -106,10 +109,21 @@
       }
       @media(min-width:1024px) {
         justify-content:center;
+        padding: 20px 40px;
+        height: 20vw;
+      }
+      @media(min-width:1440px) {
+        height:calc(((50vw - 120px) / 3);
+      }
+      @media(min-width:1800px) {
+        height:calc(900px / 3);
       }
     }
     h4 {
       margin-top: 0;
+      @media(min-width:768px) {
+        font-weight: bold;
+      }
     }
     .subscribe {
       width: 100%;
@@ -122,6 +136,14 @@
       display: block;
       bottom: 0;
       padding-bottom: 0;
+      color: rgb(51,51,51);
+      display:none;
+      @media(min-width:768px) {
+        display:block;;
+      }
+      @media(min-width:1024px) {
+        text-align: left;
+      }
     }
   }
 }

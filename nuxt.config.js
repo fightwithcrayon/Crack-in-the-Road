@@ -3,11 +3,11 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'citr',
+    title: 'Crack in the Road',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Static version of long standing music blog' }
+      { hid: 'description', name: 'description', content: 'First to break the latest in genuinely groundbreaking new music, art and culture since 2010. Jacob Rees Mogg is our pay pig..' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -26,13 +26,26 @@ module.exports = {
   transition: {
     name: 'page',
     mode: 'out-in',
-    beforeEnter (el) {
-      console.log('Before enter...')
+    css: false,
+    beforeLeave (el) {
+      console.log('before leave')
+    },
+    leave (el, done) {
+      console.log('leave')
+      done()
     }
   },
+  plugins: [
+    {
+      src: '~plugins/webFontLoader.js', ssr: false
+    }
+  ],
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/proxy'
+  ],
+  middleware: [
+    'transition.js'
   ],
   axios: {
     proxy: true
