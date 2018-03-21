@@ -2,7 +2,7 @@
   <div>
     <Cover :image='cover.image' :caption='cover.caption' :title='cover.title' />
     <Nav />
-    <main id="thepage" ref="thepage">
+    <main id="thepage" ref="thepage" v-if="!loading">
       <nuxt />
     </main>
   </div>
@@ -19,7 +19,8 @@ export default {
         image: '',
         caption: '',
         title: ''
-      }
+      },
+      loading: false
     }
   },
   head () {
@@ -38,8 +39,15 @@ export default {
     }
     this.$root.$on('updateCover', (newValues) => this._updateCover(newValues))
     this.$root.$on('recalculateCover', this._recalculateCover)
+    this.$root.$on('loadStatus', (newValue) => this._loadAnimation(newValue))
   },
   methods: {
+    _loadAnimation (loading) {
+      if (loading) {
+      } else {
+      }
+      this.loading = loading
+    },
     _updateCover (newValues) {
       this.cover = newValues
       this._recalculateCover()

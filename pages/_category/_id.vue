@@ -28,7 +28,7 @@ export default {
       let { data } = await app.$axios.get(`https://www.crackintheroad.com/wp-json/wp/v2/posts/${postId}`)
       return { post: data }
     } catch (error) {
-      console.log(Object.keys(error), error.message)
+      console.log(error, error.message)
       return { post: {} }
     }
   },

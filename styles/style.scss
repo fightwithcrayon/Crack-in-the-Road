@@ -179,6 +179,7 @@ a {
 	overflow:hidden;
 	position:relative;
 	z-index:4;
+	background-color: white;
 	figure {
 	    width: 100%;
 	    height: 100%;
@@ -633,8 +634,8 @@ body:not(.cover-closed){
 	.featured_popular {
 		order:2;
 	}
-	#thepage {
-		padding-top: calc(2 * #{$mid-spacing});
+	#thepage > *:first-child {
+		margin-top: calc(2 * #{$mid-spacing});
 	}
 	.wide-content {
 		padding:0 30px;
