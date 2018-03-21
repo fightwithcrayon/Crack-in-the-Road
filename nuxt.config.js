@@ -49,29 +49,11 @@ module.exports = {
     }
   ],
   modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/axios'
   ],
   middleware: [
     'transition.js'
   ],
-  axios: {
-    proxy: true
-  },
-  proxy: {
-    '/api/': {
-      target: 'https://www.crackintheroad.com/wp-json/wp/v2',
-      pathRewrite: {
-        '^/api/': '/'
-      }
-    },
-    '/custom/': {
-      target: 'https://www.crackintheroad.com/wp-json/custom',
-      pathRewrite: {
-        '^/custom/': '/'
-      }
-    }
-  },
   build: {
     /*
     ** Run ESLint on save

@@ -27,14 +27,14 @@ import PopularCard from '~/components/home/Popular.vue'
 import SpotifyCard from '~/components/home/Spotify.vue'
 import ArchiveCard from '~/components/home/Archive.vue'
 
+const api = 'https://www.crackintheroad.com/wp-json'
+
 export default {
   async asyncData ({ app }) {
-    const api = process.server ? 'https://www.crackintheroad.com/wp-json/wp/v2' : '/api'
-    const custom = process.server ? 'https://www.crackintheroad.com/wp-json/custom' : '/custom'
-    const posts = await app.$axios.get(`${api}/posts`)
-    const featured = await app.$axios.get(`${api}/posts?sticky=true&per_page=3`)
-    const spotify = await app.$axios.get(`${custom}/spotify`)
-    const popular = await app.$axios.get(`${custom}/stats`)
+    const posts = await app.$axios.get(`${api}/wp/v2/posts`)
+    const featured = await app.$axios.get(`${api}/wp/v2/posts?sticky=true&per_page=3`)
+    const spotify = await app.$axios.get(`${api}/custom/spotify`)
+    const popular = await app.$axios.get(`${api}/custom/stats`)
     return { posts: posts.data, featured: featured.data, spotify: JSON.parse(spotify.data), popular: popular.data }
   },
   components: {
@@ -63,7 +63,7 @@ export default {
     _handleInfiniteScroll () {
       if (!this.loading && window.scrollY > (document.body.clientHeight - (window.screen.height * 2))) {
         this.loading = true
-        this.$axios.get(`/api/posts?page=${this.page}`).then((response) => {
+        this.$axios.get(`${api}/wp/v2/posts?page=${this.page}`).then((response) => {
           this.posts = this.posts.concat(response.data)
           this.page++
           this.loading = false

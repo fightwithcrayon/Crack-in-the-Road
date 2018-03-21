@@ -24,9 +24,8 @@ export default {
   },
   async asyncData ({ app, params }) {
     const postId = params.id.split('-')[0]
-    const api = process.server ? 'https://www.crackintheroad.com/wp-json/wp/v2' : '/api'
     try {
-      let { data } = await app.$axios.get(`${api}/posts/${postId}`)
+      let { data } = await app.$axios.get(`https://www.crackintheroad.com/wp-json/wp/v2/posts/${postId}`)
       return { post: data }
     } catch (error) {
       console.log(Object.keys(error), error.message)
