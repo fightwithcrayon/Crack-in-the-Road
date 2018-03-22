@@ -51,6 +51,9 @@ export default {
       loading: false
     }
   },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this._handleInfiniteScroll)
+  },
   mounted () {
     this.$root.$emit('updateCover', {
       image: this.featured[0].featured_image_srcset,
