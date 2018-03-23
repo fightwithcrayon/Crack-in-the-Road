@@ -27,15 +27,12 @@ import PopularCard from '~/components/home/Popular.vue'
 import SpotifyCard from '~/components/home/Spotify.vue'
 import ArchiveCard from '~/components/home/Archive.vue'
 
-const api = 'https://www.crackintheroad.com/wp-json'
+const api = 'https://www.crackintheroad.com/endpoint.php?api='
 
 export default {
   async asyncData ({ app }) {
-    const posts = await app.$axios.get(`${api}/wp/v2/posts`)
-    const featured = await app.$axios.get(`${api}/wp/v2/posts?sticky=true&per_page=3`)
-    const spotify = await app.$axios.get(`${api}/custom/spotify`)
-    const popular = await app.$axios.get(`${api}/custom/stats`)
-    return { posts: posts.data, featured: featured.data, spotify: JSON.parse(spotify.data), popular: popular.data }
+    const home = await app.$axios.get(`${api}home`)
+    return { posts: home.data.posts.posts, featured: home.data.featured.posts, spotify: JSON.parse(home.data.spotify), popular: home.data.stats }
   },
   components: {
     Cover,
@@ -48,7 +45,7 @@ export default {
   data () {
     return {
       page: 2,
-      loading: false
+      loading: true
     }
   },
   beforeDestroy () {
@@ -57,16 +54,17 @@ export default {
   mounted () {
     this.$root.$emit('updateCover', {
       image: this.featured[0].featured_image_srcset,
-      caption: this.featured[0].title.rendered,
-      title: this.featured[0].title.rendered
+      caption: this.featured[0].post_title,
+      title: this.featured[0].post_title
     })
     window.addEventListener('scroll', this._handleInfiniteScroll)
+    this.loading = false
   },
   methods: {
     _handleInfiniteScroll () {
       if (!this.loading && window.scrollY > (document.body.clientHeight - (window.screen.height * 2))) {
         this.loading = true
-        this.$axios.get(`${api}/wp/v2/posts?page=${this.page}`).then((response) => {
+        this.$axios.get(`${api}post&page=${this.page}`).then((response) => {
           this.posts = this.posts.concat(response.data)
           this.page++
           this.loading = false

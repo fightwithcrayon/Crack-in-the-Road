@@ -1,7 +1,7 @@
 <template>
   <div class="page-content">
     <div class="title">
-      <h2 v-html="post.title.rendered"></h2>
+      <h2 v-html="post.post_title"></h2>
     </div>
     <div class="copy" v-html="postContent"></div>
   </div>
@@ -25,7 +25,7 @@ export default {
   async asyncData ({ app, params }) {
     const postId = params.id.split('-')[0]
     try {
-      let { data } = await app.$axios.get(`https://www.crackintheroad.com/wp-json/wp/v2/posts/${postId}`)
+      let { data } = await app.$axios.get(`https://www.crackintheroad.com/endpoint.php?api=post&id=${postId}`)
       return { post: data }
     } catch (error) {
       console.log(error, error.message)
@@ -34,10 +34,10 @@ export default {
   },
   computed: {
     postContent () {
-      return this.post.content.rendered.replace('.', '.</p><p>')
+      return this.post.post_content.replace('.', '.</p><p>')
     },
     sanitisedTitle () {
-			return this.post.title.rendered.replace(/&#(\d+);/g, function(match, dec) {
+			return this.post.post_title.replace(/&#(\d+);/g, function(match, dec) {
 				return String.fromCharCode(dec);
 			});
     }
@@ -45,8 +45,8 @@ export default {
   mounted () {
     this.$root.$emit('updateCover', {
       image: this.post.featured_image_srcset,
-      caption: this.post.title.rendered,
-      title: this.post.title.rendered
+      caption: this.post.post_title,
+      title: this.post.post_title
     })
   }
 }
