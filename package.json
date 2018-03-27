@@ -11,7 +11,7 @@
     "precommit": "npm run lint",
     "build": "cross-env DEPLOY_ENV=GH_PAGES nuxt build",
     "generate": "cross-env DEPLOY_ENV=GH_PAGES nuxt generate",
-    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
+    "deploy": "git checkout gh-pages; push-dir --dir=dist --branch=gh-pages --cleanup; git checkout 2018"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.1.1",
