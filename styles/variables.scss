@@ -21,7 +21,7 @@ $color: #333333;
 $lightcolor: lighten($color, 20%);
 
 //Fonts
-$bodyfontstack: aktiv-grotesk, Lato, Helvetica Nueue, Helvetica, Arial, sans-serif;
-$headerfontstack: aktiv-grotesk, Lato, Helvetica Nueue, Helvetica, Arial, sans-serif;
+$bodyfontstack: Helvetica Nueue, Helvetica, Arial, sans-serif;
+$headerfontstack: aktiv-grotesk, Helvetica Nueue, Helvetica, Arial, sans-serif;
 
 $header_margin: (1em * $line-height) 0 (0.5em * $line-height);

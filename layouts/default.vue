@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Cover :image='cover.image' ref="cover" :caption='cover.caption' :title='cover.title' aria-hidden="true" />
+    <Cover :image='cover.image' :fontsReady="fontsReady" ref="cover" :caption='cover.caption' :title='cover.title' aria-hidden="true" />
     <Nav />
     <main id="thepage" ref="thepage">
       <nuxt />
@@ -20,7 +20,8 @@ export default {
         caption: '',
         title: ''
       },
-      loading: false
+      loading: false,
+      fontsReady: false
     }
   },
   head () {
@@ -38,6 +39,7 @@ export default {
   },
   created () {
     if (process.browser) {
+      this.initialiseFonts()
       window.addEventListener("scroll", this.runScroll, { passive: false })
     }
     this.$root.$on('updateCover', (newValues) => this._updateCover(newValues))
@@ -46,14 +48,8 @@ export default {
   },
   methods: {
     _loadAnimation (loading) {
-      if (loading) {
-        console.log('loading')
-        if (process.browser && this.$refs.cover) {
-          console.log(this.$refs.cover)
-          this.$refs.cover.$el.scrollIntoView({behavior:'smooth'})
-        }
-      } else {
-        console.log('loaded')
+      if (loading && process.browser && this.$refs.cover) {
+        this.$refs.cover.$el.scrollIntoView({behavior:'smooth'})
       }
       this.loading = loading
     },
@@ -65,6 +61,18 @@ export default {
       if (process.browser && this.$refs.thepage) {
         document.body.style = `padding-bottom: ${this.$refs.thepage.clientHeight}px`
       }
+    },
+    initialiseFonts () {
+      var WebFont = require('webfontloader');
+
+      WebFont.load({
+        typekit: {
+          id: 'rvc6sig'
+        },
+        active: () => {
+          this.fontsReady = true
+        }
+      })
     },
     runScroll () {
       this.coverClosed = window.scrollY <= window.innerHeight ? true : false

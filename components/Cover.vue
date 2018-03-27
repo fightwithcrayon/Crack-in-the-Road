@@ -12,7 +12,7 @@
 </template>
 <script>
 export default {
-  props: ['image', 'title', 'caption'],
+  props: ['image', 'title', 'caption', 'fontsReady'],
   computed: {
     cap () {
       return this.$props.caption //|| this.default.title.rendered
@@ -22,11 +22,6 @@ export default {
     },
     ttl () {
       return this.$props.title //|| this.default.title.rendered
-    }
-  },
-  mounted () {
-    if (process.browser && this.$refs.sitetitle) {
-      this.scribbleTitle()
     }
   },
   methods: {
@@ -55,6 +50,16 @@ export default {
         }
       })()
     }
+  },
+  watch: {
+    'fontsReady': function (newQuestion, oldQuestion) {
+      this.scribbleTitle()
+    }
   }
 }
 </script>
+<style lang="scss">
+#cover {
+  background-color: rgb(7,162,218);  
+}
+</style>

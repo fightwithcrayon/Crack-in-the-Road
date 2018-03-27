@@ -43,11 +43,6 @@ module.exports = {
       done()
     }
   },
-  plugins: [
-    {
-      src: '~plugins/webFontLoader.js', ssr: false
-    }
-  ],
   modules: [
     '@nuxtjs/axios'
   ],
