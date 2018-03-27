@@ -25,7 +25,7 @@ export default {
     }
   },
   mounted () {
-    if (this.$refs.sitetitle) {
+    if (process.browser && this.$refs.sitetitle) {
       this.scribbleTitle()
     }
   },
@@ -35,7 +35,7 @@ export default {
         dashLen = 50, dashOffset = dashLen, speed = 10,
         txt = "CITR", x = 30, i = 0;
 
-      ctx.font = "92px Rock Salt, sans-serif"; 
+      ctx.font = "92px scriptorama-tradeshow-jf, sans-serif"; 
       ctx.lineWidth = 1; ctx.lineJoin = "round"; ctx.globalAlpha = 1;
       ctx.strokeStyle = ctx.fillStyle = "white";
 

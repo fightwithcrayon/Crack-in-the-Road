@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Cover :image='cover.image' :caption='cover.caption' :title='cover.title' />
+    <Cover :image='cover.image' ref="cover" :caption='cover.caption' :title='cover.title' aria-hidden="true" />
     <Nav />
-    <main id="thepage" ref="thepage" v-if="!loading">
+    <main id="thepage" ref="thepage">
       <nuxt />
     </main>
   </div>
@@ -33,6 +33,9 @@ export default {
   components: {
     Cover, Nav
   },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.runScroll)
+  },
   created () {
     if (process.browser) {
       window.addEventListener("scroll", this.runScroll, { passive: false })
@@ -44,7 +47,13 @@ export default {
   methods: {
     _loadAnimation (loading) {
       if (loading) {
+        console.log('loading')
+        if (process.browser && this.$refs.cover) {
+          console.log(this.$refs.cover)
+          this.$refs.cover.$el.scrollIntoView({behavior:'smooth'})
+        }
       } else {
+        console.log('loaded')
       }
       this.loading = loading
     },
@@ -66,5 +75,13 @@ export default {
 <style>
 #thepage {
   max-width: 100%;
+}
+#pixel {
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  top:0;
+  left:0;
+  visibility:hidden;
 }
 </style>

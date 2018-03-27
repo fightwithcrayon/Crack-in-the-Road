@@ -1,5 +1,5 @@
 <template>
-	<article class="archive block">
+	<article :class="type + ' block'">
 		<div class="image">
 			<nuxt-link :to="permalink" :name="data.title">
 				<LazyImage :src="data.featured_image_url" :srcset="data.featured_image_srcset" :alt="data.title" :title="data.title" />
@@ -17,10 +17,10 @@
 <script>
 import LazyImage from '~/components/LazyImage.vue'
 export default {
-	props: ['data'],
+	props: ['data', 'type'],
   computed: {
     permalink () {
-      return this.data.link.replace('https://www.crackintheroad.com/', '')
+      return this.data.link ? this.data.link.replace('https://www.crackintheroad.com/', '') : ''
     }
 	},
 	components: {

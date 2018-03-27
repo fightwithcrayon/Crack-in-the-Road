@@ -1,7 +1,7 @@
 var WebFont = require('webfontloader');
 
 WebFont.load({
-  google: {
-    families: ['Rock Salt:400', 'Lato:400,700']
+  typekit: {
+    id: 'rvc6sig'
   }
 })

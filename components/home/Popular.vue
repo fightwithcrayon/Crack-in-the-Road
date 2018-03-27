@@ -11,7 +11,7 @@ export default {
   props: ['data'],
   computed: {
     topFive () {
-      return this.data.slice(0, 5)
+      return this.data ? this.data.slice(0, 5) : []
     }
   },
   methods: {
