@@ -1,7 +1,5 @@
 <?php get_header();
 while(have_posts()): the_post();
-$copy = str_replace_first('.', '.</p><p>', get_the_content());
-$copy = apply_filters('the_content', $copy);
 $title = get_the_title();
 ?>
 <div class="page-content">
@@ -19,7 +17,8 @@ $title = get_the_title();
 		?>
 	</ul>-->
  	<div class="copy">
-	 	<?php echo $copy;
+	 	<?php
+		 the_content();
 	 	$tracks = get_post_meta(get_the_ID(), 'audioObjects', true);
 	 	//insertPlayer($tracks);?>
 	 </div>

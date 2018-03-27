@@ -31,11 +31,18 @@ function updateSpotify($force = false) {
     $list = $api->getUserPlaylists('crackintheroad')->items;
     foreach($list as $entry) {
       if(!in_array($entry->id, $ignore)) {
-        $set[] = $api->getUserPlaylist('crackintheroad', $entry->id);
+        $playlist = $api->getUserPlaylist('crackintheroad', $entry->id);
+    	$set[] = (object) [
+    		'description' => $playlist->description,
+	    	'name' => $playlist->name,
+	    	'last_update' => $playlist->tracks->items[0]->added_at,
+	    	'image' => $playlist->images[0]->url,
+	    	'link' => $playlist->external_urls->spotify
+    	];
       }
     } 
     foreach($set as $playlist) {
-      $image = $playlist->images[0]->url;
+      $image = $playlist->image;
       $filename = basename($image);
       $uploads = wp_upload_dir()['basedir'];
       $localpath = $uploads . '/spotify/';
@@ -51,14 +58,13 @@ function updateSpotify($force = false) {
         $thumb->resizeImage(150,150,Imagick::FILTER_LANCZOS,1, true);
         $thumb->writeImage($localpath . 'optimised/' . $filename .'_150.jpg');
         $thumb->destroy();
-         syslog(LOG_NOTICE, strtotime('now') . " Playlist optimised: " . $playlist->images[0]->url);
+         syslog(LOG_NOTICE, strtotime('now') . " Playlist optimised: " . $playlist->image);
       } else {
-        $filename = basename($playlist->images[0]->url);
-        $playlist->images[0]->url = $publicpath . 'optimised/' . $filename;
-     syslog(LOG_NOTICE, strtotime('now') . " Playlist not optimised: " . $playlist->images[0]->url);
+        $filename = basename($playlist->image);
+        $playlist->image = $publicpath . 'optimised/' . $filename;
+     	syslog(LOG_NOTICE, strtotime('now') . " Playlist not optimised: " . $playlist->image);
       }
     }
-    $set = json_encode($set);
     update_option('spotify_playlist', $set);
     syslog(LOG_NOTICE, strtotime('now') . " Spotify updated.");
 }
@@ -149,11 +155,24 @@ function updatePopularAnalytics(){
       }
     }
   }
-  update_option('popular_stats', $results);
+  $return = [];
+  foreach($results as $result) {
+    $id = $result[0];
+    $post = get_post($id);
+    if ($post) {
+		$return[] = (object) [
+			'id' => $post->ID,
+	    	'title' => $post->post_title,
+	    	'link' => get_permalink($post)
+		];
+    }
+  }
+  update_option('popular_stats', $return);
   syslog(LOG_NOTICE, strtotime('now') . " Finished pulling popular posts");
   syslog(LOG_NOTICE, strtotime('now') . $results);
 }
 
 updateSpotify();
 updatePopularAnalytics();
+echo 'complete;'
 ?>

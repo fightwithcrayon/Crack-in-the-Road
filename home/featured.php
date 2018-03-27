@@ -51,16 +51,13 @@ function buildHomeFeaturedPopular($displayedIds) {
     $string .= '<aside class="featured_popular"><h3 class="entry">Popular today</h3>';
     foreach($top_posts as $popular) {
         if($i > 4) { break; }
-        if($popular[0] != 'Home') { 
-            $displayedIds[] = $popular[0];
-            $title = get_the_title($popular[0]);
-            $string .= '<article class="entry">
-                                <a href="' . get_the_permalink($popular[0]) . '" name="' . $title . '" class="simple">
-                                    '. $title .'
-                                </a>
-                        </article>';
-            $i++;
-        }
+        $displayedIds[] = $popular->id;
+        $string .= '<article class="entry">
+                            <a href="' . $popular->link . '" name="' . $popular->title . '" class="simple">
+                                '. $popular->title .'
+                            </a>
+                    </article>';
+        $i++;
     }
     $string .= '</aside>';
     $output = array($string, $displayedIds);

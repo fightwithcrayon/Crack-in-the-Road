@@ -1,0 +1,27 @@
+{
+    "remotePath": "/var/www/crackintheroad.com/htdocs/wp-content/themes/2017/",
+    "host": "crackintheroad.com",
+    "username": "andrew",
+    "password": "Earthb0undPolar0id!!",
+    "port": 22,
+    "secure": true,
+    "protocol": "sftp",
+    "uploadOnSave": false,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": null,
+    "passphrase": null,
+    "ignore": [
+        "\\.vscode",
+        "\\.git",
+        "\\.sass-cache",
+        "\\.DS_Store",
+        "\\class",
+        "\\node_modules"
+    ],
+    "generatedFiles": {
+        "uploadOnSave": false,
+        "extensionsToInclude": [],
+        "path": ""
+    }
+}

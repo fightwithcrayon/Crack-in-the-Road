@@ -126,4 +126,10 @@ function filter_ptags_on_images($content)
     return preg_replace('/<p>(\s*)(<img .* \/>)(\s*)<\/p>/iU', '\2', $content);
 }
 add_filter('the_content', 'filter_ptags_on_images');
+
+function setup_lede_paragraph($content)
+{
+    return str_replace_first('.', '.</p><p>', $content);
+}
+add_filter('the_content', 'setup_lede_paragraph');
 ?>
