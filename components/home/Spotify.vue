@@ -1,12 +1,12 @@
 <template>
   <article class="playlist block">
-    <a :href="permalink" :name="data.name">
+    <a :href="data.link" :name="data.name">
       <figure class="image">
-        <LazyImage :src="`${this.smallImage}`" :srcset="srcset" :alt="image.name" :title="image.name" />
+        <LazyImage :src="smallImage" :srcset="srcset" :alt="data.name" :title="data.name" />
       </figure>
     </a>
     <div class="info">
-      <a :href="permalink" :name="data.name">
+      <a :href="data.link" :name="data.name">
         <h4>{{ name }}</h4>
       </a>
       <p v-html="description"></p>
@@ -25,30 +25,21 @@
     },
     computed: {
       date () {
-        return format(parse(this.data.tracks.items[0].added_at), 'Do MMM')
+        return format(parse(this.data.last_update), 'Do MMM')
       },
       description () {
-        return `<a href="${this.permalink}" name="${this.data.name}">` + this.data.description.replace(/<a href="([^"]*?)">Crack in the Road<\/a>/g, 'Crack in the Road')
+        return `<a href="${this.data.link}" name="${this.data.name}">` + this.data.description.replace(/<a href="([^"]*?)">Crack in the Road<\/a>/g, 'Crack in the Road')
                                     .replace(/<a href="([^"]*?)">www.crackintheroad.com<\/a>/g, 'Crack in the Road')
                 + '</a>'
-      },
-      image () {
-        return this.data.images[0] || {}
       },
       name () {
         return this.data.name.replace('Crack in the Road ', '')
       },
-      permalink () {
-        return this.data.external_urls.spotify
-      },
       srcset () {
-        return `${this.largeImage} 300w, ${this.smallImage} 150w`
+        return `${this.data.image}.jpg 300w, ${this.smallImage} 150w`
       },
       smallImage () {
-        return `${this.image.url}_150.jpg`
-      },
-      largeImage () {
-        return `${this.image.url}.jpg`
+        return `${this.data.image}_150.jpg`
       }
     }
   }
