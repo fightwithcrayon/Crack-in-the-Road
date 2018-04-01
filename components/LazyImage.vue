@@ -1,10 +1,10 @@
 <template>
   <div class='lazyLoadContainer'>
-    <img v-if="!imageLoaded" ref="image" :src="$props.src" :alt="$props.alt" :title="$props.title" class="blur-up" />
+    <img v-if="!imageLoaded" ref="image" :src="src" :alt="$props.alt" :title="$props.title" class="blur-up" />
     <img v-if="visible"
       :class="{'hidden': !imageLoaded}"
-      :src="$props.src" 
-      :srcset="$props.srcset"
+      :src="src" 
+      :srcset="srcset"
       :alt="$props.alt"
       :title="$props.title"
       @load="imageLoaded = true"
@@ -20,7 +20,15 @@ export default {
 			visible: false,
 			imageLoaded: false
 		}
-	},
+  },
+  computed: {
+    src () {
+      return this.$props.src.replace('www.crackintheroad.com ', 'api.crackintheroad.com')
+    },
+    srcset () {
+      return this.$props.srcset.replace('www.crackintheroad.com ', 'api.crackintheroad.com')
+    }
+  },
 	mounted () {
 		this.io = new IntersectionObserver(entries => this._imageVisible(entries), {})
     this.io.observe(this.$refs.image)

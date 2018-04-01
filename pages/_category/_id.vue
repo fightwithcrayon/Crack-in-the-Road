@@ -25,7 +25,7 @@ export default {
   async asyncData ({ app, params }) {
     const postId = params.id.split('-')[0]
     try {
-      let { data } = await app.$axios.get(`https://www.crackintheroad.com/wp-json/wp/v2/posts/${postId}`)
+      let { data } = await app.$axios.get(`https://api.crackintheroad.com/wp-json/wp/v2/posts/${postId}`)
       return { post: data }
     } catch (error) {
       console.log(error, error.message)
@@ -34,9 +34,14 @@ export default {
   },
   computed: {
     sanitisedTitle () {
-			return this.post.title.rendered.replace(/&#(\d+);/g, function(match, dec) {
-				return String.fromCharCode(dec);
-			});
+      let title = this.post.title ? this.post.title : this.post.post_title
+      if (title) {
+        return this.post.title.rendered.replace(/&#(\d+);/g, function(match, dec) {
+          return String.fromCharCode(dec)
+        })
+      } else {
+        return ''
+      }
     }
   },
   mounted () {

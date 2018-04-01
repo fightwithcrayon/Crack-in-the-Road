@@ -66,7 +66,7 @@ module.exports = {
   },
   generate: {
     routes: function () {
-      return axios.get('https://www.crackintheroad.com/wp-json/custom/routes/').then((res) => {
+      return axios.get('https://api.crackintheroad.com/wp-json/custom/routes/').then((res) => {
           return res.data.map(url => url.replace('https://www.crackintheroad.com', ''))
         })
     }
