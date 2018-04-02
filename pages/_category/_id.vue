@@ -3,7 +3,7 @@
     <div class="title">
       <h2>{{sanitisedTitle}}</h2>
     </div>
-    <div class="copy" v-html="post.post_content.rendered"></div>
+    <main class="copy" v-html="bodyContent"></main>
   </div>
 </template>
 
@@ -37,6 +37,9 @@ export default {
     }
   },
   computed: {
+    bodyContent () {
+      return this.post.content ? this.post.content.rendered : this.post.post_content
+    },
     sanitisedTitle () {
       let title = this.post.title ? this.post.title.rendered : this.post.post_title
       if (title) {
