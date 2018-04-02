@@ -3,7 +3,7 @@
     <div class="title">
       <h2>{{sanitisedTitle}}</h2>
     </div>
-    <div class="copy" v-html="post.content.rendered"></div>
+    <div class="copy" v-html="post.post_content.rendered"></div>
   </div>
 </template>
 
@@ -22,21 +22,25 @@ export default {
   components: {
     Cover, Nav
   },
-  async asyncData ({ app, params }) {
-    const postId = params.id.split('-')[0]
-    try {
-      let { data } = await app.$axios.get(`https://api.crackintheroad.com/wp-json/wp/v2/posts/${postId}`)
-      return { post: data }
-    } catch (error) {
-      console.log(error, error.message)
-      return { post: {} }
+  async asyncData ({ app, params, payload }) {
+    if (payload) {
+      return { post: payload }
+    } else {
+      const postId = params.id.split('-')[0]
+      try {
+        let { data } = await app.$axios.get(`https://api.crackintheroad.com/wp-json/wp/v2/posts/${postId}`)
+        return { post: data }
+      } catch (error) {
+        console.log(error, error.message)
+        return { post: {} }
+      }
     }
   },
   computed: {
     sanitisedTitle () {
-      let title = this.post.title ? this.post.title : this.post.post_title
+      let title = this.post.title ? this.post.title : this.post.post_title.rendered
       if (title) {
-        return this.post.title.rendered.replace(/&#(\d+);/g, function(match, dec) {
+        return title.replace(/&#(\d+);/g, function(match, dec) {
           return String.fromCharCode(dec)
         })
       } else {

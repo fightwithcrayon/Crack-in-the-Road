@@ -66,9 +66,15 @@ module.exports = {
   },
   generate: {
     routes: function () {
-      return axios.get('https://api.crackintheroad.com/wp-json/custom/routes/').then((res) => {
-          return res.data.map(url => url.replace('https://www.crackintheroad.com', ''))
+      return axios.get('http://api.crackintheroad.com/wp-json/custom/routes/').then((res) => {
+        return res.data.posts.map((post, i) => {
+          return {
+            route: res.data.permalinks[i],
+            payload: post
+          }
         })
+        return res.data.map(url => url.replace('http://api.crackintheroad.com', ''))
+      })
     }
   }
 }
