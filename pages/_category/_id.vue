@@ -38,9 +38,9 @@ export default {
   },
   computed: {
     sanitisedTitle () {
-      let title = this.post.title ? this.post.title : this.post.post_title
+      let title = this.post.title ? this.post.title.rendered : this.post.post_title
       if (title) {
-        return title.rendered.replace(/&#(\d+);/g, function(match, dec) {
+        return title.replace(/&#(\d+);/g, function(match, dec) {
           return String.fromCharCode(dec)
         })
       } else {
