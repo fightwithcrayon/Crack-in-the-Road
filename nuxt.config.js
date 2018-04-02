@@ -1,7 +1,7 @@
 const axios = require('axios')
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
-    base: '/Crack-in-the-Road/'
+    base: '/'
   }
 } : {}
 
@@ -34,14 +34,7 @@ module.exports = {
   transition: {
     name: 'page',
     mode: 'out-in',
-    css: false,
-    beforeLeave (el) {
-      console.log('before leave')
-    },
-    leave (el, done) {
-      console.log('leave')
-      done()
-    }
+    css: false
   },
   modules: [
     '@nuxtjs/axios'
