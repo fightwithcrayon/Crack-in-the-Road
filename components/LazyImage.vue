@@ -1,10 +1,10 @@
 <template>
   <div class='lazyLoadContainer'>
-    <img v-if="!imageLoaded" ref="image" :src="src" :alt="$props.alt" :title="$props.title" class="blur-up" />
+    <img v-if="!imageLoaded" ref="image" :src="source" :alt="$props.alt" :title="$props.title" class="blur-up" />
     <img v-if="visible"
       :class="{'hidden': !imageLoaded}"
-      :src="src" 
-      :srcset="srcset"
+      :src="source" 
+      :srcset="sourceset"
       :alt="$props.alt"
       :title="$props.title"
       @load="imageLoaded = true"
@@ -22,10 +22,10 @@ export default {
 		}
   },
   computed: {
-    src () {
+    source () {
       return this.$props.src.replace('www.crackintheroad.com ', 'api.crackintheroad.com')
     },
-    srcset () {
+    sourceset () {
       return this.$props.srcset.replace('www.crackintheroad.com ', 'api.crackintheroad.com')
     }
   },
