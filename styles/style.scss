@@ -398,6 +398,8 @@ body:not(.cover-closed){
 	display: flex;
 	flex-direction: column;
 	min-height:100vh;
+	max-width:680px;
+	margin:0 $small-spacing;
 	.title {
 		text-align: left;
 		width:100%;
@@ -656,6 +658,7 @@ body:not(.cover-closed){
 	}
 	.page-content {
 		padding:(3 * $small-spacing) (2 * $small-spacing);
+		margin:0 auto;
 		p {
 			margin:0 auto;
 		}
