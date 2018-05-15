@@ -67,10 +67,9 @@ module.exports = {
       let posts = []
       for (let pageNum = 1; pageNum <= pageCount; pageNum++) {
         await axios.get(`https://admin.crackintheroad.com/wp-json/custom/routes/${pageNum}`).then((res) => {
-          console.log('retrieved page: ', pageNum)
+          // console.log('retrieved page: ', pageNum)
           const formattedPosts = res.data.map((post, i) => {
             // console.log((i + ((pageNum - 1) * pageSize) ))
-            console.log(permalinks[post.ID].permalink)
             return {
               route: permalinks[post.ID].permalink,
               payload: post
