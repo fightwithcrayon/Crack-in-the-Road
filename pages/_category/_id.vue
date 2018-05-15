@@ -1,9 +1,19 @@
 <template>
-  <div class="page-content">
-    <div class="title">
-      <h2>{{sanitisedTitle}}</h2>
+  <div class="singlePage">
+    <div class="page-content">
+      <portal to="cover">
+        <figure>
+          <img :alt="sanitisedTitle" :title="sanitisedTitle" :srcset="post.featured_image_srcset">
+          <figcaption>
+            <h2 v-html="sanitisedTitle"></h2>
+          </figcaption>
+        </figure>
+      </portal>
+      <div class="title">
+        <h2>{{sanitisedTitle}}</h2>
+      </div>
+      <main class="copy" v-html="bodyContent"></main>
     </div>
-    <main class="copy" v-html="bodyContent"></main>
   </div>
 </template>
 
@@ -52,11 +62,7 @@ export default {
     }
   },
   mounted () {
-    this.$root.$emit('updateCover', {
-      image: this.post.featured_image_srcset,
-      caption: this.sanitisedTitle,
-      title: this.sanitisedTitle
-    })
+    this.$root.$emit('recalculateCover')
   }
 }
 </script>

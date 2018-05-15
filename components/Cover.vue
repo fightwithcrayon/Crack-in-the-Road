@@ -1,13 +1,8 @@
 <template>
   <section id="cover">
-    <canvas id="sitetitle" ref="sitetitle"></canvas>
-    <figure>
-      <img :alt="ttl" :title="ttl" :srcset="srcset">
-      <figcaption>
-        <h2 v-if="$route.path != '/'" v-html="cap"></h2>
-        <h1 v-else v-html="cap"></h1>
-      </figcaption>
-    </figure>
+    <canvas id="sitetitle" ref="sitetitle" v-on:click="$router.push('/')"></canvas>
+    <portal-target name="cover" slim>
+    </portal-target>
   </section>
 </template>
 <script>

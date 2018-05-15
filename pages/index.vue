@@ -1,5 +1,13 @@
 <template>
   <div>
+    <portal to="cover">
+      <figure>
+        <img :alt="featured[0].post_title" :title="featured[0].post_title" :srcset="featured[0].featured_image_srcset">
+        <figcaption>
+          <h1 v-html="featured[0].post_title"></h1>
+        </figcaption>
+      </figure>
+    </portal>
     <section class="featured divider">
       <StoryCard v-for="(post, i) in featured" type="featured" :data="post" :key="i" v-if="i < 3" />
       <PopularCard :data="popular" />
@@ -50,11 +58,7 @@ export default {
     window.removeEventListener('scroll', this._handleInfiniteScroll)
   },
   mounted () {
-    this.$root.$emit('updateCover', {
-      image: this.featured[0].featured_image_srcset,
-      caption: this.featured[0].post_title,
-      title: this.featured[0].post_title
-    })
+    this.$root.$emit('recalculateCover')
     window.addEventListener('scroll', this._handleInfiniteScroll)
     this.loading = false
   },

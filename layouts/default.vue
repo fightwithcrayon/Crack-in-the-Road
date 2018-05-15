@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Cover :image='cover.image' :fontsReady="fontsReady" ref="cover" :caption='cover.caption' :title='cover.title' aria-hidden="true" />
+    <Cover :fontsReady="fontsReady" ref="cover" aria-hidden="true" />
     <Nav />
     <main id="thepage" ref="thepage">
       <nuxt />
@@ -15,11 +15,6 @@ export default {
   data () {
     return {
       coverClosed: true,
-      cover: {
-        image: '',
-        caption: '',
-        title: ''
-      },
       loading: false,
       fontsReady: false
     }
@@ -42,9 +37,11 @@ export default {
       this.initialiseFonts()
       window.addEventListener("scroll", this.runScroll, { passive: false })
     }
-    this.$root.$on('updateCover', (newValues) => this._updateCover(newValues))
     this.$root.$on('recalculateCover', this._recalculateCover)
     this.$root.$on('loadStatus', (newValue) => this._loadAnimation(newValue))
+  },
+  mounted () {
+    this._recalculateCover()
   },
   methods: {
     _loadAnimation (loading) {
@@ -52,10 +49,6 @@ export default {
         this.$refs.cover.$el.scrollIntoView({behavior:'smooth'})
       }
       this.loading = loading
-    },
-    _updateCover (newValues) {
-      this.cover = newValues
-      this._recalculateCover()
     },
     _recalculateCover () {
       if (process.browser && this.$refs.thepage) {
@@ -75,7 +68,7 @@ export default {
       })
     },
     runScroll () {
-      this.coverClosed = window.scrollY <= window.innerHeight ? true : false
+      this.coverClosed = (window.scrollY <= window.innerHeight)
     }
   }
 }

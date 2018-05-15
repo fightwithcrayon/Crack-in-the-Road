@@ -36,7 +36,11 @@ module.exports = {
   middleware: [
     'transition.js'
   ],
+  plugins: [
+    '~/plugins/portal-vue'
+  ],
   build: {
+    vendor: ['portal-vue'],
     /*
     ** Run ESLint on save
     */

@@ -223,9 +223,10 @@ body:not(.cover-closed){
 #sitetitle {
 	width:300px;
 	position: absolute;
-    top: 3em;
-    left: 50%;
-    transform: rotate(-25deg) skewX(5deg) skewY(5deg) translateX(-50%);
+	top: 3em;
+	left: 50%;
+	transform: rotate(-25deg) skewX(5deg) skewY(5deg) translateX(-50%);
+	cursor:pointer;
 }
 //Home styles
 .wide-content {
@@ -393,6 +394,10 @@ body:not(.cover-closed){
 }
 
 // Single styles
+.singlePage {
+	width: 100%;
+	background-color: #fff;
+}
 .page-content {
 	overflow: hidden;
 	display: flex;
