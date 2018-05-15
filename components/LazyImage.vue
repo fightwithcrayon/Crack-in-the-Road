@@ -23,10 +23,10 @@ export default {
   },
   computed: {
     source () {
-      return this.$props.src.replace(/www.crackintheroad.com/g, 'api.crackintheroad.com')
+      return this.$props.src.replace(/www.crackintheroad.com/g, 'admin.crackintheroad.com')
     },
     sourceset () {
-      return this.$props.src.replace(/www.crackintheroad.com/g, 'api.crackintheroad.com')
+      return this.$props.srcset.replace(/www.crackintheroad.com/g, 'admin.crackintheroad.com')
     }
   },
 	mounted () {

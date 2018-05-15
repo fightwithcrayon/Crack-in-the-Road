@@ -1,12 +1,6 @@
 const axios = require('axios')
-const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
-  router: {
-    base: '/'
-  }
-} : {}
 
 module.exports = {
-  ...routerBase,
   /*
   ** Headers of the page
   */
@@ -58,16 +52,32 @@ module.exports = {
     }
   },
   generate: {
-    routes: function () {
-      return axios.get('http://api.crackintheroad.com/wp-json/custom/routes/').then((res) => {
-        return res.data.posts.map((post, i) => {
-          return {
-            route: res.data.permalinks[i],
-            payload: post
-          }
+    routes: async function () {
+      const res = await axios.get('https://admin.crackintheroad.com/wp-json/custom/routes/')
+      const permalinks = res.data
+      //console.log('permalinks: ', permalinks)
+      console.log('size: ', Object.keys(permalinks).length)
+      const pageSize = 1000
+      const pageCount = Math.ceil(Object.keys(permalinks).length / pageSize)
+      console.log('pages: ', pageCount)
+      let posts = []
+      for (let pageNum = 1; pageNum <= pageCount; pageNum++) {
+        await axios.get(`https://admin.crackintheroad.com/wp-json/custom/routes/${pageNum}`).then((res) => {
+          console.log('retrieved page: ', pageNum)
+          const formattedPosts = res.data.map((post, i) => {
+            // console.log((i + ((pageNum - 1) * pageSize) ))
+            console.log(permalinks[post.ID].permalink)
+            return {
+              route: permalinks[post.ID].permalink,
+              payload: post
+            }
+          })
+          posts = [...posts, ...formattedPosts]
+          console.log('New size: ', posts.length)
         })
-        return res.data.map(url => url.replace('http://api.crackintheroad.com', ''))
-      })
+      }
+      // console.log('final post data generated:', posts)
+      return posts
     }
   }
 }

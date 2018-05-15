@@ -26,7 +26,7 @@ import PopularCard from '~/components/home/Popular.vue'
 import SpotifyCard from '~/components/home/Spotify.vue'
 import StoryCard from '~/components/home/StoryCard.vue'
 
-const api = 'https://api.crackintheroad.com/wp-json/'
+const api = 'https://admin.crackintheroad.com/wp-json/'
 
 export default {
   async asyncData ({ app }) {

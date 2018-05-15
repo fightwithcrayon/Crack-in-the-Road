@@ -20,7 +20,7 @@ export default {
 	props: ['data', 'type'],
   computed: {
     permalink () {
-      return this.data.link ? this.data.link.replace('https://api.crackintheroad.com/', '') : ''
+      return this.data.link ? this.data.link.replace('https://admin.crackintheroad.com/', '') : ''
     }
 	},
 	components: {
