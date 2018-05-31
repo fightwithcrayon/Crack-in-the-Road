@@ -32,18 +32,21 @@ export default {
   components: {
     Cover, Nav
   },
-  async asyncData ({ app, params, payload }) {
+  async asyncData ({ app, params, payload, error}) {
     if (payload) {
       return { post: payload }
-    } else {
+    } else if (params && params.id) {
       const postId = params.id.split('-')[0]
       try {
         let { data } = await app.$axios.get(`https://admin.crackintheroad.com/wp-json/wp/v2/posts/${postId}`)
         return { post: data }
-      } catch (error) {
-        console.log(error, error.message)
+      } catch (e) {
+        console.log(e, e.message)
         return { post: {} }
       }
+    } else {
+      res.statusCode = 404
+      return error({ statusCode: 404, message: 'Post not found' })
     }
   },
   computed: {
