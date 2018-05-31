@@ -45,7 +45,6 @@ export default {
         return { post: {} }
       }
     } else {
-      res.statusCode = 404
       return error({ statusCode: 404, message: 'Post not found' })
     }
   },
