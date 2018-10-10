@@ -1,0 +1,2 @@
+/wp-admin            https://admin.crackintheroad.com
+/wp-admin/*            https://admin.crackintheroad.com/:splat
