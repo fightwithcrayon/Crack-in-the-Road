@@ -70,7 +70,7 @@ module.exports = {
           const pageData = await axios.get(`https://admin.crackintheroad.com/wp-json/custom/routes/${pageNum}`)
           const formattedPosts = pageData.data.map((post, i) => {
             return {
-              route: permalinks[post.ID].permalink,
+              route: decodeURIComponent(permalinks[post.ID].permalink).normalize('NFD').replace(/[\u0300-\u036f]/g, ""),
               payload: post
             }
           })
