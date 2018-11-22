@@ -54,5 +54,30 @@ module.exports = {
         })
       }
     }
+  },
+  generate: {
+    workers: 4,
+    workerConcurrency: 500,
+    concurrency: 500,
+    routes: function () {
+      return axios.get('https://admin.crackintheroad.com/wp-json/custom/routes/')
+      .then(async res => {
+        const permalinks = res.data
+        const pageSize = 1000
+        const pageCount = Math.ceil(Object.keys(permalinks).length / pageSize)
+        let posts = []
+        for (let pageNum = 1; pageNum <= pageCount; pageNum++) {
+          const pageData = await axios.get(`https://admin.crackintheroad.com/wp-json/custom/routes/${pageNum}`)
+          const formattedPosts = pageData.data.map((post, i) => {
+            return {
+              route: permalinks[post.ID].permalink,
+              payload: post
+            }
+          })
+          posts = [...posts, ...formattedPosts]
+        }
+        return posts
+      })
+    }
   }
 }
