@@ -38,7 +38,7 @@ const api = 'https://admin.crackintheroad.com/wp-json/'
 
 export default {
   async asyncData ({ app }) {
-    const home = await app.$axios.get(`${api}custom/home`)
+    const home = await app.$axios.get(`${api}custom/home?v=2`)
     return { posts: home.data.posts, featured: home.data.featured, spotify: home.data.spotify, popular: home.data.stats }
   },
   head () {

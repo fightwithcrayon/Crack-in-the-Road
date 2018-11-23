@@ -61,7 +61,7 @@ export default {
       return this.post.content ? this.post.content.rendered : this.post.post_content
     },
     externalPermalink () {
-      return this.data.link ? this.data.link.replace('https://admin.crackintheroad.com', 'https://www.crackintheroad.com') : 'https://www.crackintheroad.com/'
+      return this.post.link ? this.post.link.replace('https://admin.crackintheroad.com', 'https://www.crackintheroad.com') : 'https://www.crackintheroad.com/'
     },
     sanitisedTitle () {
       let title = this.post.title ? this.post.title.rendered : this.post.post_title
