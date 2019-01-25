@@ -60,14 +60,14 @@ module.exports = {
     workerConcurrency: 500,
     concurrency: 500,
     routes: function () {
-      return axios.get('https://admin.crackintheroad.com/wp-json/custom/routes/')
+      return axios.get(`https://admin.crackintheroad.com/wp-json/custom/routes/?date=${Date.now()}`)
       .then(async res => {
         const permalinks = res.data
         const pageSize = 1000
         const pageCount = Math.ceil(Object.keys(permalinks).length / pageSize)
         let posts = []
         for (let pageNum = 1; pageNum <= pageCount; pageNum++) {
-          const pageData = await axios.get(`https://admin.crackintheroad.com/wp-json/custom/routes/${pageNum}`)
+          const pageData = await axios.get(`https://admin.crackintheroad.com/wp-json/custom/routes/${pageNum}?date=${Date.now()}`)
           const formattedPosts = pageData.data.map((post, i) => {
             return {
               route: decodeURIComponent(permalinks[post.ID].permalink).normalize('NFD').replace(/[\u0300-\u036f]/g, ""),
