@@ -25,7 +25,15 @@ export default {
     return {
       title: `${this.sanitisedTitle} - Crack in the Road`,
       meta: [
-        { hid: 'description', name: 'description', content: this.post.custom_excerpt }
+        { hid: 'description', name: 'description', content: this.post.custom_excerpt },
+        { hid: 'og:title', name: 'og:title', content: this.sanitisedTitle },
+        { hid: 'og:description', name: 'og:description', content: this.post.custom_excerpt },
+        { hid: 'og:image', name: 'og:image', content: this.post.social_image_url },
+        { hid: 'og:url', name: 'og:url', content: this.externalPermalink },
+        { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
+        { hid: 'og:site_name', name: '', content: 'Crack in the Road' },
+        { hid: 'twitter:image:alt', name: '', content: this.sanitisedTitle },
+        { hid: 'twitter:site', name: '', content: '@crackintheroad' }
       ]
     }
   },
@@ -38,7 +46,7 @@ export default {
     } else if (params && params.id) {
       const postId = params.id.split('-')[0]
       try {
-        let { data } = await app.$axios.get(`https://admin.crackintheroad.com/wp-json/wp/v2/posts/${postId}`)
+        let { data } = await app.$axios.get(`https://admin.crackintheroad.com/wp-json/wp/v2/posts/${postId}?n=2`)
         return { post: data }
       } catch (e) {
         console.log(e, e.message)
@@ -51,6 +59,9 @@ export default {
   computed: {
     bodyContent () {
       return this.post.content ? this.post.content.rendered : this.post.post_content
+    },
+    externalPermalink () {
+      return this.post.link ? this.post.link.replace('https://admin.crackintheroad.com', 'https://www.crackintheroad.com') : 'https://www.crackintheroad.com/'
     },
     sanitisedTitle () {
       let title = this.post.title ? this.post.title.rendered : this.post.post_title

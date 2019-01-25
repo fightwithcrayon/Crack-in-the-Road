@@ -38,8 +38,22 @@ const api = 'https://admin.crackintheroad.com/wp-json/'
 
 export default {
   async asyncData ({ app }) {
-    const home = await app.$axios.get(`${api}custom/home`)
+    const home = await app.$axios.get(`${api}custom/home?v=2`)
     return { posts: home.data.posts, featured: home.data.featured, spotify: home.data.spotify, popular: home.data.stats }
+  },
+  head () {
+    return {
+      title: 'Crack in the Road',
+      meta: [
+        { hid: 'og:title', name: 'og:title', content: 'Crack in the Road' },
+        { hid: 'og:image', name: 'og:image', content: this.featured[0].social_image_url },
+        { hid: 'og:url', name: 'og:url', content: 'https://www.crackintheroad.com' },
+        { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
+        { hid: 'og:site_name', name: '', content: 'Crack in the Road' },
+        { hid: 'twitter:image:alt', name: '', content: 'Crack in the Road' },
+        { hid: 'twitter:site', name: '', content: '@crackintheroad' }
+      ]
+    }
   },
   components: {
     Cover,
