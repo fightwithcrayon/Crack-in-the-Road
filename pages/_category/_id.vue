@@ -26,15 +26,15 @@ export default {
       title: `${this.sanitisedTitle} - Crack in the Road`,
       meta: [
         { hid: 'description', name: 'description', content: this.post.custom_excerpt },
-        { hid: 'og:title', name: 'og:title', content: this.sanitisedTitle },
-        { hid: 'og:description', name: 'og:description', content: this.post.custom_excerpt },
-        { hid: 'og:image', name: 'og:image', content: this.post.social_image_url },
-        { hid: 'og:url', name: 'og:url', content: this.externalPermalink },
-        { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
-        { hid: 'og:site_name', name: 'og:site_name', content: 'Crack in the Road' },
-        { hid: 'twitter:image', name: 'twitter:image', content: this.post.social_image_url },
-        { hid: 'twitter:image:alt', name: 'twitter:image:alt', content: this.sanitisedTitle },
-        { hid: 'twitter:site', name: 'twitter:site', content: '@crackintheroad' }
+        { hid: 'og:title', property: 'og:title', content: this.sanitisedTitle },
+        { hid: 'og:description', property: 'og:description', content: this.post.custom_excerpt },
+        { hid: 'og:image', property: 'og:image', content: this.post.social_image_url },
+        { hid: 'og:url', property: 'og:url', content: this.externalPermalink },
+        { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' },
+        { hid: 'og:site_name', property: 'og:site_name', content: 'Crack in the Road' },
+        { hid: 'twitter:image', property: 'twitter:image', content: this.post.social_image_url },
+        { hid: 'twitter:image:alt', property: 'twitter:image:alt', content: this.sanitisedTitle },
+        { hid: 'twitter:site', property: 'twitter:site', content: '@crackintheroad' }
       ]
     }
   },

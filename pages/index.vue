@@ -45,10 +45,10 @@ export default {
     return {
       title: 'Crack in the Road',
       meta: [
-        { hid: 'og:title', name: 'og:title', content: 'Crack in the Road' },
-        { hid: 'og:image', name: 'og:image', content: this.featured[0].social_image_url },
-        { hid: 'og:url', name: 'og:url', content: 'https://www.crackintheroad.com' },
-        { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
+        { hid: 'og:title', property: 'og:title', content: 'Crack in the Road' },
+        { hid: 'og:image', property: 'og:image', content: this.featured[0].social_image_url },
+        { hid: 'og:url', property: 'og:url', content: 'https://www.crackintheroad.com' },
+        { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' },
         { hid: 'og:site_name', name: '', content: 'Crack in the Road' },
         { hid: 'twitter:image:alt', name: '', content: 'Crack in the Road' },
         { hid: 'twitter:site', name: '', content: '@crackintheroad' }
