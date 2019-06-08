@@ -46,7 +46,9 @@ export default {
       title: 'Crack in the Road',
       meta: [
         { hid: 'og:title', property: 'og:title', content: 'Crack in the Road' },
-        { hid: 'og:image', property: 'og:image', content: this.featured[0].social_image_url },
+        { hid: 'og:image', property: 'og:image', content: this.featured[0].social_image[0] },
+        { hid: 'og:image:width', property: 'og:image:width', content: this.featured[0].social_image[1] },
+        { hid: 'og:image:height', property: 'og:image:height', content: this.featured[0].social_image[2] },
         { hid: 'og:url', property: 'og:url', content: 'https://www.crackintheroad.com' },
         { hid: 'og:site_name', property: 'og:site_name', content: 'Crack in the Road' },
         { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },

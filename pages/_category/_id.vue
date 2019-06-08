@@ -22,14 +22,15 @@ import Cover from '~/components/Cover.vue'
 import Nav from '~/components/Nav.vue'
 export default {
   head () {
-    console.log(this.post.social_image_url);
     return {
       title: `${this.sanitisedTitle} - Crack in the Road`,
       meta: [
         { hid: 'description', name: 'description', content: this.post.custom_excerpt },
         { hid: 'og:title', property: 'og:title', content: this.sanitisedTitle },
         { hid: 'og:description', property: 'og:description', content: this.post.custom_excerpt },
-        { hid: 'og:image', property: 'og:image', content: this.post.social_image_url },
+        { hid: 'og:image', property: 'og:image', content: this.post.social_image[0] },
+        { hid: 'og:image:width', property: 'og:image:width', content: this.post.social_image[1] },
+        { hid: 'og:image:height', property: 'og:image:height', content: this.post.social_image[2] },
         { hid: 'og:url', property: 'og:url', content: this.externalPermalink },
         { hid: 'og:site_name', property: 'og:site_name', content: 'Crack in the Road' },
         { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' },
@@ -47,7 +48,7 @@ export default {
     } else if (params && params.id) {
       const postId = params.id.split('-')[0]
       try {
-        let { data } = await app.$axios.get(`https://admin.crackintheroad.com/wp-json/wp/v2/posts/${postId}`)
+        let { data } = await app.$axios.get(`https://admin.crackintheroad.com/wp-json/wp/v2/posts/${postId}?nonce`)
         return { post: data }
       } catch (e) {
         console.log(e, e.message)
