@@ -47,7 +47,7 @@ export default {
     } else if (params && params.id) {
       const postId = params.id.split('-')[0]
       try {
-        let { data } = await app.$axios.get(`https://admin.crackintheroad.com/wp-json/wp/v2/posts/${postId}?n=${Date.now()}`)
+        let { data } = await app.$axios.get(`https://admin.crackintheroad.com/wp-json/wp/v2/posts/${postId}`)
         return { post: data }
       } catch (e) {
         console.log(e, e.message)
