@@ -36,6 +36,7 @@
         return this.data.name.replace('Crack in the Road ', '')
       },
       srcset () {
+        console.log(this.data.image);
         return `${this.data.image}.jpg 300w, ${this.smallImage} 150w`
       },
       smallImage () {
