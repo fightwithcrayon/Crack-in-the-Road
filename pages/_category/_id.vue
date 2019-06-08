@@ -30,10 +30,9 @@ export default {
         { hid: 'og:description', property: 'og:description', content: this.post.custom_excerpt },
         { hid: 'og:image', property: 'og:image', content: this.post.social_image_url },
         { hid: 'og:url', property: 'og:url', content: this.externalPermalink },
-        { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' },
         { hid: 'og:site_name', property: 'og:site_name', content: 'Crack in the Road' },
-        { hid: 'twitter:image', property: 'twitter:image', content: this.post.social_image_url },
-        { hid: 'twitter:image:alt', property: 'twitter:image:alt', content: this.sanitisedTitle },
+        { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' },
+        { hid: 'twitter:image:alt', name: 'twitter:image:alt', content: this.sanitisedTitle },
         { hid: 'twitter:site', property: 'twitter:site', content: '@crackintheroad' }
       ]
     }
@@ -47,7 +46,7 @@ export default {
     } else if (params && params.id) {
       const postId = params.id.split('-')[0]
       try {
-        let { data } = await app.$axios.get(`https://admin.crackintheroad.com/wp-json/wp/v2/posts/${postId}?n=2`)
+        let { data } = await app.$axios.get(`https://admin.crackintheroad.com/wp-json/wp/v2/posts/${postId}?n=${Date.now()}`)
         return { post: data }
       } catch (e) {
         console.log(e, e.message)
