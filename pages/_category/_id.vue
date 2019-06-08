@@ -22,6 +22,7 @@ import Cover from '~/components/Cover.vue'
 import Nav from '~/components/Nav.vue'
 export default {
   head () {
+    console.log(this.post.social_image_url);
     return {
       title: `${this.sanitisedTitle} - Crack in the Road`,
       meta: [
