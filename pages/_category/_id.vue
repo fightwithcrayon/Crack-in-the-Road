@@ -31,9 +31,10 @@ export default {
         { hid: 'og:image', name: 'og:image', content: this.post.social_image_url },
         { hid: 'og:url', name: 'og:url', content: this.externalPermalink },
         { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
-        { hid: 'og:site_name', name: '', content: 'Crack in the Road' },
-        { hid: 'twitter:image:alt', name: '', content: this.sanitisedTitle },
-        { hid: 'twitter:site', name: '', content: '@crackintheroad' }
+        { hid: 'og:site_name', name: 'og:site_name', content: 'Crack in the Road' },
+        { hid: 'twitter:image', name: 'twitter:image', content: this.post.social_image_url },
+        { hid: 'twitter:image:alt', name: 'twitter:image:alt', content: this.sanitisedTitle },
+        { hid: 'twitter:site', name: 'twitter:site', content: '@crackintheroad' }
       ]
     }
   },
