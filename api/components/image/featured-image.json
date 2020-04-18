@@ -1,0 +1,20 @@
+{
+  "connection": "default",
+  "collectionName": "components_image_featured_images",
+  "info": {
+    "name": "featured_image",
+    "icon": "atom"
+  },
+  "options": {},
+  "attributes": {
+    "file": {
+      "type": "string"
+    },
+    "width": {
+      "type": "integer"
+    },
+    "height": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+@import '../shared';
+
+.page {
+	display: grid;
+	grid-template-areas: "featured" "posts";
+	row-gap: 72px;
+	grid-template-columns: 1fr;
+}
+
+.featuredLink {
+	color: inherit;
+	text-decoration: none;
+}
+
+.featured {
+	grid-area: featured;
+}
+
+.posts {
+	grid-area: posts;
+	display: grid;
+	grid-template-columns: 1fr;
+	row-gap: 72px;
+	column-gap: 32px;
+
+	@include breakpoint(small) {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	@include breakpoint(small) {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+
+	font-size: var(--h4);
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+}

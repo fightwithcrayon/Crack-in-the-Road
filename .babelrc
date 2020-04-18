@@ -1,0 +1,13 @@
+{
+    "presets": [
+      "nano-react-app"
+    ],
+	"plugins": [
+		[
+		  "@babel/plugin-transform-react-jsx",
+		  {
+			"pragmaFrag": "React.Fragment"
+		  }
+		]
+	]
+}

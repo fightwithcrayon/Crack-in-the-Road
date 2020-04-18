@@ -1,0 +1,108 @@
+@font-face {
+	font-family: 'Jost';
+	src: url('./fonts/jost-300-light-webfont.woff2') format('woff2'),
+		url('./fonts/jost-300-light-webfont.woff') format('woff');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Jost';
+	src: url('./fonts/jost-300-lightitalic-webfont.woff2') format('woff2'),
+		url('./fonts/jost-300-lightitalic-webfont.woff') format('woff');
+	font-weight: 300;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Jost';
+	src: url('./fonts/jost-400-book-webfont.woff2') format('woff2'),
+		url('./fonts/jost-400-book-webfont.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Jost';
+	src: url('./fonts/jost-400-bookitalic-webfont.woff2') format('woff2'),
+		url('./fonts/jost-400-bookitalic-webfont.woff') format('woff');
+	font-weight: 400;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Jost';
+	src: url('./fonts/jost-500-medium-webfont.woff2') format('woff2'),
+		url('./fonts/jost-500-medium-webfont.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Jost';
+	src: url('./fonts/jost-500-mediumitalic-webfont.woff2') format('woff2'),
+		url('./fonts/jost-500-mediumitalic-webfont.woff') format('woff');
+	font-weight: 500;
+	font-style: italic;
+}
+
+:root {
+	--h1: 38px;
+	--h2: 32px;
+	--h3: 28px;
+	--h4: 24px;
+	--h5: 18px;
+	--h6: 14px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	padding: 0;
+	font-family: Jost;
+	font-weight: 500;
+	position: relative;
+	line-height: 1.2;
+	letter-spacing: -0.009em;
+}
+
+h1 {
+	font-size: var(--h1);
+}
+
+h2 {
+	font-size: var(--h2);
+}
+
+h3 {
+	font-size: var(--h3);
+}
+
+h4 {
+	font-size: var(--h4);
+}
+
+h5 {
+	font-size: var(--h5);
+}
+
+h6 {
+	font-size: var(--h6);
+}
+
+body {
+	font-size: var(--h5);
+	color: var(--black);
+	font-family: 'Spectral', 'Cormorant Garamond', 'Adobe Garamond', 'Garamond', Times, serif;
+	font-weight: 300;
+	line-height: 1.6;
+	text-rendering: optimizeLegibility;
+	-moz-osx-font-smoothing: grayscale;
+	word-wrap: break-word;
+	-moz-hyphens: auto;
+	hyphens: auto;
+}

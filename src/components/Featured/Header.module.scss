@@ -1,0 +1,22 @@
+.header {
+	position: sticky;
+	top: 0;
+	width: 100%;
+	border-bottom: 1px solid var(--alternate);
+	padding: 32px 0;
+	background-color: var(--background);
+	z-index: 2;
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+}
+
+.title {
+	hyphens: none;
+	text-transform: uppercase;
+	font-size: 24px;
+	letter-spacing: 2px;
+	word-break: break-word;
+}

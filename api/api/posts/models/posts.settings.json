@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "posts",
+  "info": {
+    "name": "Posts"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "artists": {
+      "collection": "artist",
+      "via": "posts",
+      "dominant": true
+    },
+    "author": {
+      "model": "author"
+    },
+    "categories": {
+      "collection": "category",
+      "via": "posts"
+    },
+    "wpid": {
+      "type": "integer",
+      "unique": true,
+      "required": true
+    },
+    "category": {
+      "type": "string"
+    },
+    "featured_image": {
+      "type": "component",
+      "repeatable": false,
+      "component": "image.featured-image"
+    },
+    "isSticky": {
+      "type": "boolean"
+    }
+  }
+}

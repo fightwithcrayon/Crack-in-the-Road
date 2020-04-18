@@ -1,0 +1,62 @@
+@import '../../shared';
+
+.page {
+	display: grid;
+	grid-template-areas: "header header header"
+		"spacel content spacer";
+	grid-template-columns: 1fr 100% 1fr;
+	row-gap: 64px;
+
+	@include breakpoint(small) {
+		grid-template-columns: 1fr 84% 1fr;
+	}
+
+	@include breakpoint(medium) {
+		grid-template-columns: 1fr 66% 1fr;
+	}
+}
+
+.header {
+	grid-area: header;
+}
+
+.image {
+	grid-area: image;
+}
+
+.title {
+	grid-area: title;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	grid-area: content;
+	font-size: var(--h4);
+
+	strong {
+		font-weight: bold;
+	}
+
+	img {
+		width: 100%;
+
+		@include breakpoint(small) {
+			margin: 0 -64px 40px;
+		}
+	}
+
+	iframe {
+		width: 100% !important;
+		max-width: 100%;
+	}
+
+	*:not(img) {
+		width: 100%;
+	
+		@include breakpoint(large) {
+			width: 75%;
+		}
+	}
+}

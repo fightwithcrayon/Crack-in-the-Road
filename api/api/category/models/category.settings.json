@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "categories",
+  "info": {
+    "name": "Category"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "posts": {
+      "via": "categories",
+      "collection": "posts",
+      "dominant": true
+    },
+    "slug": {
+      "type": "uid"
+    }
+  }
+}

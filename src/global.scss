@@ -1,0 +1,22 @@
+@import './fonts';
+@import './shared';
+
+:root {
+	--alternate: rgb(245,245,245);
+	--background: rgb(255,255,255);
+	--grey: rgb(43, 43, 43);
+	--black: rgb(20, 20, 20);
+	--small: #{map-get($breakpoints, 'small')};
+	--medium: #{map-get($breakpoints, 'medium')};
+	--large: #{map-get($breakpoints, 'large')};
+	--xlarge: #{map-get($breakpoints, 'xlarge')};
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
