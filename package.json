@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "next",
-    "build": "NODE_ENV=production next build",
+    "build": "next build",
     "start": "next start"
   },
   "license": "MIT",
