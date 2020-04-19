@@ -4,8 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "next",
-    "build": "next build",
-    "generate": "next build",
+    "build": "NODE_ENV=production next build",
     "start": "next start"
   },
   "license": "MIT",
@@ -13,8 +12,7 @@
     "date-fns": "^2.11.1",
     "next": "^9.3.4",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "strip-ansi": "^6.0.0"
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
