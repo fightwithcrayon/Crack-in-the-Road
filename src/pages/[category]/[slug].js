@@ -10,7 +10,7 @@ const Single = ({ data }) => {
         featured_image,
         title,
     } = data;
-    console.log(data)
+
     return (
         <div className={styles.page}>
             <Featured className={styles.header} post={data} tag="header" />
@@ -34,7 +34,6 @@ export async function getStaticPaths() {
     const res2 = await fetch('https://api.crackintheroad.com/posts/routes')
     const posts = await res2.json();
     const paths = posts.map(({ category, slug }) => {
-        console.log(category, slug)
         return {
             params: {
                 category,
