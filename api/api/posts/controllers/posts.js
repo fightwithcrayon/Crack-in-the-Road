@@ -38,28 +38,28 @@ const unescapeHTML = str => str.replace(/\&([^;]+);/g, (entity, entityCode) => {
  */
 
 const getAuthor = async slug => {
-  let author = await strapi.services.author.find({ slug });
+  const author = await strapi.query('author').model.find({ slug }, 'slug id');
   return author;
 }
 
 const getArtists = async slugs => {
   let artists = await Promise.all(slugs.map(slug => new Promise(async (resolve, reject) => {
-    const artist = await strapi.services.artist.find({ slug });
+    const artist = await strapi.query('artist').model.find({ slug }, 'slug id');
     resolve(artist[0]);
   })));
   return artists.map(artist => artist.id);
 }
 
 const getCategories = async terms => {
-  let categories = await Promise.all(terms.map(({ slug }) => new Promise(async (resolve, reject) => {
-    const category = await strapi.services.category.find({ slug });
-    resolve(category[0]);
+  let categories = await Promise.all(terms.map((slug) => new Promise(async (resolve, reject) => {
+    const data = await strapi.query('category').model.find({ slug }, 'slug id');
+    resolve(data[0]);
   })));
   return categories.filter(c => c);
 }
 const getImage = meta => {
   const { file, sizes } = meta;
-  const filePath = __dirname + '/output/wp-content/uploads/'
+  const filePath = '/Users/andrew/Repos/crackintheroad/api/public/uploads/'
   if (fs.existsSync(filePath + file)) {
     return {
       file: file.toLowerCase(),
@@ -85,7 +85,7 @@ const getImage = meta => {
   const filename = path.parse(filenameWithExt).name;
   try {
     var files = fs
-      .readdirSync(__dirname + `/output/wp-content/uploads/${year}/${month}`)
+      .readdirSync(`${filePath}${year}/${month}`)
       .filter(fn => fn.startsWith(filename))
       .map(f => {
         const chunks = path.parse(f).name.replace(filename + '-', '').split('x');
@@ -129,16 +129,13 @@ const process = async post => {
     artists: wpArtists,
     featured_image_meta,
     sticky,
-    _embedded: {
-      author: wpAuthor,
-      ['wp:term']: wpTerms,
-    }
+    author: wpAuthor,
+    terms: wpTerms,
   } = post;
-  const categories = await getCategories(wpTerms[0]);
+  const categories = await getCategories(wpTerms);
   const artists = await getArtists(wpArtists);
-  const author = await getAuthor(wpAuthor[0].slug);
+  const author = await getAuthor(wpAuthor);
   const featured_image = featured_image_meta ? getImage(featured_image_meta) : null;
-
   const postData = {
     title: unescapeHTML(titleRendered),
     content: unescapeHTML(contentRendered.replace('admin.crackintheroad.com', 'api.crackintheroad.com').replace('/wp-content/uploads', '/uploads')),
@@ -156,23 +153,24 @@ const process = async post => {
 }
 
 let totalPostPages = 0;
-const importPosts = async (page = 39, limit = 999) => {
+const importPosts = async (page = 30, limit = 999) => {
   let total = 0;
   let progress = 0;
   let posts;
   console.clear()
-  console.log('Getting page', page);
   try {
-    const response = await fetch(`http://localhost:8888/wp-json/wp/v2/posts?per_page=100&page=${page}&_embed`);
+    console.log('Getting page', page);
+    const response = await fetch(`http://localhost:8888/wp-json/wp/v2/posts?per_page=100&page=${page}`);
     totalPostPages = response.headers.get('x-wp-totalpages')
     posts = await response.json();
   } catch (error) {
+    console.log('Error');
     return importPosts(page);
   }
   total = posts.length;
   for await (post of posts) {
     const slug = `${post.id}-${decodeURIComponent(post.slug)}`;
-    const existing = await strapi.services.posts.find({ slug });
+    const existing = await strapi.query('posts').model.find({ slug }, 'slug id');
     if (!existing || existing.length < 1) {
       const postData = await process(post);
       await strapi.services.posts.create(postData);

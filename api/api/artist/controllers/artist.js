@@ -8,31 +8,31 @@ const fetch = require('node-fetch');
 
 let totalPages = 0;
 const importArtists = async (page = 1) => {
-    let data;
+  let data;
   try {
-    const response = await fetch(`https://admin.crackintheroad.com/wp-json/wp/v2/ha_artist?per_page=100&page=${page}`);
+    const response = await fetch(`http://localhost:8888/wp-json/wp/v2/ha_artist?per_page=100&page=${page}`);
     totalPages = response.headers.get('x-wp-totalpages')
     data = await response.json();
-   } catch (error) {
-     return importArtists(page);
-   }
+  } catch (error) {
+    return importArtists(page);
+  }
   const artists = await Promise.all(data.map(artist => new Promise(async (resolve, reject) => {
     const {
       name,
       slug,
     } = artist;
-    try{
+    try {
       const created = await strapi.services.artist.create({
         name,
         slug,
       });
       resolve(created)
-    }catch(err){
+    } catch (err) {
       reject(err)
     }
   })));
   return totalPages > page ? importArtists(page + 1) : artists;
- }
+}
 
 module.exports = {
   import: async ctx => {

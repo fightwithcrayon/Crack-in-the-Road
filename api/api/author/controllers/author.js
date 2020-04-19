@@ -9,30 +9,30 @@ const fetch = require('node-fetch');
 const importAuthors = async () => {
   let data;
   try {
-    const response = await fetch(`https://admin.crackintheroad.com/wp-json/wp/v2/users?per_page=100`);
+    const response = await fetch(`http://localhost:8888/wp-json/wp/v2/users?per_page=100`);
     data = await response.json();
-   } catch (error) {
-     return importAuthors();
-   }
+  } catch (error) {
+    return importAuthors();
+  }
   const authors = await Promise.all(data.map(author => new Promise(async (resolve, reject) => {
     const {
       name,
       slug,
       avatar_urls,
     } = author;
-    try{
+    try {
       const created = await strapi.services.author.create({
         name,
         slug,
         avatar: avatar_urls['96'],
       });
       resolve(created)
-    }catch(err){
+    } catch (err) {
       reject(err)
     }
   })));
   return authors;
- }
+}
 
 module.exports = {
   import: async ctx => {

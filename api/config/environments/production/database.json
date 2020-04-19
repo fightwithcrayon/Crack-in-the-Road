@@ -4,7 +4,7 @@
     "default": {
       "connector": "mongoose",
       "settings": {
-        "uri": "${process.env.URI}"
+        "uri": "mongodb+srv://crackintheroad:iURDz^3hes4h!@Z7F@crackintheroad-6l73a.mongodb.net/crackintheroad"
       },
       "options": {
         "ssl": true
