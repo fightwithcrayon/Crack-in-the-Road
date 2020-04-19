@@ -20,7 +20,7 @@ const Single = ({ data }) => {
 };
 
 export async function getStaticProps({ params: { slug } }) {
-    const res = await fetch(`http://localhost:1337/posts?slug=${slug}`)
+    const res = await fetch(`https://api.crackintheroad.com/posts?slug=${slug}`)
     const results = await res.json();
 
     return {
@@ -31,7 +31,7 @@ export async function getStaticProps({ params: { slug } }) {
 }
 
 export async function getStaticPaths() {
-    const res2 = await fetch('http://localhost:1337/posts/routes')
+    const res2 = await fetch('https://api.crackintheroad.com/posts/routes')
     const posts = await res2.json();
     const paths = posts.map(({ category, slug }) => {
         console.log(category, slug)

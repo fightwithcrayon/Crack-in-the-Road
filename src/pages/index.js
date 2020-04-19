@@ -29,8 +29,8 @@ const Index = ({ featured, posts }) => (
 );
 
 export async function getStaticProps() {
-	const res = await fetch('http://localhost:1337/posts/index');
-	const res2 = await fetch('http://localhost:1337/posts/timeline')
+	const res = await fetch('https://api.crackintheroad.com/posts/index');
+	const res2 = await fetch('https://api.crackintheroad.com/posts/timeline')
 	const { featured, latest, random } = await res.json();
 	const timeline = await res2.json();
 
