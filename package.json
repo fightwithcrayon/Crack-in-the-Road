@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "generate": "next build",
     "start": "next start"
   },
   "license": "MIT",
