@@ -18,8 +18,8 @@ const Single = ({ data }) => {
 };
 
 export async function getStaticProps({ params: { slug } }) {
-    const res2 = await fetch('../../../cache.json')
-    const json = await res2.json();
+    const res = fs.readFileSync('../../../cache.json');
+    const json = JSON.parse(res);
     const data = json.find(post => post.slug === slug)
     return {
         props: {
@@ -30,10 +30,16 @@ export async function getStaticProps({ params: { slug } }) {
 
 export async function getStaticPaths() {
     const fs = require('fs');
-    const path = fs.existsSync('../../../cache.json') ? '../../../cache.json' : 'https://api.crackintheroad.com/posts/routes'
+    let posts;
 
-    const res = await fetch(path)
-    const posts = await res.json();
+    if (fs.existsSync('../../../cache.json')) {
+        let cachedData = fs.readFileSync('../../../cache.json');
+        posts = JSON.parse(cachedData);
+    } else {
+        const res = await fetch('https://api.crackintheroad.com/posts/routes')
+        posts = await res.json();
+    }
+
     const json = JSON.stringify(posts);
     return new Promise((resolve) => {
         fs.writeFile('./cache.json', json, 'utf8', function (err) {
