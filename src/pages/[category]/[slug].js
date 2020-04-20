@@ -18,6 +18,7 @@ const Single = ({ data }) => {
 };
 
 export async function getStaticProps({ params: { slug } }) {
+    const fs = require('fs');
     const res = fs.readFileSync('../../../cache.json');
     const json = JSON.parse(res);
     const data = json.find(post => post.slug === slug)
