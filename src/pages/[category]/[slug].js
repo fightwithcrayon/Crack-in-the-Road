@@ -18,7 +18,8 @@ const Single = ({ data }) => {
 };
 
 export async function getStaticProps({ params: { slug } }) {
-    const json = require('../../../cache.json');
+    const res2 = await fetch('../../../cache.json')
+    const json = await res2.json();
     const data = json.find(post => post.slug === slug)
     return {
         props: {
