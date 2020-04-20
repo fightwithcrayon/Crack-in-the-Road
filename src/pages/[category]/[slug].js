@@ -30,25 +30,10 @@ export async function getStaticProps({ params: { slug } }) {
 
 export async function getStaticPaths() {
     const fs = require('fs');
-    if (fs.existsSync('../../../cache.json')) {
-        const cached = require('../../../cache.json');
-        const cachedPaths = cached.map(({ category, slug }) => {
-            return {
-                params: {
-                    category,
-                    slug,
-                }
-            }
-        })
+    const path = fs.existsSync('../../../cache.json') ? '../../../cache.json' : 'https://api.crackintheroad.com/posts/routes'
 
-        return {
-            paths: cachedPaths.slice(0, 1000),
-            fallback: false
-        };
-    }
-
-    const res2 = await fetch('https://api.crackintheroad.com/posts/routes')
-    const posts = await res2.json();
+    const res = await fetch(path)
+    const posts = await res.json();
     const json = JSON.stringify(posts);
     return new Promise((resolve) => {
         fs.writeFile('./cache.json', json, 'utf8', function (err) {
