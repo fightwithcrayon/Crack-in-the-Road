@@ -191,7 +191,6 @@ const getIndex = async (ctx) => {
       date_lt: new Date(year, month, 0),
     }
   }
-  console.log(dateFilter)
   const latest = await strapi.query('posts').find({ _limit: 10, _sort: 'date:desc', ...dateFilter });
   const featured = await strapi.query('posts').find({ isSticky: true, _limit: 5, _sort: 'date:desc', ...dateFilter });
   const random = await strapi.query('posts').find({ id_nin: [...latest, ...featured], _limit: 10, _sort: 'date:desc', ...dateFilter });
@@ -216,7 +215,7 @@ module.exports = {
     await getIndex(ctx)
   },
   routes: async ctx => {
-    const data = strapi.query('posts').model.find({}, 'category slug');
+    const data = strapi.query('posts').model.find({}, 'author category content date featured_image slug title');
     ctx.send(await data.exec())
   },
   timeline: async ctx => {

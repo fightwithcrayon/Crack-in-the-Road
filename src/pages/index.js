@@ -15,7 +15,7 @@ const Index = ({ featured, posts }) => (
 		</Link>
 		<div className={styles.posts}>
 			{posts.map(post => (
-				<Link as={`/${post.category}/${post.slug}`} href="/[category]/[slug]">
+				<Link as={`/${post.category}/${post.slug}`} href="/[category]/[slug]" key={post.id}>
 					<a>
 						<article className={styles.post}>
 							<PostImage className={styles.image} image={post.featured_image} ratio={75} />

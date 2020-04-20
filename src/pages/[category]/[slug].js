@@ -7,8 +7,6 @@ import Featured from '../../components/Featured/Featured';
 const Single = ({ data }) => {
     const {
         content,
-        featured_image,
-        title,
     } = data;
 
     return (
@@ -20,32 +18,58 @@ const Single = ({ data }) => {
 };
 
 export async function getStaticProps({ params: { slug } }) {
-    const res = await fetch(`https://api.crackintheroad.com/posts?slug=${slug}`)
-    const results = await res.json();
-
+    const json = require('../../../cache.json');
+    const data = json.find(post => post.slug === slug)
     return {
         props: {
-            data: results[0]
+            data
         },
     }
 }
 
 export async function getStaticPaths() {
+    const fs = require('fs');
+    if (fs.existsSync('../../../cache.json')) {
+        const cached = require('../../../cache.json');
+        const cachedPaths = cached.map(({ category, slug }) => {
+            return {
+                params: {
+                    category,
+                    slug,
+                }
+            }
+        })
+
+        return {
+            paths: cachedPaths.slice(0, 1000),
+            fallback: false
+        };
+    }
+
     const res2 = await fetch('https://api.crackintheroad.com/posts/routes')
     const posts = await res2.json();
-    const paths = posts.map(({ category, slug }) => {
-        return {
-            params: {
-                category,
-                slug
+    const json = JSON.stringify(posts);
+    return new Promise((resolve) => {
+        fs.writeFile('./cache.json', json, 'utf8', function (err) {
+            if (err) {
+                console.error("An error occured while writing JSON Object to File.");
+                throw new Error();
             }
-        }
-    })
+            const paths = posts.map(({ category, slug }) => {
+                return {
+                    params: {
+                        category,
+                        slug,
+                    }
+                }
+            })
 
-    return {
-        paths: paths.slice(0, 1000),
-        fallback: false
-    };
+            resolve({
+                paths: paths.slice(0, 1000),
+                fallback: false
+            });
+        })
+    });
 }
 
 
