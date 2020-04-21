@@ -30,9 +30,9 @@ const Index = ({ featured, posts }) => (
 
 export async function getStaticProps() {
 	const res = await fetch('https://api.crackintheroad.com/posts/index');
-	const res2 = await fetch('https://api.crackintheroad.com/posts/timeline')
+	// const res2 = await fetch('https://api.crackintheroad.com/posts/timeline')
 	const { featured, latest, random } = await res.json();
-	const timeline = await res2.json();
+	// const timeline = await res2.json();
 
 	// By returning { props: posts }, the Blog component
 	// will receive `posts` as a prop at build time
@@ -40,7 +40,7 @@ export async function getStaticProps() {
 		props: {
 			featured: featured[0],
 			posts: [...latest, ...random],
-			timeline
+			// 	timeline
 		},
 	}
 }
