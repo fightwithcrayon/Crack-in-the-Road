@@ -31,7 +31,7 @@ const Single = ({ data }) => {
                 <meta name="twitter:description" content={description} />
                 <meta name="twitter:image" content="" />
             </Head>
-            <Featured className={styles.header} post={data} tag="header" />
+            <Featured className={styles.header} hasAuthor post={data} tag="header" />
             <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
         </div>
     );

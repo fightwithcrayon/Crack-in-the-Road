@@ -33,6 +33,7 @@ const Details = ({ className, hasAuthor, heading, post }) => {
 
 Details.defaultProps = {
 	className: null,
+	hasAuthor: true,
 	heading: 'h4',
 };
 

@@ -10,7 +10,7 @@ const Index = ({ featured, posts }) => (
 	<main className={styles.page}>
 		<Link as={`/${featured.category}/${featured.slug}`} href="/[category]/[slug]">
 			<a className={styles.featuredLink}>
-				<Featured className={styles.featured} post={featured} />
+				<Featured className={styles.featured} hasAuthor={false} post={featured} />
 			</a>
 		</Link>
 		<div className={styles.posts}>

@@ -3,10 +3,10 @@ import React from 'react';
 import Details from '../Details/Details';
 import PostImage from '../PostImage/PostImage';
 
-const Featured = ({ className, post, tag: Tag }) => {
+const Featured = ({ className, hasAuthor, post, tag: Tag }) => {
 	return (
 		<Tag className={`${styles.featured} ${className}`}>
-			<Details className={styles.details} hasAuthor heading="h2" post={post} />
+			<Details className={styles.details} hasAuthor={hasAuthor} heading="h2" post={post} />
 			<PostImage className={styles.image} image={post.featured_image} ratio={75} />
 		</Tag>
 	);
@@ -14,6 +14,7 @@ const Featured = ({ className, post, tag: Tag }) => {
 
 Featured.defaultProps = {
 	className: '',
+	hasAuthor: true,
 	tag: 'article',
 }
 
