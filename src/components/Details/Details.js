@@ -20,7 +20,7 @@ const Details = ({ className, hasAuthor, heading, post }) => {
 			<div className={styles.details}>
 				<p>{date}</p>
 				<span className={styles.line} />
-				<p>{hasAuthor ? post.author.name : post.category}</p>
+				<p>{(hasAuthor && post.author) ? post.author.name : post.category}</p>
 			</div>
 			<HTag className={styles.title}>
 				{!artist && !track && post.title}
