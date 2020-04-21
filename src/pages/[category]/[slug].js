@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import fetch from 'node-fetch'
 import PostImage from '../../components/PostImage/PostImage';
 import Featured from '../../components/Featured/Featured';
-import Head from 'next/Head';
+import Head from 'next/head';
 
 const Single = ({ data }) => {
     const {

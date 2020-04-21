@@ -1,5 +1,5 @@
 import styles from './Header.module.scss';
-import Head from 'next/Head';
+import Head from 'next/head';
 import React from 'react';
 import Link from 'next/link';
 
