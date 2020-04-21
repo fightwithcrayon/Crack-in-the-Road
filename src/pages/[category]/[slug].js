@@ -3,14 +3,34 @@ import React, { useEffect, useState } from 'react';
 import fetch from 'node-fetch'
 import PostImage from '../../components/PostImage/PostImage';
 import Featured from '../../components/Featured/Featured';
+import Head from 'next/Head';
 
 const Single = ({ data }) => {
     const {
+        category,
         content,
+        slug,
+        title,
     } = data;
+
+    const description = content.length > 160 ? content.substring(0, content - 3) + "..." : content;
 
     return (
         <div className={styles.page}>
+            <Head>
+                <meta charset="utf-8" />
+                <title key="title">{title}</title>
+                <meta key="description" name="description" content="Big last decade." />
+                <meta name="og:title" property="og:title" content={title} />
+                <meta name="og:description" property="og:description" content={description} />
+                <meta property="og:site_name" content={title} />
+                <meta property="og:url" content={`https://www.crackintheroad.com/${category}/${slug}`} />
+                <meta property="og:image" content="/logo.jpg" />
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:title" content={title} />
+                <meta name="twitter:description" content={description} />
+                <meta name="twitter:image" content="" />
+            </Head>
             <Featured className={styles.header} post={data} tag="header" />
             <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
         </div>
@@ -18,51 +38,32 @@ const Single = ({ data }) => {
 };
 
 export async function getStaticProps({ params: { slug } }) {
-    const fs = require('fs');
-    const res = fs.readFileSync('../../../cache.json');
-    const json = JSON.parse(res);
-    const data = json.find(post => post.slug === slug)
+    const res = await fetch(`https://api.crackintheroad.com/posts/single/${slug}`)
+    const results = await res.json();
+
     return {
         props: {
-            data
+            data: results[0]
         },
     }
 }
 
 export async function getStaticPaths() {
-    const fs = require('fs');
-    let posts;
-
-    if (fs.existsSync('../../../cache.json')) {
-        let cachedData = fs.readFileSync('../../../cache.json');
-        posts = JSON.parse(cachedData);
-    } else {
-        const res = await fetch('https://api.crackintheroad.com/posts/routes')
-        posts = await res.json();
-    }
-
-    const json = JSON.stringify(posts);
-    return new Promise((resolve) => {
-        fs.writeFile('./cache.json', json, 'utf8', function (err) {
-            if (err) {
-                console.error("An error occured while writing JSON Object to File.");
-                throw new Error();
+    const res2 = await fetch('https://api.crackintheroad.com/posts/routes')
+    const posts = await res2.json();
+    const paths = posts.map(({ category, slug }) => {
+        return {
+            params: {
+                category,
+                slug
             }
-            const paths = posts.map(({ category, slug }) => {
-                return {
-                    params: {
-                        category,
-                        slug,
-                    }
-                }
-            })
+        }
+    })
 
-            resolve({
-                paths: paths.slice(0, 1000),
-                fallback: false
-            });
-        })
-    });
+    return {
+        paths,
+        fallback: false
+    };
 }
 
 

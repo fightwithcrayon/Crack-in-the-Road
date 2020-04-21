@@ -215,7 +215,15 @@ module.exports = {
     await getIndex(ctx)
   },
   routes: async ctx => {
-    const data = strapi.query('posts').model.find({}, 'author category content date featured_image slug title');
+    const data = strapi.query('posts').model.find({}, 'category slug');
+    ctx.send(await data.exec())
+  },
+  single: async ctx => {
+    console.log(ctx.params.id)
+    const data = strapi.query('posts').model.find({
+      slug: ctx.params.id,
+    })
+      .populate('author', 'name').select('author.name category content date featured_image_url slug title');
     ctx.send(await data.exec())
   },
   timeline: async ctx => {

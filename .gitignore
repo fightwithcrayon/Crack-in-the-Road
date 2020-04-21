@@ -3,5 +3,5 @@ node_modules
 npm-debug.log
 .next
 .vscode
-dist
+out
 src-attemptone

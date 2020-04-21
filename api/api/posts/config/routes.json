@@ -2,6 +2,14 @@
   "routes": [
     {
       "method": "GET",
+      "path": "/posts/single/:id",
+      "handler": "posts.single",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/posts/routes",
       "handler": "posts.routes",
       "config": {

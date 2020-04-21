@@ -6,9 +6,14 @@
 */
 
 module.exports = {
-  // Before saving a value.
-  // Fired before an `insert` or `update` query.
-  // beforeSave: async (model, attrs, options) => {},
+  beforeSave: async (model, attrs, options) => {
+    console.log(model, attrs, options)
+    //const data = strapi.query('users').model.find({
+    //  id: model.author,
+    //}, 'category slug');
+    //const passwordHashed = await strapi.api.user.services.user.hashPassword(model.password);
+    //model.author_name = name;
+  },
 
   // After saving a value.
   // Fired after an `insert` or `update` query.

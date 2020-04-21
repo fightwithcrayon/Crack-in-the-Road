@@ -17,7 +17,9 @@
       "type": "richtext"
     },
     "slug": {
-      "type": "string"
+      "type": "string",
+      "unique": true,
+      "required": true
     },
     "date": {
       "type": "datetime"
