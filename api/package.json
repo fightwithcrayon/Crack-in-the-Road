@@ -11,6 +11,8 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "@analytics/google-analytics": "^0.3.1",
+    "analytics": "^0.3.5",
     "strapi": "3.0.0-beta.19.5",
     "strapi-admin": "3.0.0-beta.19.5",
     "strapi-connector-mongoose": "3.0.0-beta.19.5",
@@ -26,7 +28,7 @@
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "d7ef9bf5-4e70-4f68-919b-04d83184deb3"
+    "uuid": false
   },
   "engines": {
     "node": ">=10.0.0",

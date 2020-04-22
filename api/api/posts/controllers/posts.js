@@ -1,6 +1,21 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
 const path = require('path');
+const { Analytics } = require('analytics')
+const googleAnalytics = require('@analytics/google-analytics').default;
+
+const analytics = Analytics({
+  app: 'Crack in the Road',
+  version: 100,
+  plugins: [
+    googleAnalytics({
+      trackingId: 'UA-17970339-3',
+    }),
+  ]
+})
+
+// Fire a page view
+
 var htmlEntities = {
   nbsp: ' ',
   cent: '¢',
@@ -212,18 +227,37 @@ module.exports = {
       state: 'success',
     });
   },
+  do: async ctx => {
+    const data = strapi.query('posts').model.update({
+      wpid: {
+        $gt: 1,
+      }
+    }, {
+      featured_image_url: 'test',
+    });
+    ctx.send(await data.exec())
+  },
   index: async ctx => {
     await getIndex(ctx)
   },
   indexArchive: async ctx => {
     await getIndex(ctx)
   },
+  note: async ctx => {
+    const { href, path, title } = ctx.query;
+    analytics.page({
+      path,
+      title,
+      href,
+      url: href,
+    })
+    ctx.send({})
+  },
   routes: async ctx => {
     const data = strapi.query('posts').model.find({}, 'category slug');
     ctx.send(await data.exec())
   },
   single: async ctx => {
-    console.log(ctx.params.id)
     const data = strapi.query('posts').model.find({
       slug: ctx.params.id,
     })

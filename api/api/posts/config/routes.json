@@ -2,6 +2,22 @@
   "routes": [
     {
       "method": "GET",
+      "path": "/posts/note",
+      "handler": "posts.note",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/posts/do",
+      "handler": "posts.do",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/posts/single/:id",
       "handler": "posts.single",
       "config": {
