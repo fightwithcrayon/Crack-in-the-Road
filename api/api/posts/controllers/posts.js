@@ -228,12 +228,12 @@ module.exports = {
     });
   },
   do: async ctx => {
-    const data = strapi.query('posts').model.update({
+    const data = strapi.query('posts').model.updateMany({
       wpid: {
-        $gt: 1,
+        $ne: 1,
       }
     }, {
-      featured_image_url: 'test',
+      featured_image_url: '$featured_image.file',
     });
     ctx.send(await data.exec())
   },
@@ -261,7 +261,7 @@ module.exports = {
     const data = strapi.query('posts').model.find({
       slug: ctx.params.id,
     })
-      .populate('author', 'name').select('author.name category content date featured_image_url slug title');
+      .populate('author', 'name').select('author.name category content date featured_image slug title');
     ctx.send(await data.exec())
   },
   timeline: async ctx => {
