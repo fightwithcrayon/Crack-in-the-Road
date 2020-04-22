@@ -6,7 +6,7 @@ import Header from '../components/Header/Header';
 const App = ({ Component, pageProps }) => {
 	useEffect(() => {
 		const { href, pathname } = window.location;
-		fetch(`http://localhost:1337/posts/note?href=${href}&path=${pathname}&title=${document.title}`);
+		fetch(`https://api.crackintheroad.com/posts/note?href=${href}&path=${pathname}&title=${document.title}`);
 	}, [pageProps]);
 
 	return (
