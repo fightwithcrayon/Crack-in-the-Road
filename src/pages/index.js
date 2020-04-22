@@ -18,7 +18,13 @@ const Index = ({ featured, posts }) => (
 				<Link as={`/${post.category}/${post.slug}`} href="/[category]/[slug]" key={post.id}>
 					<a>
 						<article className={styles.post}>
-							<PostImage className={styles.image} image={post.featured_image} ratio={75} />
+							<PostImage
+								className={styles.image}
+								image={post.featured_image}
+								ratio={75}
+								sizes="(max-width: 768px) 100%, (max-width: 992px) 50%, (max-width: 1300px) 33%, 400px"
+								srcset={[200, 400, 800]}
+							/>
 							<Details post={post} />
 						</article>
 					</a>

@@ -7,7 +7,13 @@ const Featured = ({ className, hasAuthor, post, tag: Tag }) => {
 	return (
 		<Tag className={`${styles.featured} ${className}`}>
 			<Details className={styles.details} hasAuthor={hasAuthor} heading="h2" post={post} />
-			<PostImage className={styles.image} image={post.featured_image} ratio={75} />
+			<PostImage
+				className={styles.image}
+				image={post.featured_image}
+				ratio={75}
+				sizes="(max-width: 768px) 100%, (max-width: 1388px) 60%, 870px"
+				srcset={[400, 800, 1600]}
+			/>
 		</Tag>
 	);
 }
