@@ -1,8 +1,8 @@
 @font-face {
 	font-family: 'Jost';
 	src: local('Jost'),
-		url('./fonts/jost-300-light-webfont.woff2') format('woff2'),
-		url('./fonts/jost-300-light-webfont.woff') format('woff');
+		url('/fonts/jost-300-light-webfont.woff2') format('woff2'),
+		url('/fonts/jost-300-light-webfont.woff') format('woff');
 	font-weight: 300;
 	font-style: normal;
 }
@@ -10,8 +10,8 @@
 @font-face {
 	font-family: 'Jost';
 	src: local('Jost'),
-		url('./fonts/jost-400-book-webfont.woff2') format('woff2'),
-		url('./fonts/jost-400-book-webfont.woff') format('woff');
+		url('/fonts/jost-400-book-webfont.woff2') format('woff2'),
+		url('/fonts/jost-400-book-webfont.woff') format('woff');
 	font-weight: 400;
 	font-style: normal;
 }
@@ -19,8 +19,8 @@
 @font-face {
 	font-family: 'Jost';
 	src: local('Jost'),
-		url('./fonts/jost-500-medium-webfont.woff2') format('woff2'),
-		url('./fonts/jost-500-medium-webfont.woff') format('woff');
+		url('/fonts/jost-500-medium-webfont.woff2') format('woff2'),
+		url('/fonts/jost-500-medium-webfont.woff') format('woff');
 	font-weight: 500;
 	font-style: normal;
 }
