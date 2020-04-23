@@ -7,9 +7,14 @@ const PostImage = ({ className, image, ratio, sizes, srcset }) => {
 		<div className={`${styles.image} ${className}`} style={{ paddingTop: `${ratio}%` }}>
 			{
 				image_url !== '' && (
-					<img sizes={sizes} srcset={srcset.map(size =>
-						image_url + `?nf_resize=smartcrop&w=${size}&h=${(size / 100) * ratio} ${size}px`
-					).join(', ')} src={image_url} />
+					<img
+						loading="lazy"
+						sizes={sizes}
+						srcset={srcset.map(size =>
+							image_url + `?nf_resize=smartcrop&w=${size}&h=${(size / 100) * ratio} ${size}px`
+						).join(', ')}
+						src={image_url}
+					/>
 				)
 			}
 		</div>
