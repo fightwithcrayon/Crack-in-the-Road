@@ -26,6 +26,8 @@ const Header = () => {
 				<meta name="twitter:image" content="/logo.jpg" />
 				<link rel="icon" type="image/png" href="/logo.jpg" />
 				<link rel="apple-touch-icon" href="/static/images/favicon.ico" />
+				<link rel="preload" href="/fonts/jost-500-light-webfont.woff2" as="font" />
+				<link rel="preload" href="/fonts/jost-300-light-webfont.woff2" as="font" />
 			</Head>
 			<Link as="/" href="/">
 				<a>
