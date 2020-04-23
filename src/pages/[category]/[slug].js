@@ -40,6 +40,7 @@ const Single = ({ data }) => {
 export async function getStaticProps({ params: { slug } }) {
     const res = await fetch(`https://api.crackintheroad.com/posts/single/${slug}`)
     const results = await res.json();
+    console.log('Completed', slug);
 
     return {
         props: {
