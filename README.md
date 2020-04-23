@@ -24,3 +24,5 @@ For future reference:
 -  Add date navigation
 -  Adjust styling to be more minimal
 -  Cross browser testing
+-  OAuth meta/images
+-  Serve images at multiple sizes
