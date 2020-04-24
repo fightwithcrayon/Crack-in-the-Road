@@ -2,7 +2,7 @@ import styles from './PostImage.module.scss';
 import React from 'react';
 
 const PostImage = ({ className, image, ratio, sizes, srcset }) => {
-	const image_url = image ? `https://api.crackintheroad.com/uploads/${image.file}` : '';
+	const image_url = image ? `https://api.crackintheroad.com/images/${image.file}` : '';
 	return (
 		<div className={`${styles.image} ${className}`} style={{ paddingTop: `${ratio}%` }}>
 			{
