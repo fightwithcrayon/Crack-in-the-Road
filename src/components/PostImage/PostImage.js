@@ -1,7 +1,7 @@
 import styles from './PostImage.module.scss';
 import React from 'react';
 
-const PostImage = ({ className, image, ratio, sizes, srcset }) => {
+const PostImage = ({ alt, className, image, ratio, sizes, srcset }) => {
 	const image_url = image ? `https://api.crackintheroad.com/images/${image.file}` : '';
 
 	if (!image_url) {
@@ -12,6 +12,7 @@ const PostImage = ({ className, image, ratio, sizes, srcset }) => {
 		<div className={`${styles.image} ${className}`} style={{ paddingTop: `${ratio}%` }}>
 			<picture>
 				<source
+					alt={alt}
 					sizes={sizes}
 					srcset={srcset.map(size =>
 						image_url + `?width=${size} ${size}px`
@@ -19,6 +20,7 @@ const PostImage = ({ className, image, ratio, sizes, srcset }) => {
 					type="image/webp"
 				/>
 				<img
+					alt={alt}
 					loading="lazy"
 					sizes={sizes}
 					srcset={srcset.map(size =>

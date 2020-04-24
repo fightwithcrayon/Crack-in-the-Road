@@ -19,10 +19,11 @@ const Index = ({ featured, posts }) => (
 					<a>
 						<article className={styles.post}>
 							<PostImage
+								alt={post.title}
 								className={styles.image}
 								image={post.featured_image}
 								ratio={75}
-								sizes="(max-width: 768px) 100%, (max-width: 992px) 50%, (max-width: 1300px) 33%, 400px"
+								sizes="(max-width: 768px) 100vw, (max-width: 992px) 50vw, (max-width: 1300px) 33vw, 400px"
 								srcset={[200, 400, 800]}
 							/>
 							<Details post={post} />
