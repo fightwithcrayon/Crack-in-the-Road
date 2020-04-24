@@ -12,10 +12,9 @@ const PostImage = ({ alt, className, image, ratio, sizes, srcset }) => {
 		<div className={`${styles.image} ${className}`} style={{ paddingTop: `${ratio}%` }}>
 			<picture>
 				<source
-					alt={alt}
 					sizes={sizes}
-					srcset={srcset.map(size =>
-						image_url + `?width=${size} ${size}px`
+					srcSet={srcset.map(size =>
+						image_url + `?width=${size}&type=webp ${size}w`
 					).join(', ')}
 					type="image/webp"
 				/>
@@ -23,8 +22,8 @@ const PostImage = ({ alt, className, image, ratio, sizes, srcset }) => {
 					alt={alt}
 					loading="lazy"
 					sizes={sizes}
-					srcset={srcset.map(size =>
-						image_url + `?width=${size} ${size}px`
+					srcSet={srcset.map(size =>
+						image_url + `?width=${size} ${size}w`
 					).join(', ')}
 					src={image_url}
 				/>
