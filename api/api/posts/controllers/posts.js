@@ -228,14 +228,25 @@ module.exports = {
     });
   },
   do: async ctx => {
-    const data = strapi.query('posts').model.updateMany({
-      wpid: {
-        $ne: 1,
-      }
-    }, {
-      featured_image_url: '$featured_image.file',
-    });
-    ctx.send(await data.exec())
+    const data = strapi.query('posts').model.find({}, 'id slug content');
+    const docs = await data.exec();
+
+    for await (doc of docs) {
+      const content = doc.content
+        .replace('http://localhost:8888/wp-content/uploads', 'https://api.crackintheroad.com/images')
+        .replace('http://admin.crackintheroad.com/wp-content/uploads', 'https://api.crackintheroad.com/images')
+        .replace('https://admin.crackintheroad.com/wp-content/uploads', 'https://api.crackintheroad.com/images')
+        .replace('http://', 'https://');
+
+      const result = strapi.query('posts').model.update({
+        id: doc.id,
+      }, {
+        content,
+      });
+
+      await result.exec();
+      console.log('Processed', doc.slug)
+    };
   },
   index: async ctx => {
     await getIndex(ctx)

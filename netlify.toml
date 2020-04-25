@@ -9,6 +9,11 @@
     immutable'''
 
 [[redirects]]
+  from = "/music/13896-new-azealia-banks-needsumluv-sxlnd"
+  to = "/mpfree/13896-new-azealia-banks-needsumluv-sxlnd"
+  status = 301
+
+[[redirects]]
   from = "/music/2002-review-hove-festival-norway"
   to = "/festivals/2002-review-hove-festival-norway"
   status = 301
