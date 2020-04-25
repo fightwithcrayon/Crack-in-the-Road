@@ -26,6 +26,7 @@ app.get('/images/:year/:month/:file', async (req, res) => {
 	const editedFile = path.join(targetFolder, `${name}${size}${extension}`);
 
 	if (fs.existsSync(editedFile)) {
+		res.set('Cache-control', 'public, max-age=31536000')
 		res.sendFile(editedFile);
 		return;
 	};
@@ -61,6 +62,7 @@ app.get('/images/:year/:month/:file', async (req, res) => {
 
 		fs.mkdirSync(targetFolder, { recursive: true });
 		await sharpImg.toFile(editedFile);
+		res.set('Cache-control', 'public, max-age=31536000')
 		res.sendFile(editedFile);
 		return;
 	} catch (error) {
