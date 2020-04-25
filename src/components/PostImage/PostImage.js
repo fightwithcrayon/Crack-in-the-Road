@@ -1,7 +1,7 @@
 import styles from './PostImage.module.scss';
 import React from 'react';
 
-const PostImage = ({ alt, className, image, ratio, sizes, srcset }) => {
+const PostImage = ({ alt, className, image, isLazy, ratio, sizes, srcset }) => {
 	const image_url = image ? `https://api.crackintheroad.com/images/${image.file}` : '';
 
 	if (!image_url) {
@@ -20,7 +20,7 @@ const PostImage = ({ alt, className, image, ratio, sizes, srcset }) => {
 				/>
 				<img
 					alt={alt}
-					loading="lazy"
+					loading={isLazy ? lazy : ''}
 					sizes={sizes}
 					srcSet={srcset.map(size =>
 						image_url + `?width=${size} ${size}w`
@@ -34,6 +34,7 @@ const PostImage = ({ alt, className, image, ratio, sizes, srcset }) => {
 
 PostImage.defaultProps = {
 	className: null,
+	isLazy: true,
 	ratio: 66,
 };
 

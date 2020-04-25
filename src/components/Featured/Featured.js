@@ -10,6 +10,7 @@ const Featured = ({ className, hasAuthor, post, tag: Tag }) => {
 			<PostImage
 				alt={post.title}
 				className={styles.image}
+				isLazy={false}
 				image={post.featured_image}
 				ratio={75}
 				sizes="(max-width: 768px) 100vw, (max-width: 1388px) 60vw, 870px"

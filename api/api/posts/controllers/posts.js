@@ -220,6 +220,10 @@ const getIndex = async (ctx) => {
   })
 }
 
+String.prototype.replaceAll = function (search, replacement) {
+  var target = this;
+  return target.replace(new RegExp(search, 'g'), replacement);
+};
 module.exports = {
   import: async ctx => {
     const data = await importPosts();
@@ -228,18 +232,18 @@ module.exports = {
     });
   },
   do: async ctx => {
-    const data = strapi.query('posts').model.find({}, 'id slug content');
+    const data = strapi.query('posts').model.find({}, 'id wpid slug content');
     const docs = await data.exec();
 
     for await (doc of docs) {
       const content = doc.content
-        .replace('http://localhost:8888/wp-content/uploads', 'https://api.crackintheroad.com/images')
-        .replace('http://admin.crackintheroad.com/wp-content/uploads', 'https://api.crackintheroad.com/images')
-        .replace('https://admin.crackintheroad.com/wp-content/uploads', 'https://api.crackintheroad.com/images')
-        .replace('http://', 'https://');
+        .replaceAll('http://localhost:8888/wp-content/uploads', 'https://api.crackintheroad.com/images')
+        .replaceAll('http://admin.crackintheroad.com/wp-content/uploads', 'https://api.crackintheroad.com/images')
+        .replaceAll('https://admin.crackintheroad.com/wp-content/uploads', 'https://api.crackintheroad.com/images')
+        .replaceAll('http://', 'https://');
 
       const result = strapi.query('posts').model.update({
-        id: doc.id,
+        slug: doc.slug,
       }, {
         content,
       });
