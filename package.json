@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "date-fns": "^2.11.1",
+    "gulp": "^4.0.2",
     "next": "^9.3.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -30,6 +31,7 @@
     "eslint-plugin-prettier": "3.1.1",
     "eslint-plugin-react": "7.16.0",
     "eslint-plugin-react-hooks": "2.3.0",
+    "favicons": "^6.0.0",
     "parcel-bundler": "^1.12.4",
     "postcss-modules": "^1.5.0",
     "postcss-preset-env": "^6.7.0",
