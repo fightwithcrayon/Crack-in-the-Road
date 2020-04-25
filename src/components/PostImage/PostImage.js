@@ -20,7 +20,7 @@ const PostImage = ({ alt, className, image, isLazy, ratio, sizes, srcset }) => {
 				/>
 				<img
 					alt={alt}
-					loading={isLazy ? lazy : ''}
+					loading={isLazy ? 'lazy' : ''}
 					sizes={sizes}
 					srcSet={srcset.map(size =>
 						image_url + `?width=${size} ${size}w`
