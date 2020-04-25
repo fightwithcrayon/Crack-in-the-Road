@@ -24,7 +24,7 @@ const Index = ({ featured, posts }) => (
 								image={post.featured_image}
 								ratio={75}
 								sizes="(max-width: 768px) 100vw, (max-width: 992px) 50vw, (max-width: 1300px) 33vw, 400px"
-								srcset={[200, 400, 800]}
+								srcset={[320, 412, 824]}
 							/>
 							<Details post={post} />
 						</article>

@@ -5,6 +5,7 @@
 		url('/fonts/jost-300-light-webfont.woff') format('woff');
 	font-weight: 300;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -14,6 +15,7 @@
 		url('/fonts/jost-400-book-webfont.woff') format('woff');
 	font-weight: 400;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -23,6 +25,7 @@
 		url('/fonts/jost-500-medium-webfont.woff') format('woff');
 	font-weight: 500;
 	font-style: normal;
+	font-display: swap;
 }
 
 :root {
