@@ -7,3 +7,48 @@
     max-age=31536000,
     public,
     immutable'''
+
+[[redirects]]
+  from = "/music/2002-review-hove-festival-norway"
+  to = "/festivals/2002-review-hove-festival-norway"
+  status = 301
+
+[[redirects]]
+  from = "/music/874-5-minutes-with-alan-pownall"
+  to = "/interviews/874-5-minutes-with-alan-pownall"
+  status = 301
+
+[[redirects]]
+  from = "/music/8600-secret-garden-party-2011-art"
+  to = "/festivals/8600-secret-garden-party-2011-art"
+  status = 301
+
+[[redirects]]
+  from = "/opinion/31754-interview-stephen-davidson-of-tellison"
+  to = "/interviews/31754-interview-stephen-davidson-of-tellison"
+  status = 301
+
+[[redirects]]
+  from = "/music/6328-interview-ducktails"
+  to = "/interviews/6328-interview-ducktails"
+  status = 301
+
+[[redirects]]
+  from = "/music/393-5-minutes-with-raised-by-swans"
+  to = "/interviews/393-5-minutes-with-raised-by-swans"
+  status = 301
+
+[[redirects]]
+  from = "/music/10870-introducing-jamie-isaac"
+  to = "/introducing/10870-introducing-jamie-isaac"
+  status = 301
+
+[[redirects]]
+  from = "/music/874-5-minutes-with-alan-pownall"
+  to = "/interviews/874-5-minutes-with-alan-pownall"
+  status = 301
+
+[[redirects]]
+  from = "/music/17589-new-father-sculptor-aristide"
+  to = "/mpfree/17589-new-father-sculptor-aristide"
+  status = 301
