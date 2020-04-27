@@ -7,13 +7,15 @@
     "build": "next build",
     "start": "next start",
     "export": "next export",
-    "deploy": "NODE_ENV=production npm run build && npm run export"
+    "sitemap": "node generateSitemap.js",
+    "deploy": "NODE_ENV=production npm run build && npm run export && npm run sitemap"
   },
   "license": "MIT",
   "dependencies": {
     "date-fns": "^2.11.1",
     "gulp": "^4.0.2",
     "next": "^9.3.4",
+    "nextjs-sitemap-generator": "^0.5.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "strip-ansi": "^6.0.0"

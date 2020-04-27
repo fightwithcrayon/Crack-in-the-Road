@@ -207,11 +207,11 @@ const getIndex = async (ctx) => {
     }
   }
   // Todo: No date filter added
-  const latest = await strapi.query('posts').model.find({}, 'title slug category date featured_image').limit(10).sort({ date: 'desc' }).exec();
+  const latest = await strapi.query('posts').model.find({}, 'title slug category date featured_image').limit(20).sort({ date: 'desc' }).exec();
   const featured = await strapi.query('posts').model.find({
     isSticky: true,
   }, 'title slug category date featured_image').limit(1).sort({ date: 'desc' }).exec();
-  const random = await strapi.query('posts').model.find({}, 'title slug category date featured_image').where('id').nin([...latest, ...featured]).limit(10).sort({ date: 'desc' }).exec();
+  const random = await strapi.query('posts').model.aggregate([{ $sample: { size: 20 } }]).exec();
 
   ctx.send({
     latest,
