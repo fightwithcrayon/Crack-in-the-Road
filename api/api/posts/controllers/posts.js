@@ -231,6 +231,11 @@ module.exports = {
       state: 'success',
     });
   },
+  category: async ctx => ctx.send({
+    posts: await strapi.query('posts').model.find({
+      category: ctx.params.category,
+    }, 'title slug category date featured_image').limit(40).sort({ date: 'desc' }).exec(),
+  }),
   do: async ctx => {
     const data = strapi.query('posts').model.find({}, 'id wpid slug content');
     const docs = await data.exec();
@@ -255,8 +260,37 @@ module.exports = {
   index: async ctx => {
     await getIndex(ctx)
   },
-  indexArchive: async ctx => {
-    await getIndex(ctx)
+  archive: async ctx => {
+    let { month, year } = ctx.params;
+    month = month === 'all' ? 'all' : parseInt(month);
+    year = parseInt(year);
+    let query = {
+      month,
+      year,
+    };
+    if (month === 'all') {
+      query = {
+        year,
+      }
+    }
+
+    ctx.send({
+      posts: await strapi.query('posts').model.aggregate([{
+        $project: {
+          title: 1,
+          slug: 1,
+          category: 1,
+          date: 1,
+          featured_image: 1,
+          month: { $month: '$date' },
+          year: { $year: '$date' }
+        }
+      },
+      {
+        $match: query
+      }
+      ]).sort({ date: 'desc' }).exec(),
+    })
   },
   note: async ctx => {
     const { href, path, title } = ctx.query;

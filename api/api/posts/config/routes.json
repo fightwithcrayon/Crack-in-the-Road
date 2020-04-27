@@ -42,8 +42,16 @@
     },
     {
       "method": "GET",
-      "path": "/posts/index/:year/:month",
-      "handler": "posts.indexArchive",
+      "path": "/posts/archive/:year/:month",
+      "handler": "posts.archive",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/posts/category/:category",
+      "handler": "posts.category",
       "config": {
         "policies": []
       }
