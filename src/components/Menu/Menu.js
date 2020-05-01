@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Header from '../Header/Header';
 
-const Menu = ({ onClose }) => {
+const Menu = ({ isOpen, onClose }) => {
 	const [authors, setAuthors] = useState([]);
 	const [categories, setCategories] = useState([]);
 	const [years, setYears] = useState([]);
@@ -35,6 +35,10 @@ const Menu = ({ onClose }) => {
 		getOptions();
 	}, []);
 
+	if (!isOpen) {
+		return null;
+	}
+
 	return (
 		<div className={styles.menu}>
 			<div className={`${global.wrapper} ${styles.wrapper}`}>
@@ -45,8 +49,10 @@ const Menu = ({ onClose }) => {
 					<p>Won Site of the Year at 2012 ROTD awards.</p>
 					<p>Quietened down around 2017 – 2019.</p>
 				</div>
-				<div className={styles.years}>{years.map(year => <li>{year}</li>)}</div>
-				<div className={styles.authors}>{authors.map(author => <li>{author.name}</li>)}</div>
+				<div className={styles.years}>{years.map(year => <li><a href={`/archive/${year}`}>{year}</a></li>)}</div>
+				<div className={styles.categoriesBox}>
+					<div className={styles.categories}>{categories.map(cat => <li><a href={`/${cat.slug}`}>{cat.name}</a></li>)}</div>
+				</div>
 			</div>
 		</div>
 	);

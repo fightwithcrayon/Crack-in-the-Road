@@ -100,7 +100,7 @@ const Header = ({ className, isInverted, onClose }) => {
 						<button className={styles.button} onClick={() => setIsOpen(true)}>Explore</button>
 					)}
 			</header>
-			{!isInverted && isOpen && <Menu onClose={() => setIsOpen(false)} />}
+			{!isInverted && <Menu isOpen={isOpen} onClose={() => setIsOpen(false)} />}
 		</>
 	);
 }

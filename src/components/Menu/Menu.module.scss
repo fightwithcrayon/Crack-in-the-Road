@@ -12,8 +12,20 @@
 
 .wrapper {
 	display: grid;
-	grid-template-areas: "header header header header" "bio bio bio bio" "authors authors categories years";
+	grid-template-areas: "header header" "bio bio" "years categories";
+	grid-template-columns: 25% 1fr;
+	grid-template-rows: min-content min-content auto;
 	width: 100%;
+	height: 100vh;
+
+	li {
+		list-style: none;
+		display: block;
+	}
+
+	a {
+		color: black;
+	}
 }
 
 .header {
@@ -23,15 +35,28 @@
 
 .bio {
 	grid-area: bio;
+	padding-bottom: 48px;
 }
 
 .years {
 	grid-area: years;
 }
 
-.authors {
+.categoriesBox {
+	position: relative;
+	grid-area: categories;
+	height: 100%;
+}
+
+.categories {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
-	grid-area: authors;
+	align-items: flex-start;
+	justify-content: flex-start;
 }
