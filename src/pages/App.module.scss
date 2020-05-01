@@ -1,5 +1,11 @@
+@import '../shared';
+
 .wrapper {
-	padding: 0 44px;
+	padding: 0 24px;
 	margin: 0 auto 72px;
 	max-width: var(--xlarge);
+
+	@include breakpoint(small) {
+		padding: 0 44px;
+	}
 }

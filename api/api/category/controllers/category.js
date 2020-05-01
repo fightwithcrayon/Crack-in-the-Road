@@ -27,7 +27,7 @@ const importCategories = async (page = 1) => {
 }
 
 module.exports = {
-  routes: async ctx => ctx.send(await strapi.query('category').model.find({}, 'slug').exec()),
+  routes: async ctx => ctx.send(await strapi.query('category').model.find({}, 'slug name').exec()),
   import: async ctx => {
     const categories = await importCategories();
     ctx.send(categories);

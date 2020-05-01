@@ -1,15 +1,24 @@
 import Archive from '../../../components/Archive/Archive';
-import fetch from 'node-fetch'
+import fetch from 'node-fetch';
 
 const Index = Archive;
 
 export async function getStaticProps({ params }) {
-	const res = await fetch(`${process.env.API_URL}/posts/archive/${params.year}/all`);
+	const res = await fetch(`${process.env.API_URL}/posts/archive/${params.year}/${params.month}`);
 	const { posts } = await res.json();
-	console.log(params)
+
+	const res2 = await fetch(`${process.env.API_URL}/posts/timeline`)
+	const dates = await res2.json();
+	const years = Object.keys(dates.reduce((all, current) => ({
+		...all,
+		[current._id.year]: null,
+	}), {}));
+
 	return {
 		props: {
-			posts
+			posts,
+			year: params.year,
+			years
 		},
 	}
 }

@@ -11,7 +11,7 @@ const Featured = ({ className, hasAuthor, post, tag: Tag }) => {
 				alt={post.title}
 				className={styles.image}
 				isLazy={false}
-				image={post.featured_image}
+				image={post.image || post.old_image}
 				ratio={75}
 				sizes="(max-width: 768px) 100vw, (max-width: 1388px) 60vw, 870px"
 				srcset={[400, 800, 1600]}

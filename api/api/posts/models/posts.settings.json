@@ -44,13 +44,17 @@
     "category": {
       "type": "string"
     },
-    "featured_image": {
-      "type": "component",
-      "repeatable": false,
-      "component": "image.featured-image"
-    },
     "isSticky": {
       "type": "boolean"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "old_image": {
+      "type": "string"
     }
   }
 }

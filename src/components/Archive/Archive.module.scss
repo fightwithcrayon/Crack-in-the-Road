@@ -1,29 +1,32 @@
 @import '../../shared';
 
 .page {
-	display: grid;
-	grid-template-areas: "featured" "posts";
-	row-gap: 72px;
-	grid-template-columns: 1fr;
 }
 
 .posts {
 	grid-area: posts;
 	display: grid;
-	grid-template-columns: 1fr;
-	row-gap: 72px;
-	column-gap: 32px;
-	font-size: var(--h4);
+	grid-template-columns: 1fr 1fr;
+	row-gap: 48px;
+	column-gap: 36px;
+	font-size: var(--h6);
 
 	@include breakpoint(small) {
-		grid-template-columns: 1fr 1fr;
-	}
-
-	@include breakpoint(medium) {
 		grid-template-columns: 1fr 1fr 1fr;
 	}
 
+	@include breakpoint(medium) {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+
+	@include breakpoint(large) {
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	}
+
 	a {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		color: inherit;
 		text-decoration: none;
 	}

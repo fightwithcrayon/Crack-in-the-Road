@@ -4,7 +4,7 @@
 :root {
 	--alternate: rgb(245,245,245);
 	--background: rgb(255,255,255);
-	--grey: rgb(43, 43, 43);
+	--grey: gray;
 	--black: rgb(20, 20, 20);
 	--small: #{map-get($breakpoints, 'small')};
 	--medium: #{map-get($breakpoints, 'medium')};
@@ -19,4 +19,9 @@
 body {
 	margin: 0;
 	padding: 0;
+}
+
+.no-scroll,
+.no-scroll body {
+	overflow: hidden;
 }

@@ -1,15 +1,15 @@
 import styles from './PostImage.module.scss';
 import React from 'react';
 
-const PostImage = ({ alt, className, image, isLazy, ratio, sizes, srcset }) => {
-	const image_url = image ? `https://api.crackintheroad.com/images/${image.file}` : '';
+const PostImage = ({ alt, className, image, isLazy, sizes, srcset }) => {
+	const image_url = image ? `https://api.crackintheroad.com/images/${image}` : '';
 
 	if (!image_url) {
 		return null;
 	}
 
 	return (
-		<div className={`${styles.image} ${className}`} style={{ paddingTop: `${ratio}%` }}>
+		<div className={`${styles.image} ${className}`}>
 			<picture>
 				<source
 					sizes={sizes}

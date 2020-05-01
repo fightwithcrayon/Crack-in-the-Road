@@ -207,11 +207,26 @@ const getIndex = async (ctx) => {
     }
   }
   // Todo: No date filter added
-  const latest = await strapi.query('posts').model.find({}, 'title slug category date featured_image').limit(20).sort({ date: 'desc' }).exec();
+  const latest = await strapi.query('posts').model.find({}, 'title slug category date image old_image').limit(20).sort({ date: 'desc' }).exec();
   const featured = await strapi.query('posts').model.find({
     isSticky: true,
   }, 'title slug category date featured_image').limit(1).sort({ date: 'desc' }).exec();
-  const random = await strapi.query('posts').model.aggregate([{ $sample: { size: 20 } }]).exec();
+  const random = await strapi.query('posts').model.aggregate([
+    {
+      $project: {
+        title: 1,
+        slug: 1,
+        category: 1,
+        date: 1,
+        old_image: 1,
+        image: 1,
+      },
+    },
+    {
+      $sample: {
+        size: 20
+      }
+    }]).exec();
 
   ctx.send({
     latest,
@@ -237,20 +252,18 @@ module.exports = {
     }, 'title slug category date featured_image').limit(40).sort({ date: 'desc' }).exec(),
   }),
   do: async ctx => {
-    const data = strapi.query('posts').model.find({}, 'id wpid slug content');
+    const data = strapi.query('posts').model.find({});
     const docs = await data.exec();
-
+    console.log(docs);
     for await (doc of docs) {
-      const content = doc.content
-        .replaceAll('http://localhost:8888/wp-content/uploads', 'https://api.crackintheroad.com/images')
-        .replaceAll('http://admin.crackintheroad.com/wp-content/uploads', 'https://api.crackintheroad.com/images')
-        .replaceAll('https://admin.crackintheroad.com/wp-content/uploads', 'https://api.crackintheroad.com/images')
-        .replaceAll('http://', 'https://');
-
+      if (!doc.featured_image || doc.featured_image.length === 0) {
+        continue;
+      }
+      console.log(doc.featured_image[0].ref.file);
       const result = strapi.query('posts').model.update({
         slug: doc.slug,
       }, {
-        content,
+        old_image: doc.featured_image[0].ref.file,
       });
 
       await result.exec();
@@ -281,7 +294,8 @@ module.exports = {
           slug: 1,
           category: 1,
           date: 1,
-          featured_image: 1,
+          old_image: 1,
+          image: 1,
           month: { $month: '$date' },
           year: { $year: '$date' }
         }
@@ -294,6 +308,13 @@ module.exports = {
   },
   note: async ctx => {
     const { href, path, title } = ctx.query;
+    const { hasAnalytics } = strapi.config.currentEnvironment;
+    if (!hasAnalytics) {
+      ctx.send({
+        dummied: true,
+      })
+      return;
+    }
     analytics.page({
       path,
       title,
@@ -310,7 +331,7 @@ module.exports = {
     const data = strapi.query('posts').model.find({
       slug: ctx.params.id,
     })
-      .populate('author', 'name').select('author.name category content date featured_image slug title');
+      .populate('author', 'name').select('author.name category content date old_image image slug title');
     ctx.send(await data.exec())
   },
   timeline: async ctx => {

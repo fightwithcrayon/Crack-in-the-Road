@@ -17,16 +17,17 @@ const Details = ({ className, hasAuthor, heading, post }) => {
 	const { artist, track, title } = formatTitle(post.title);
 	return (
 		<div className={`${styles.frame} ${className}`}>
-			<div className={styles.details}>
-				<p>{date}</p>
-				<span className={styles.line} />
-				<p>{(hasAuthor && post.author) ? post.author.name : post.category}</p>
-			</div>
 			<HTag className={styles.title}>
 				{!artist && !track && post.title}
 				{artist && <span className={styles.artist}>{artist}</span>}
 				{track && <span className={styles.track}>{track}</span>}
 			</HTag>
+			{hasAuthor && post.author && (
+				<div className={styles.details}>
+					<p>{date}</p>
+					<p>{post.author.name}</p>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -1,0 +1,37 @@
+@import '../../shared';
+
+.menu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: var(--alternate);
+	z-index: 10;
+}
+
+.wrapper {
+	display: grid;
+	grid-template-areas: "header header header header" "bio bio bio bio" "authors authors categories years";
+	width: 100%;
+}
+
+.header {
+	grid-area: header;
+	width: 100%;
+}
+
+.bio {
+	grid-area: bio;
+}
+
+.years {
+	grid-area: years;
+}
+
+.authors {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	grid-area: authors;
+}

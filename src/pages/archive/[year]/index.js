@@ -7,9 +7,18 @@ export async function getStaticProps({ params }) {
 	const res = await fetch(`${process.env.API_URL}/posts/archive/${params.year}/all`);
 	const { posts } = await res.json();
 
+	const res2 = await fetch(`${process.env.API_URL}/posts/timeline`)
+	const dates = await res2.json();
+	const years = Object.keys(dates.reduce((all, current) => ({
+		...all,
+		[current._id.year]: null,
+	}), {}));
+
 	return {
 		props: {
-			posts
+			posts,
+			year: params.year,
+			years
 		},
 	}
 }

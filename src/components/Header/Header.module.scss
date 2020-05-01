@@ -1,6 +1,8 @@
 @import '../../shared';
 
 .header {
+	display: flex;
+	justify-content: space-between;
 	top: 0;
 	width: 100%;
 	border-bottom: 1px solid var(--alternate);
@@ -16,12 +18,31 @@
 		color: inherit;
 		text-decoration: none;
 	}
+
+	&.invert {
+		background-color: var(--alternate);
+		z-index: 11;
+	}
 }
 
 .title {
+	font-family: "Jost", "Futura", "Montserrat", "Open Sans", "Helvetica", sans-serif;
 	text-transform: uppercase;
 	font-size: 24px;
 	letter-spacing: 2px;
 	word-break: break-word;
 	hyphens: none;
+}
+
+.button {
+	all: unset;
+	border: 1px solid var(--alternate);
+	border-radius: 40px;
+	font-size: var(--caption);
+	padding: 4px 20px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: var(--alternate)
+	}
 }

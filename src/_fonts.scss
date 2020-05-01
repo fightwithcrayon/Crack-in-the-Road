@@ -1,31 +1,21 @@
 @font-face {
 	font-family: 'Jost';
 	src: local('Jost'),
-		url('/fonts/jost-300-light-webfont.woff2') format('woff2'),
-		url('/fonts/jost-300-light-webfont.woff') format('woff');
-	font-weight: 300;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Jost';
-	src: local('Jost'),
-		url('/fonts/jost-400-book-webfont.woff2') format('woff2'),
-		url('/fonts/jost-400-book-webfont.woff') format('woff');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Jost';
-	src: local('Jost'),
-		url('/fonts/jost-500-medium-webfont.woff2') format('woff2'),
-		url('/fonts/jost-500-medium-webfont.woff') format('woff');
+		url('/fonts/jost-500-medium-citr.woff2') format('woff2'),
+		url('/fonts/jost-500-medium-citr.woff') format('woff');
 	font-weight: 500;
 	font-style: normal;
 	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local('Inter'), 
+		url("/fonts/Inter-Regular.woff2?v=3.13") format("woff2"),
+		url("/fonts/Inter-Regular.woff?v=3.13") format("woff");
 }
 
 :root {
@@ -34,7 +24,8 @@
 	--h3: 28px;
 	--h4: 24px;
 	--h5: 18px;
-	--h6: 14px;
+	--h6: 16px;
+	--caption: 14px;
 }
 
 h1,
@@ -45,11 +36,10 @@ h5,
 h6 {
 	margin: 0;
 	padding: 0;
-	font-family: "Jost", "Futura", "Montserrat", "Open Sans", "Helvetica", sans-serif;
-	font-weight: 500;
+	font-family: inherit;
+	font-weight: inherit;
 	position: relative;
-	line-height: 1.2;
-	letter-spacing: -0.009em;
+	line-height: inherit;
 }
 
 h1 {
@@ -79,9 +69,10 @@ h6 {
 body {
 	font-size: var(--h5);
 	color: var(--black);
-	font-family: 'Spectral', 'Cormorant Garamond', 'Adobe Garamond', 'Garamond', Times, serif;
-	font-weight: 300;
+	font-family: 'Inter', 'Cormorant Garamond', 'Adobe Garamond', 'Garamond', Times, serif;
+	font-weight: 500;
 	line-height: 1.6;
+	letter-spacing: -0.009em;
 	text-rendering: optimizeLegibility;
 	-moz-osx-font-smoothing: grayscale;
 	word-wrap: break-word;

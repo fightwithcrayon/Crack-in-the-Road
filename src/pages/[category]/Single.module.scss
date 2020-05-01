@@ -5,7 +5,7 @@
 	grid-template-areas: "header header header"
 		"spacel content spacer";
 	grid-template-columns: 1fr 100% 1fr;
-	row-gap: 64px;
+	row-gap: 36px;
 
 	@include breakpoint(small) {
 		grid-template-columns: 1fr 84% 1fr;
@@ -13,6 +13,7 @@
 
 	@include breakpoint(medium) {
 		grid-template-columns: 1fr 66% 1fr;
+		row-gap: 64px;
 	}
 }
 
@@ -33,7 +34,7 @@
 	flex-direction: column;
 	align-items: center;
 	grid-area: content;
-	font-size: var(--h4);
+	font-size: var(--h5);
 
 	strong {
 		font-weight: 500;
