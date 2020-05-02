@@ -255,11 +255,17 @@ module.exports = {
       category: ctx.params.category,
     }, 'title slug category date old_image').sort({ date: 'desc' }).exec(),
   }),
-  author: async ctx => ctx.send({
-    posts: await strapi.query('posts').model.find({
-      author: ctx.params.author,
-    }, 'title slug category date old_image').sort({ date: 'desc' }).exec(),
-  }),
+  author: async ctx => {
+    const author = await strapi.query('author').model.find({
+      slug: ctx.params.author,
+    }).exec()
+
+    ctx.send({
+      posts: await strapi.query('posts').model.find({
+        author: author[0].id,
+      }, 'title slug category date old_image').sort({ date: 'desc' }).exec(),
+    })
+  },
   do: async ctx => {
     const docs = require('./final.json');
     for await (doc of docs) {
@@ -335,7 +341,7 @@ module.exports = {
     const data = strapi.query('posts').model.find({
       slug: ctx.params.id,
     })
-      .populate('author', 'name').select('author.name category content date old_image image slug title');
+      .populate('author', 'name slug').select('author.name category content date old_image image slug title');
     ctx.send(await data.exec())
   },
   timeline: async ctx => {

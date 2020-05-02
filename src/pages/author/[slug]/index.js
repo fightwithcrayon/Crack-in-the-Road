@@ -6,7 +6,7 @@ const Index = Archive;
 export async function getStaticProps({ params: { slug } }) {
 	const res = await fetch(`${process.env.API_URL}/posts/author/${slug}`);
 	const { posts } = await res.json();
-
+	console.log(posts);
 	return {
 		props: {
 			posts,
@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 	const paths = authors.map(author => {
 		return {
 			params: {
-				slug,
+				slug: author.slug,
 			}
 		}
 	})

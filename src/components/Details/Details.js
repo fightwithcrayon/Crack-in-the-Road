@@ -33,7 +33,7 @@ const Details = ({ className, hasAuthor, heading, post }) => {
 			{hasAuthor && post.author && (
 				<div className={styles.details}>
 					<p>{date}</p>
-					<p><a href={`/author/${post.author._id}`}>{post.author.name}</a></p>
+					<p><a href={`/author/${post.author.slug}`}>{post.author.name}</a></p>
 				</div>
 			)}
 		</div>
