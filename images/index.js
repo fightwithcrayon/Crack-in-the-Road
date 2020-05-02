@@ -21,9 +21,10 @@ async function processImage(req, res) {
 	const { name, ext } = path.parse(file);
 	const extension = type ? `.${type}` : ext;
 	const size = width ? `_${width}` : '';
+	const size2 = height ? `_${height}` : '';
 
 	const targetFolder = path.join(__dirname, 'assets', directory);
-	const editedFile = path.join(targetFolder, `${name}${size}${extension}`);
+	const editedFile = path.join(targetFolder, `${name}${size}${size2}${extension}`);
 
 	if (fs.existsSync(editedFile)) {
 		res.set('Cache-control', 'public, max-age=31536000')
