@@ -10,7 +10,7 @@ app.use(express.static('client'));
 
 async function processImage(req, res) {
 	const { year, month, file } = req.params;
-	const { type, width } = req.query;
+	const { type, height, width } = req.query;
 	const directory = year ? `${year}/${month}` : 'generated';
 	const originalFile = path.join(__dirname, 'uploads', directory, file);
 	if (!width) {
@@ -39,7 +39,9 @@ async function processImage(req, res) {
 	try {
 		const sharpImg = sharp(originalFile)
 
-		if (width) {
+		if (width && height) {
+			sharpImg.resize(parseInt(width), parseInt(height))
+		} else if (width) {
 			sharpImg.resize(parseInt(width))
 		}
 

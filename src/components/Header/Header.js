@@ -25,20 +25,20 @@ const Header = ({ className, isInverted, onClose }) => {
 					<title key="title">{title}</title>
 					<meta key="description" name="description" content="Big last decade." />
 					<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-					<meta property="og:type" content="website" />
-					<meta name="og:title" property="og:title" content={title} />
-					<meta name="og:description" property="og:description" content={description} />
-					<meta property="og:site_name" content={title} />
-					<meta property="og:url" content={`https://www.crackintheroad.com`} />
-					<meta property="og:image" content="/logo.jpg" />
-					<meta name="twitter:card" content="summary" />
-					<meta name="twitter:title" content={title} />
-					<meta name="twitter:description" content={description} />
-					<meta name="twitter:site" content="@crackintheroad" />
-					<meta name="twitter:image" content="/logo.jpg" />
+					<meta name="robots" content="index, follow" />
+					<meta key="og:type" property="og:type" content="website" />
+					<meta key="og:title" name="og:title" property="og:title" content={title} />
+					<meta key="og:description" name="og:description" property="og:description" content={description} />
+					<meta key="og:site_name" property="og:site_name" content={title} />
+					<meta key="og:url" property="og:url" content={`https://www.crackintheroad.com`} />
+					<meta key="og:image" property="og:image" content="https://api.crackintheroad.com/images/generated/logo.jpg?width=1000" />
+					<meta key="twitter:card" name="twitter:card" content="summary" />
+					<meta key="twitter:title" name="twitter:title" content={title} />
+					<meta key="twitter:description" name="twitter:description" content={description} />
+					<meta key="twitter:site" name="twitter:site" content="@crackintheroad" />
 					<link rel="icon" type="image/png" href="/logo.jpg" />
 					<link rel="preload" href="/fonts/jost-500-medium-webfont.woff2" as="font" />
-					<link rel="preload" href="/fonts/jost-300-light-webfont.woff2" as="font" />
+					<link rel="preload" href="/fonts/Inter-Regular.woff2.woff2" as="font" />
 					<link rel="shortcut icon" href="/favicon.ico" />
 					<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
 					<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />

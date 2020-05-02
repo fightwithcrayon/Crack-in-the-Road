@@ -10,6 +10,7 @@ const Single = ({ data }) => {
         category,
         content,
         slug,
+        old_image,
         title,
     } = data;
 
@@ -20,16 +21,14 @@ const Single = ({ data }) => {
             <Head>
                 <meta charset="utf-8" />
                 <title key="title">{title}</title>
-                <meta key="description" name="description" content="Big last decade." />
-                <meta name="og:title" property="og:title" content={title} />
-                <meta name="og:description" property="og:description" content={description} />
-                <meta property="og:site_name" content={title} />
+                <meta key="og:title" name="og:title" property="og:title" content={title} />
+                <meta key="og:description" name="og:description" property="og:description" content={description} />
+                <meta key="og:site_name" property="og:site_name" content={title} />
                 <meta property="og:url" content={`https://www.crackintheroad.com/${category}/${slug}`} />
-                <meta property="og:image" content="/logo.jpg" />
-                <meta name="twitter:card" content="summary" />
-                <meta name="twitter:title" content={title} />
-                <meta name="twitter:description" content={description} />
-                <meta name="twitter:image" content="" />
+                <meta key="og:image" property="og:image" content={`https://api.crackintheroad.com/images/${old_image}?width=1200&height=630`} />
+                <meta key="twitter:card" name="twitter:card" content="summary_large_image" />
+                <meta key="twitter:title" name="twitter:title" content={title} />
+                <meta key="twitter:description" name="twitter:description" content={description} />
             </Head>
             <Featured className={styles.header} hasAuthor post={data} tag="header" />
             <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
