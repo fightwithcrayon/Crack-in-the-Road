@@ -253,7 +253,12 @@ module.exports = {
   category: async ctx => ctx.send({
     posts: await strapi.query('posts').model.find({
       category: ctx.params.category,
-    }, 'title slug category date old_image').limit(40).sort({ date: 'desc' }).exec(),
+    }, 'title slug category date old_image').sort({ date: 'desc' }).exec(),
+  }),
+  author: async ctx => ctx.send({
+    posts: await strapi.query('posts').model.find({
+      author: ctx.params.author,
+    }, 'title slug category date old_image').sort({ date: 'desc' }).exec(),
   }),
   do: async ctx => {
     const docs = require('./final.json');

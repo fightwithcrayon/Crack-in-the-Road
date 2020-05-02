@@ -50,6 +50,14 @@
     },
     {
       "method": "GET",
+      "path": "/posts/author/:author",
+      "handler": "posts.author",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/posts/category/:category",
       "handler": "posts.category",
       "config": {
