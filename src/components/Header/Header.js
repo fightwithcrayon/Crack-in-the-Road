@@ -94,6 +94,7 @@ const Header = ({ className, isInverted, onClose }) => {
 						<h1 className={styles.title}>Crack in the Road</h1>
 					</a>
 				</Link>
+				<span className={styles.darkmode} />
 				{isInverted ? (
 					<button className={styles.button} onClick={onClose}>Close</button>
 				) : (

@@ -27,7 +27,15 @@ const importCategories = async (page = 1) => {
 }
 
 module.exports = {
-  routes: async ctx => ctx.send(await strapi.query('category').model.find({}, 'slug name').exec()),
+  routes: async ctx => {
+    const sorted = await strapi.query('category').model.aggregate([
+      { $project: { posts: 1, slug: 1, name: 1 } },
+      { $unwind: '$posts' },
+      { $group: { _id: '$_id', count: { $sum: 1 }, slug: { $first: '$slug' }, name: { $first: '$name' } } },
+      { $sort: { 'count': -1 } },
+    ]);
+    ctx.send(sorted);
+  },
   import: async ctx => {
     const categories = await importCategories();
     ctx.send(categories);

@@ -6,17 +6,26 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: var(--alternate);
+	background-color: var(--highlight);
 	z-index: 10;
+	overflow-y: scroll;
+
+	@include breakpoint(small) {
+		overflow: hidden;
+	}
 }
 
 .wrapper {
 	display: grid;
 	grid-template-areas: "header header" "bio bio" "years categories";
-	grid-template-columns: 25% 1fr;
 	grid-template-rows: min-content min-content auto;
+	grid-template-columns: 25% 1fr;
 	width: 100%;
-	height: 100vh;
+	color: var(--highlight-dark);
+	@include breakpoint(small) {
+		height: 100vh;
+		grid-template-rows: min-content min-content auto;
+	}
 
 	li {
 		list-style: none;
@@ -24,7 +33,8 @@
 	}
 
 	a {
-		color: black;
+		color: inherit;
+		text-decoration: none;
 	}
 }
 
@@ -35,7 +45,7 @@
 
 .bio {
 	grid-area: bio;
-	padding-bottom: 48px;
+	padding: 12px 0 48px;
 }
 
 .years {
@@ -49,14 +59,20 @@
 }
 
 .categories {
-	position: absolute;
+	position: relative;
 	top: 0;
 	left: 0;
 	height: 100%;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	align-items: flex-start;
 	justify-content: flex-start;
+	padding-bottom: 32px;
+	@include breakpoint(small) {
+		position: absolute;
+		flex-wrap: wrap;
+		padding-bottom: 0;
+	}
 }

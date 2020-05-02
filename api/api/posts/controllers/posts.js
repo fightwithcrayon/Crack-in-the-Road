@@ -210,6 +210,14 @@ const getIndex = async (ctx) => {
   //const latest = await strapi.query('posts').model.find({}, 'title slug category date image old_image').limit(20).sort({ date: 'desc' }).exec();
   const random = await strapi.query('posts').model.aggregate([
     {
+      "$match": {
+        "old_image": {
+          "$exists": true,
+          "$ne": null
+        }
+      }
+    },
+    {
       $project: {
         title: 1,
         slug: 1,
@@ -234,6 +242,7 @@ String.prototype.replaceAll = function (search, replacement) {
   var target = this;
   return target.replace(new RegExp(search, 'g'), replacement);
 };
+
 module.exports = {
   import: async ctx => {
     const data = await importPosts();
@@ -247,22 +256,17 @@ module.exports = {
     }, 'title slug category date featured_image').limit(40).sort({ date: 'desc' }).exec(),
   }),
   do: async ctx => {
-    const data = strapi.query('posts').model.find({});
-    const docs = await data.exec();
-    console.log(docs);
+    const docs = require('./final.json');
     for await (doc of docs) {
-      if (!doc.featured_image || doc.featured_image.length === 0) {
-        continue;
-      }
-      console.log(doc.featured_image[0].ref.file);
       const result = strapi.query('posts').model.update({
-        slug: doc.slug,
+        _id: doc.id,
       }, {
-        old_image: doc.featured_image[0].ref.file,
+        old_image: doc.old_image,
       });
 
       await result.exec();
-      console.log('Processed', doc.slug)
+      console.log('Processed', doc);
+      ctx.send({});
     };
   },
   index: async ctx => {

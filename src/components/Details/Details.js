@@ -6,7 +6,15 @@ const formatTitle = title => {
 	const hyphenSplit = title.split(' – ');
 	if (hyphenSplit.length === 2) {
 		const [artist, track] = hyphenSplit;
-		return { artist, track };
+		const cleanArtist = artist
+			.replace(/^(New: )/i, '')
+			.replace(/^(Single of the Week: )/i, '')
+			.replace(/^(Review: )/i, '')
+			.replace(/^(Stream: )/i, '')
+			.replace(/^(Video: )/i, '')
+			.replace(/^(News: )/i, '')
+			.replace(/^(MPFree: )/i, '');
+		return { artist: cleanArtist, track };
 	}
 	return title;
 };

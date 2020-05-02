@@ -4,12 +4,23 @@
 :root {
 	--alternate: rgb(245,245,245);
 	--background: rgb(255,255,255);
+	--highlight-dark: #DA5E50;
+	--highlight: #FCDDD3;
 	--grey: gray;
 	--black: rgb(20, 20, 20);
 	--small: #{map-get($breakpoints, 'small')};
 	--medium: #{map-get($breakpoints, 'medium')};
 	--large: #{map-get($breakpoints, 'large')};
 	--xlarge: #{map-get($breakpoints, 'xlarge')};
+
+	@media (prefers-color-scheme: dark) {
+		--alternate: rgb(245,245,245);
+		--black: rgb(255,255,255);
+		--highlight-dark: #FCDDD3;
+		--highlight: #DA5E50;
+		--grey: gray;
+		--background: rgb(20, 20, 20);
+	}
 }
 
 * {
@@ -19,6 +30,7 @@
 body {
 	margin: 0;
 	padding: 0;
+	background-color: var(--background);
 }
 
 .no-scroll,

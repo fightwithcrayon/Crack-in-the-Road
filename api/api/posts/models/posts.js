@@ -7,7 +7,6 @@
 
 module.exports = {
   beforeSave: async (model, attrs, options) => {
-    console.log(model, attrs, options)
     //const data = strapi.query('users').model.find({
     //  id: model.author,
     //}, 'category slug');

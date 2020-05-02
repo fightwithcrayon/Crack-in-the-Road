@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "date-fns": "^2.11.1",
+    "glob": "^7.1.6",
     "gulp": "^4.0.2",
     "next": "^9.3.4",
     "nextjs-sitemap-generator": "^0.5.2",

@@ -36,6 +36,10 @@
 	grid-area: content;
 	font-size: var(--h5);
 
+	a {
+		color: var(--highlight-dark);
+	}
+
 	strong {
 		font-weight: 500;
 	}

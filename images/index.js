@@ -2,43 +2,28 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const fs = require('fs')
-const potrace = require('potrace');
 const sharp = require('sharp');
-
 
 module.exports = app;
 
 app.use(express.static('client'));
 
-app.get('/images/:year/:month/:file', async (req, res) => {
+async function processImage(req, res) {
 	const { year, month, file } = req.params;
-	const { trace, type, width } = req.query;
-	const originalFile = path.join(__dirname, 'uploads', year, month, file);
-
-	if (Object.values(req.query).length === 0) {
+	const { type, width } = req.query;
+	const directory = year ? `${year}/${month}` : 'generated';
+	const originalFile = path.join(__dirname, 'uploads', directory, file);
+	if (!width) {
 		res.sendFile(originalFile);
 		return;
 	}
 
 	const { name, ext } = path.parse(file);
-	let decoratedName = name;
+	const extension = type ? `.${type}` : ext;
+	const size = width ? `_${width}` : '';
 
-	if (width) {
-		decoratedName += `_${width}`;
-	}
-
-	if (trace) {
-		decoratedName += `_trace.svg`;
-	}
-
-	if (type) {
-		decoratedName += `.${type}`
-	} else if (!trace) {
-		decoratedName += ext;
-	}
-
-	const targetFolder = path.join(__dirname, 'assets', year, month);
-	const editedFile = path.join(targetFolder, decoratedName);
+	const targetFolder = path.join(__dirname, 'assets', directory);
+	const editedFile = path.join(targetFolder, `${name}${size}${extension}`);
 
 	if (fs.existsSync(editedFile)) {
 		res.set('Cache-control', 'public, max-age=31536000')
@@ -57,8 +42,6 @@ app.get('/images/:year/:month/:file', async (req, res) => {
 		if (width) {
 			sharpImg.resize(parseInt(width))
 		}
-
-		const { ext: extension } = path.parse(editedFile);
 
 		if (extension === 'webp') {
 			sharpImg.webp();
@@ -79,28 +62,6 @@ app.get('/images/:year/:month/:file', async (req, res) => {
 
 		fs.mkdirSync(targetFolder, { recursive: true });
 		await sharpImg.toFile(editedFile);
-		console.log('here');
-		if (trace) {
-			const params = {
-				turdSize: 200,
-				optTolerance: 0.8,
-				color: '#f5f5f5',
-				background: '#fff',
-			}
-
-			const traceFile = () => new Promise((resolve) => {
-				potrace.trace(editedFile, params, function (err, svg) {
-					if (err) throw err;
-					fs.mkdirSync(targetFolder, { recursive: true });
-					fs.writeFileSync(editedFile, svg);
-					console.log('now resolve')
-					console.log('everywhere')
-					resolve(editedFile);
-				});
-			})
-			await traceFile();
-		}
-		console.log('there')
 		res.set('Cache-control', 'public, max-age=31536000')
 		res.sendFile(editedFile);
 		return;
@@ -111,7 +72,10 @@ app.get('/images/:year/:month/:file', async (req, res) => {
 		return;
 	}
 
-});
+};
+
+app.get('/images/generated/:file', processImage);
+app.get('/images/:year/:month/:file', processImage);
 
 const port = process.env.PORT || 4040;
 app.listen(port, () => console.log('Imge server listening on port', port))

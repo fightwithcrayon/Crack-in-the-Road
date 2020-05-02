@@ -6,7 +6,8 @@
 	top: 0;
 	width: 100%;
 	border-bottom: 1px solid var(--alternate);
-	padding: 32px 0;
+	border-color: var(--alternate);
+	padding: 32px 0 24px;
 	background-color: var(--background);
 	z-index: 2;
 
@@ -20,7 +21,8 @@
 	}
 
 	&.invert {
-		background-color: var(--alternate);
+		border-color: var(--highlight-dark);
+		background-color: transparent;
 		z-index: 11;
 	}
 }
@@ -28,21 +30,54 @@
 .title {
 	font-family: "Jost", "Futura", "Montserrat", "Open Sans", "Helvetica", sans-serif;
 	text-transform: uppercase;
-	font-size: 24px;
+	font-size: 18px;
 	letter-spacing: 2px;
 	word-break: break-word;
 	hyphens: none;
+	@include breakpoint(small) {
+		font-size: 24px;
+	}
+}
+
+.darkmode {
+	position: relative;
+	margin-left: auto;
+	align-self: center;
+
+	@media (prefers-color-scheme: dark) {
+		&::before {
+			font-size: var(--caption);
+			color: inherit;
+			padding-right: 12px;
+			white-space: nowrap;
+			@include breakpoint(small) {
+				content: '(dark mode active)';
+			}
+		}
+	}
 }
 
 .button {
 	all: unset;
 	border: 1px solid var(--alternate);
+	border-color: inherit;
 	border-radius: 40px;
 	font-size: var(--caption);
-	padding: 4px 20px;
+	padding: 4px 12px;
 	cursor: pointer;
+	text-align: center;
+	@include breakpoint(small) {
+		padding: 4px 20px;
+		width: 52px;
+	}
 
 	&:hover {
-		background-color: var(--alternate)
+		background-color: var(--highlight);
+		color: var(--highlight-dark);
+		
+		.invert & {
+			color: var(--highlight);
+			background-color: var(--highlight-dark)
+		}
 	}
 }

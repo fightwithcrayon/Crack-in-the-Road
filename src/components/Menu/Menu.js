@@ -5,16 +5,11 @@ import Link from 'next/link';
 import Header from '../Header/Header';
 
 const Menu = ({ isOpen, onClose }) => {
-	const [authors, setAuthors] = useState([]);
 	const [categories, setCategories] = useState([]);
 	const [years, setYears] = useState([]);
 
 	useEffect(() => {
 		const getOptions = async () => {
-			const resA = await fetch(`${process.env.API_URL}/authors`)
-			const authors = await resA.json();
-			const auts = authors.map(({ name, slug }) => ({ name, slug }));
-			setAuthors(auts);
 
 			const resB = await fetch(`${process.env.API_URL}/categories/routes`)
 			const categories = await resB.json();

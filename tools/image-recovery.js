@@ -1,7 +1,7 @@
 // Archive file created via Wayback Machine CDX server API
 // Thanks guys!
 const fetch = require('node-fetch');
-const archive = require('./citr-archive-2.json');
+const archive = require('./all.json');
 const fs = require('fs');
 const https = require('https');
 const path = require('path');
