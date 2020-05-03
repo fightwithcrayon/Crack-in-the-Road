@@ -32,3 +32,10 @@
 		text-decoration: none;
 	}
 }
+
+.next {
+	all: unset;
+	margin: 16px auto;
+	background-color: var(--background);
+	color: var(--black);
+}

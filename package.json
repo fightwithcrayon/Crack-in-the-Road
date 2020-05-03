@@ -8,17 +8,28 @@
     "start": "next start",
     "export": "next export",
     "sitemap": "node generateSitemap.js",
-    "deploy": "NODE_ENV=production npm run build && npm run export && npm run sitemap"
+    "deploy": "NODE_ENV=production npm run build && npm run export && npm run sitemap",
+    "analyze": "cross-env ANALYZE=true next build",
+    "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
   },
   "license": "MIT",
   "dependencies": {
+    "@next/bundle-analyzer": "^9.3.6",
+    "cross-env": "^7.0.2",
     "date-fns": "^2.11.1",
     "glob": "^7.1.6",
     "gulp": "^4.0.2",
     "next": "^9.3.4",
+    "next-images": "^1.4.0",
     "nextjs-sitemap-generator": "^0.5.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "potrace": "^2.1.6",
+    "preact": "^10.4.1",
+    "preact-ssr-prepass": "^1.0.1",
+    "preact-render-to-string": "^5.1.4",
+    "react": "github:preact-compat/react#1.0.0",
+    "react-dom": "github:preact-compat/react-dom#1.0.0",
+    "react-lazy-images": "^1.1.0",
     "strip-ansi": "^6.0.0"
   },
   "devDependencies": {

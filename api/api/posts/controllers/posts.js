@@ -233,9 +233,7 @@ const getIndex = async (ctx) => {
       }
     }]).exec();
 
-  ctx.send({
-    posts: random,
-  })
+  ctx.send(random)
 }
 
 String.prototype.replaceAll = function (search, replacement) {
@@ -250,21 +248,17 @@ module.exports = {
       state: 'success',
     });
   },
-  category: async ctx => ctx.send({
-    posts: await strapi.query('posts').model.find({
-      category: ctx.params.category,
-    }, 'title slug category date old_image').sort({ date: 'desc' }).exec(),
-  }),
+  category: async ctx => ctx.send(await strapi.query('posts').model.find({
+    category: ctx.params.category,
+  }, 'title slug category date old_image').skip(40 * ((ctx.query.page || 1) - 1)).limit(40).sort({ date: 'desc' }).exec()),
   author: async ctx => {
     const author = await strapi.query('author').model.find({
       slug: ctx.params.author,
     }).exec()
 
-    ctx.send({
-      posts: await strapi.query('posts').model.find({
-        author: author[0].id,
-      }, 'title slug category date old_image').sort({ date: 'desc' }).exec(),
-    })
+    ctx.send(await strapi.query('posts').model.find({
+      author: author[0].id,
+    }, 'title slug category date old_image').skip(40 * ((ctx.query.page || 1) - 1)).limit(40).sort({ date: 'desc' }).exec())
   },
   do: async ctx => {
     const docs = require('./final.json');
@@ -313,7 +307,7 @@ module.exports = {
       {
         $match: query
       }
-      ]).sort({ date: 'desc' }).exec(),
+      ]).skip(40 * ((ctx.query.page || 1) - 1)).limit(40).sort({ date: 'desc' }).exec(),
     })
   },
   note: async ctx => {

@@ -1,6 +1,7 @@
 @import './fonts';
 @import './shared';
 
+.force-light,
 :root {
 	--alternate: rgb(245,245,245);
 	--background: rgb(255,255,255);
@@ -12,7 +13,9 @@
 	--medium: #{map-get($breakpoints, 'medium')};
 	--large: #{map-get($breakpoints, 'large')};
 	--xlarge: #{map-get($breakpoints, 'xlarge')};
+}
 
+:root {
 	@media (prefers-color-scheme: dark) {
 		--alternate: rgb(245,245,245);
 		--black: rgb(255,255,255);

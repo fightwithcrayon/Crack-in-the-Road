@@ -52,6 +52,10 @@
 			white-space: nowrap;
 			@include breakpoint(small) {
 				content: '(dark mode active)';
+
+				:global(.force-light) & {
+					content: '(dark mode disabled)';
+				}
 			}
 		}
 	}

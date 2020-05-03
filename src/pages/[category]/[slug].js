@@ -24,7 +24,7 @@ const Single = ({ data }) => {
                 <meta key="og:title" name="og:title" property="og:title" content={title} />
                 <meta key="og:description" name="og:description" property="og:description" content={description} />
                 <meta key="og:site_name" property="og:site_name" content={title} />
-                <meta property="og:url" content={`https://www.crackintheroad.com/${category}/${slug}`} />
+                <meta key="og:url" property="og:url" content={`https://www.crackintheroad.com/${category}/${slug}`} />
                 <meta key="og:image" property="og:image" content={`https://api.crackintheroad.com/images/${old_image}?width=1200&height=630`} />
                 <meta key="twitter:card" name="twitter:card" content="summary_large_image" />
                 <meta key="twitter:title" name="twitter:title" content={title} />

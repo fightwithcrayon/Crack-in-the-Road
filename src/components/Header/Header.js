@@ -17,6 +17,10 @@ const Header = ({ className, isInverted, onClose }) => {
 		return () => document.documentElement.classList.remove('no-scroll');
 	}, [isOpen]);
 
+	const toggleDarkMode = () => {
+		document.body.classList.toggle('force-light')
+	}
+
 	return (
 		<>
 			<header className={`${className} ${styles.header} ${isInverted ? styles.invert : ''}`}>
@@ -31,14 +35,14 @@ const Header = ({ className, isInverted, onClose }) => {
 					<meta key="og:description" name="og:description" property="og:description" content={description} />
 					<meta key="og:site_name" property="og:site_name" content={title} />
 					<meta key="og:url" property="og:url" content={`https://www.crackintheroad.com`} />
-					<meta key="og:image" property="og:image" content="https://api.crackintheroad.com/images/generated/logo.jpg?width=1000" />
+					<meta key="og:image" property="og:image" content="/logo.jpg" />
 					<meta key="twitter:card" name="twitter:card" content="summary" />
 					<meta key="twitter:title" name="twitter:title" content={title} />
 					<meta key="twitter:description" name="twitter:description" content={description} />
 					<meta key="twitter:site" name="twitter:site" content="@crackintheroad" />
 					<link rel="icon" type="image/png" href="/logo.jpg" />
-					<link rel="preload" href="/fonts/jost-500-medium-webfont.woff2" as="font" />
-					<link rel="preload" href="/fonts/Inter-Regular.woff2.woff2" as="font" />
+					<link rel="preload" href="/fonts/jost-500-medium-citr.woff2" as="font" />
+					<link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" />
 					<link rel="shortcut icon" href="/favicon.ico" />
 					<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
 					<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
@@ -94,7 +98,7 @@ const Header = ({ className, isInverted, onClose }) => {
 						<h1 className={styles.title}>Crack in the Road</h1>
 					</a>
 				</Link>
-				<span className={styles.darkmode} />
+				<span className={styles.darkmode} onClick={toggleDarkMode} />
 				{isInverted ? (
 					<button className={styles.button} onClick={onClose}>Close</button>
 				) : (

@@ -5,7 +5,7 @@ const Index = Archive;
 
 export async function getStaticProps({ params }) {
 	const res = await fetch(`${process.env.API_URL}/posts/archive/${params.year}/${params.month}`);
-	const { posts } = await res.json();
+	const posts = await res.json();
 
 	const res2 = await fetch(`${process.env.API_URL}/posts/timeline`)
 	const dates = await res2.json();
