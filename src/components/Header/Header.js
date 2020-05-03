@@ -7,7 +7,7 @@ import Menu from '../Menu/Menu';
 const Header = ({ className, isInverted, onClose }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const title = 'Crack in the Road';
-	const description = 'Crack in the Road';
+	const description = 'New music and visual arts. Once was the future. Once.';
 
 	useEffect(() => {
 		if (!isOpen) {
@@ -27,7 +27,7 @@ const Header = ({ className, isInverted, onClose }) => {
 				<Head>
 					<meta charset="utf-8" />
 					<title key="title">{title}</title>
-					<meta key="description" name="description" content="Big last decade." />
+					<meta key="description" name="description" content={description} />
 					<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 					<meta name="robots" content="index, follow" />
 					<meta key="og:type" property="og:type" content="website" />
