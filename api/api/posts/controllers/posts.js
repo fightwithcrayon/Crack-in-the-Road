@@ -241,6 +241,28 @@ String.prototype.replaceAll = function (search, replacement) {
   return target.replace(new RegExp(search, 'g'), replacement);
 };
 
+const getTimeline = async () => await strapi.query('posts').model.aggregate([
+  {
+    $group: {
+      _id: {
+        year: {
+          $year: '$date'
+        },
+        month: {
+          $month: '$date'
+        }
+      },
+      documentCount: { $sum: 1 }
+    }
+  },
+  {
+    $sort: {
+      '_id.year': -1,
+      '_id.month': -1
+    }
+  }
+]);
+
 module.exports = {
   import: async ctx => {
     const data = await importPosts();
@@ -339,27 +361,7 @@ module.exports = {
     ctx.send(await data.exec())
   },
   timeline: async ctx => {
-    const data = strapi.query('posts').model.aggregate([
-      {
-        $group: {
-          _id: {
-            year: {
-              $year: '$date'
-            },
-            month: {
-              $month: '$date'
-            }
-          },
-          documentCount: { $sum: 1 }
-        }
-      },
-      {
-        $sort: {
-          '_id.year': -1,
-          '_id.month': -1
-        }
-      }
-    ]);
+    const data = await getTimeline();
     ctx.send(await data.exec())
   }
 };

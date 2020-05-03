@@ -10,6 +10,14 @@
     },
     {
       "method": "GET",
+      "path": "/categories/menu",
+      "handler": "category.menu",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/categories/routes",
       "handler": "category.routes",
       "config": {

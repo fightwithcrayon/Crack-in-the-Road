@@ -10,20 +10,10 @@ const Menu = ({ isOpen, onClose }) => {
 
 	useEffect(() => {
 		const getOptions = async () => {
+			const res = await fetch(`${process.env.API_URL}/categories/menu`)
+			const { cats, years } = await res.json();
 
-			const resB = await fetch(`${process.env.API_URL}/categories/routes`)
-			const categories = await resB.json();
-			const cats = categories.map(({ name, slug }) => ({ name, slug }));
 			setCategories(cats);
-
-			const resC = await fetch(`${process.env.API_URL}/posts/timeline`)
-			const dates = await resC.json();
-
-			const years = Object.keys(dates.reduce((all, current) => ({
-				...all,
-				[current._id.year]: null,
-			}), {}));
-
 			setYears(years);
 		}
 
