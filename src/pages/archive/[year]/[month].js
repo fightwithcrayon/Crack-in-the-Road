@@ -4,7 +4,8 @@ import fetch from 'node-fetch';
 const Index = Archive;
 
 export async function getStaticProps({ params }) {
-	const res = await fetch(`${process.env.API_URL}/posts/archive/${params.year}/${params.month}`);
+	const pageUrl = `${process.env.API_URL}/posts/archive/${params.year}/${params.month}`;
+	const res = await fetch(pageUrl);
 	const posts = await res.json();
 
 	const res2 = await fetch(`${process.env.API_URL}/posts/timeline`)
@@ -16,6 +17,7 @@ export async function getStaticProps({ params }) {
 
 	return {
 		props: {
+			pageUrl,
 			posts,
 			year: params.year,
 			years

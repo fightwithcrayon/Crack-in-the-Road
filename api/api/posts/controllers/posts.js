@@ -261,7 +261,7 @@ const getTimeline = async () => await strapi.query('posts').model.aggregate([
       '_id.month': -1
     }
   }
-]);
+]).exec();
 
 module.exports = {
   import: async ctx => {
@@ -313,24 +313,23 @@ module.exports = {
       }
     }
 
-    ctx.send({
-      posts: await strapi.query('posts').model.aggregate([{
-        $project: {
-          title: 1,
-          slug: 1,
-          category: 1,
-          date: 1,
-          old_image: 1,
-          image: 1,
-          month: { $month: '$date' },
-          year: { $year: '$date' }
-        }
-      },
-      {
-        $match: query
+    ctx.send(await strapi.query('posts').model.aggregate([{
+      $project: {
+        title: 1,
+        slug: 1,
+        category: 1,
+        date: 1,
+        old_image: 1,
+        image: 1,
+        month: { $month: '$date' },
+        year: { $year: '$date' }
       }
-      ]).skip(40 * ((ctx.query.page || 1) - 1)).limit(40).sort({ date: 'desc' }).exec(),
-    })
+    },
+    {
+      $match: query
+    }
+    ]).skip(40 * ((ctx.query.page || 1) - 1)).limit(40).sort({ date: 'desc' }).exec(),
+    )
   },
   note: async ctx => {
     const { href, path, title } = ctx.query;
@@ -362,6 +361,7 @@ module.exports = {
   },
   timeline: async ctx => {
     const data = await getTimeline();
-    ctx.send(await data.exec())
+    console.log(data);
+    ctx.send(data);
   }
 };
