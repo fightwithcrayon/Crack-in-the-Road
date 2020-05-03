@@ -14,7 +14,6 @@ const App = ({ Component, pageProps }) => {
 				};
 			});
 			const isSupported = await test();
-			console.log(isSupported)
 			window.isWebPSupported = isSupported;
 		};
 		testWebP()
