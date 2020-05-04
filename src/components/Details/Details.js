@@ -1,6 +1,7 @@
 import styles from './Details.module.scss';
 import React from 'react';
 import { format, parseISO } from 'date-fns';
+import Link from 'next/link';
 
 const formatTitle = title => {
 	const hyphenSplit = title.split(' – ');
@@ -33,7 +34,11 @@ const Details = ({ className, hasAuthor, heading, post }) => {
 			{hasAuthor && post.author && (
 				<div className={styles.details}>
 					<p>{date}</p>
-					<p><a href={`/author/${post.author.slug}`}>{post.author.name}</a></p>
+					<p>
+						<Link as={`/author/${post.author.slug}`} href="/author/[slug]">
+							<a >{post.author.name}</a>
+						</Link>
+					</p>
 				</div>
 			)}
 		</div>

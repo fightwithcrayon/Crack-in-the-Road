@@ -2,6 +2,7 @@ import styles from './Menu.module.scss';
 import global from '../../pages/App.module.scss';
 import React, { useState, useEffect } from 'react';
 import Header from '../Header/Header';
+import Link from 'next/link';
 
 const Menu = ({ isOpen, onClose }) => {
 	const [categories, setCategories] = useState([]);
@@ -33,9 +34,26 @@ const Menu = ({ isOpen, onClose }) => {
 					<p>Won Site of the Year in 2012.</p>
 					<p>Quietened down 2017 - 2019.</p>
 				</div>
-				<div className={styles.years}>{years.map(year => <li><a href={`/archive/${year}`}>{year}</a></li>)}</div>
+				<div className={styles.years}>
+					{years.map(year => (
+						<li>
+							<Link as={`/archive/${year}`} href="/archive/[year]">
+								<a>{year}</a>
+							</Link>
+						</li>
+					))}
+				</div>
 				<div className={styles.categoriesBox}>
-					<div className={styles.categories}>{categories.map(cat => <li><a href={`/${cat.slug}`}>{cat.name}</a></li>)}</div>
+					<div className={styles.categories}>
+						{categories.map(cat => (
+							<li>
+
+								<Link as={`/${cat.slug}`} href="/[category]">
+									<a>{cat.name}</a>
+								</Link>
+							</li>
+						))}
+					</div>
 				</div>
 			</div>
 		</div>

@@ -30,16 +30,20 @@ const Header = ({ className, isInverted, onClose }) => {
 					<meta key="description" name="description" content={description} />
 					<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 					<meta name="robots" content="index, follow" />
-					<meta key="og:type" property="og:type" content="website" />
-					<meta key="og:title" name="og:title" property="og:title" content={title} />
-					<meta key="og:description" name="og:description" property="og:description" content={description} />
-					<meta key="og:site_name" property="og:site_name" content={title} />
-					<meta key="og:url" property="og:url" content={`https://www.crackintheroad.com`} />
-					<meta key="og:image" property="og:image" content="/logo.jpg" />
-					<meta key="twitter:card" name="twitter:card" content="summary" />
-					<meta key="twitter:title" name="twitter:title" content={title} />
-					<meta key="twitter:description" name="twitter:description" content={description} />
-					<meta key="twitter:site" name="twitter:site" content="@crackintheroad" />
+					<meta key="ogtype" property="og:type" content="website" />
+					<meta key="ogtitle" name="og:title" property="og:title" content={title} />
+					<meta key="ogdescription" name="og:description" property="og:description" content={description} />
+					<meta key="ogsite_name" property="og:site_name" content={title} />
+					<meta key="ogurl" property="og:url" content={`https://www.crackintheroad.com`} />
+					<meta key="ogimage" property="og:image" content="/logo.jpg" />
+					<meta key="ogimagetype" property="og:image:type" content="image/jpeg" />
+					<meta key="ogimagewidth" property="og:image:width" content="1200" />
+					<meta key="ogimageheight" property="og:image:height" content="630" />
+					<meta key="ogimagealt" property="og:image:alt" content="Crack in the Road logo" />
+					<meta key="twittercard" name="twitter:card" content="summary" />
+					<meta key="twittertitle" name="twitter:title" content={title} />
+					<meta key="twitterdescription" name="twitter:description" content={description} />
+					<meta key="twittersite" name="twitter:site" content="@crackintheroad" />
 					<link rel="icon" type="image/png" href="/logo.jpg" />
 					<link rel="preload" href="/fonts/jost-500-medium-citr.woff2" as="font" />
 					<link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" />
