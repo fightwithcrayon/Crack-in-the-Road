@@ -10,6 +10,13 @@ const Archive = ({ children, pageUrl, posts }) => {
 	const pageRef = useRef();
 
 	useEffect(() => {
+		setCompleted(false);
+		setPage(1);
+		isLoading.current = false;
+		setVisiblePosts(posts);
+	}, [pageUrl]);
+
+	useEffect(() => {
 		if (!pageUrl || completed) {
 			return undefined;
 		}

@@ -49,8 +49,8 @@ const Header = ({ className, isInverted, onClose, page }) => {
 					<meta key="twitterdescription" name="twitter:description" content={description} />
 					<meta key="twittersite" name="twitter:site" content="@crackintheroad" />
 					<link rel="icon" type="image/png" href="/logo.jpg" />
-					<link rel="preload" href="/fonts/jost-500-medium-citr.woff2" as="font" />
-					<link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" />
+					<link rel="preload" href="/fonts/jost-500-medium-citr.woff2" as="font" type="font/woff2" crossorigin />
+					<link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin />
 					<link rel="shortcut icon" href="/favicon.ico" />
 					<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
 					<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
