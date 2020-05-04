@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Menu from '../Menu/Menu';
 
-const Header = ({ className, isInverted, onClose }) => {
+const Header = ({ className, isInverted, onClose, page }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const title = 'Crack in the Road';
 	const description = 'New music and visual arts. Once was the future. Once.';
@@ -16,6 +16,10 @@ const Header = ({ className, isInverted, onClose }) => {
 		document.documentElement.classList.add('no-scroll');
 		return () => document.documentElement.classList.remove('no-scroll');
 	}, [isOpen]);
+
+	useEffect(() => {
+		setIsOpen(false);
+	}, [page]);
 
 	const toggleDarkMode = () => {
 		document.body.classList.toggle('force-light')

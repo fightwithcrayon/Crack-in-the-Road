@@ -25,7 +25,7 @@ const App = ({ Component, pageProps }) => {
 
 	return (
 		<div className={styles.wrapper}>
-			<Header />
+			<Header page={[Component, pageProps]} />
 			<Component {...pageProps} />
 		</div>
 	)
