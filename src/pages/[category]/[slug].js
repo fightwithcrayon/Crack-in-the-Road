@@ -64,11 +64,11 @@ export async function getStaticPaths() {
                 slug
             }
         }
-    }).slice(0, 500);
+    })
 
     return {
         paths,
-        fallback: true
+        fallback: false
     };
 }
 
