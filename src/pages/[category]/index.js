@@ -7,7 +7,6 @@ export async function getStaticProps({ params }) {
 	const pageUrl = `${process.env.API_URL}/posts/category/${params.category}`;
 	const res = await fetch(pageUrl);
 	const posts = await res.json();
-
 	return {
 		props: {
 			pageUrl,

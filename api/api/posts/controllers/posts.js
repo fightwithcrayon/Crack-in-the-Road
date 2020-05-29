@@ -270,9 +270,20 @@ module.exports = {
       state: 'success',
     });
   },
-  category: async ctx => ctx.send(await strapi.query('posts').model.find({
-    category: ctx.params.category,
-  }, 'title slug category date old_image').skip(40 * ((ctx.query.page || 1) - 1)).limit(40).sort({ date: 'desc' }).exec()),
+  category: async ctx => {
+    const result = await strapi.query('category').model.find({
+      slug: ctx.params.category,
+    }, 'posts').populate({
+      path: 'posts',
+      options: {
+        limit: 40,
+        skip: 40 * ((ctx.query.page || 1) - 1),
+        sort: { date: 'desc' }
+      }
+    }).exec()
+
+    ctx.send(result[0].posts);
+  },
   author: async ctx => {
     const author = await strapi.query('author').model.find({
       slug: ctx.params.author,
